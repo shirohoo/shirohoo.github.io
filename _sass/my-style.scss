@@ -1,0 +1,332 @@
+.dl-table {
+  a {
+    @supports ((text-decoration-thickness: initial) and (text-underline-offset: initial)) {
+      text-underline-offset: .7rem;
+    }
+    @supports not ((text-decoration-thickness: initial) and (text-underline-offset: initial)) {
+      padding-bottom: .3rem;
+    }
+  }
+
+  .btn, .gumroad-button  {
+    margin: 1rem 0;
+  }
+}
+
+code{
+  // background-color: #ffffe9;
+  background-color: #fbe8c9;
+  border-radius: 5px;
+}
+
+// for swiper
+.swiper-container {
+  width: 100%;
+  height: 100%;
+}
+
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #fff;
+
+  /* Center slide text vertically */
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+}
+
+.swiper-button-prev::after, .swiper-button-next::after{
+  color: #64ADFF;
+}
+.swiper-button-prev:hover::after, .swiper-button-next:hover::after{
+  color: #007AFF;
+}
+
+// for spread sub menu
+.spread-btn{
+  left: 7%;
+  position: absolute;
+  padding: 0;
+  padding-top: 2px;
+  border: none;
+  background: none;
+  color: white;
+  cursor: pointer;
+}
+.menu-wrapper {
+  text-align: left;
+  margin-left: 10%;
+}
+.submenu.menu-wrapper{
+  position: absolute;
+  background-color: rgb(34,31,32);
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+  width: 700px;
+
+  ul{
+    margin: 0;
+    padding: 0 1.25rem;
+  }
+
+  ul > li > a {
+    font-size: 1vh;
+  }
+}
+.submenu.menu-wrapper.hide{
+  display: none;
+}
+
+// for my collapsible
+.collapsible-title:hover {
+  cursor: pointer;
+
+  #section > span{
+    text-shadow: 2px 2px 2px gray;
+  }
+}
+.collapsible-body[open]{
+  display: block;
+}
+.collapsible-body{
+  display: none;
+}
+
+.collapsible-mark{
+  display: inline-block;
+  width: 30px;
+}
+
+// for my class
+.collapsible-body > p > img{
+
+  padding: 5% 4%;
+}
+
+.ps-problem-img:hover{
+  opacity: 0.5;
+}
+
+a::after{
+  display: none;
+}
+
+// custom hydejack
+.figcaption img {
+  width: 100%;
+}
+
+// for top-menu
+.top-menu-wrapper{
+  display: inline-block;
+}
+
+.nav-btn, .nav-btn-bar{
+  height: 3rem;
+}
+.top-menu{
+  margin-left: auto;
+  margin-right: 10px;
+}
+.top-menu.nav-btn{
+  border: none;
+  display: inline-flex;
+  width: 6rem;
+  margin-left: -1px;
+}
+.nav-btn:hover,.nav-btn:focus{
+  color: grey;
+  background-color: rgba(0,0,0,0.05);
+}
+
+.nav-span{
+  flex: none;
+}
+
+// for underline u tag
+u{
+  text-decoration: none;
+  font-weight: bold;
+  background: linear-gradient(180deg,rgba(255,255,255,0) 50%, #fbe8c9 50%);
+}
+
+// for katex maths
+.katex-display{
+  // 투명
+  background-color: transparent !important;
+}
+
+// time-line
+.list-lead{
+  margin-bottom: 0;
+}
+.list-lead::after{
+  content:"";
+  display:block;
+  position: relative;
+  border-radius: 50%;
+  width: 12px;
+  height: 12px;
+  top: -21px;
+  left: 62px;
+  // border: 3px solid;
+
+  background-color: lightgrey;
+  z-index: 1;
+}
+.list-post li {
+  line-height: 3rem;
+}
+.list-post > ul > li:first-child::before, .list-post > ul > li::after{
+  content: "";
+  width: 4px;
+  left: 66px;
+  display: inline-block;
+  float: left;
+  position: relative;
+  background-color: lightgrey;
+}
+.list-post > ul > li > div{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.list-post > ul > li > div > a{
+  margin-left: 1.5rem;
+  position: relative;
+}
+.list-post > ul > li > div > a::before{
+  content: "";
+  display: inline-block;
+  position: relative;
+  border-radius: 50%;
+  width: 8px;
+  height: 8px;
+  float: left;
+  top: 1.35rem;
+  left: 60px;
+  box-shadow: 0 0 5px 0 grey;
+  background-color: white;
+  z-index: 1;
+
+  transition: all 0.5s;
+}
+.list-post > ul > li > div > a:hover::before{
+  background-color: lightgrey;
+  margin-right: 0.3rem;
+  box-shadow: 0 0 2px 0 grey;
+}
+.list-post > ul > li:first-child::before{
+  height: 3.0rem;
+  top: -1.5rem;
+}
+.list-post > ul > li:not(:last-child)::after{
+  height: 3.3rem;
+  top: -1.3rem;
+}
+.list-post ul:not(:last-child)>li:last-child::after{
+  height: 5.2rem;
+  top: -1.3rem;
+}
+
+.list-post .related-posts>li+li{
+  margin-top: 0;
+}
+.list-post li.h6{
+  margin-top: 0;
+}
+
+// scrollbar
+*::-webkit-scrollbar {
+  width: 5px;
+  height: 3px;
+}
+*::-webkit-scrollbar-thumb {
+  background-color: lightgrey;
+  border-radius: 0;
+}
+*::-webkit-scrollbar-thumb:hover{
+  background-color: rgb(173, 173, 173);
+}
+*::-webkit-scrollbar-track {
+  background-color: white;
+}
+
+.post-date {
+  @extend .h4;
+  display: flex;
+  justify-content: normal !important;
+  margin-top: -.6rem;
+  height: 2rem;
+  margin-bottom: .85rem;
+  color: var(--gray);
+
+  > .ellipsis {
+    cursor: pointer;
+  }
+
+  [class^="icon-"] {
+    display: inline-block;
+    font-size: smaller;
+    margin-right: .25rem;
+  }
+}
+
+body.no-break-layout {
+  div.highlight > button {
+    margin: 5px;
+    background-color: whitesmoke;
+    box-shadow: 1px 1px 1px 1px gray;
+    border-radius: 7px;
+  }
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  color: gray !important;
+  speak: never;
+  font-style: normal;
+  font-weight: bold !important;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-mail:before {
+  color: whitesmoke !important;
+  content: "\ea83";
+}
+
+.icon-github:before {
+  color: whitesmoke !important;
+  content: "\eab0";
+}
+
+#_search-box > input[type="search"] {
+  width: 50%;
+  height: 100%;
+  margin-left: auto;
+  flex: 1 1 0%;
+  padding-left: 3rem;
+  padding-right: 3rem;
+}
+
+.sidebar-bg {
+  background-repeat: no-repeat !important;
+  background-size: cover !important;
+}

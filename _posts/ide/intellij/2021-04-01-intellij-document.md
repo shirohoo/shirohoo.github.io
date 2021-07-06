@@ -8,8 +8,6 @@ title: 인텔리제이(IntelliJ) Docs 빠르게 확인하기
 description: >
     <u>인텔리제이(IntelliJ)</u>에서 공식 문서를 즉시 확인합니다 
 image: /assets/img/ide/Intellij.png
-accent_image:
-    background: url('/assets/img/ide/Intellij.png') center/cover
 related_posts:
     - _posts/ide/intellij/2021-01-08-git-bash.md
     - _posts/ide/intellij/2021-01-22-intellij-command.md

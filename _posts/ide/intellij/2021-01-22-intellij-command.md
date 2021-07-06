@@ -8,8 +8,6 @@ title: 인텔리제이(IntelliJ) 단축키
 description: >
     <u>Windows10</u>과 <u>Linux(Mac)</u> 환경에서 인텔리제이(IntelliJ)의 단축키를 살펴봅니다 
 image: /assets/img/ide/Intellij.png
-accent_image:
-    background: url('/assets/img/ide/Intellij.png') center/cover
 related_posts:
     - _posts/ide/intellij/2021-01-08-git-bash.md
     - _posts/ide/intellij/2021-04-01-intellij-document.md

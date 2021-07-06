@@ -8,8 +8,6 @@ title: Json으로 DTO 자동 생성하기
 description: >
     <u>DTO generator</u> 사용 방법을 알아봅니다
 image: /assets/img/ide/Intellij.png
-accent_image:
-    background: url('/assets/img/ide/Intellij.png') center/cover
 related_posts:
     - _posts/ide/intellij/2021-01-22-intellij-command.md
     - _posts/ide/intellij/2021-04-26-intellij-2021.1.md

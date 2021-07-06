@@ -2,26 +2,36 @@
 <script nomodule>{% include scripts/nomodule.min.js %}</script>
 <script src="{{ '/assets/js/hydejack-9.1.4.js' | relative_url }}" type="module"></script>
 <script src="{{ '/assets/js/LEGACY-hydejack-9.1.4.js' | relative_url }}" nomodule defer></script>
+<!--
+mouse event cancel
+-->
+<script>
+document.oncontextmenu = function (e) {
+    return false;
+};
+document.onselectstart = function (e) {
+    return false;
+};
+</script>
 
 <script type="text/javascript">
-  // <![CDATA[
-  var colours=new Array("#a6f", "#60f", "#60f", "#a6f", "#ccc");
-  var bubbles=66;
-  var over_or_under="over";
-  var x=ox=400;
-  var y=oy=300;
-  var swide=800;
-  var shigh=600;
-  var sleft=sdown=0;
-  var bubb=new Array();
-  var bubbx=new Array();
-  var bubby=new Array();
-  var bubbs=new Array();
-  var sploosh=false;
+  let colours=new Array("#a6f", "#60f", "#60f", "#a6f", "#ccc");
+  let bubbles=66;
+  let over_or_under="over";
+  let x=ox=400;
+  let y=oy=300;
+  let swide=800;
+  let shigh=600;
+  let sleft=sdown=0;
+  let bubb=new Array();
+  let bubbx=new Array();
+  let bubby=new Array();
+  let bubbs=new Array();
+  let sploosh=false;
 
   function addLoadEvent(funky) {
     window.scrollTo({top:1, left:0, behavior:'auto'});
-    var oldonload=window.onload;
+    let oldonload=window.onload;
     if (typeof(oldonload)!='function') window.onload=funky;
     else window.onload=function() {
       if (oldonload) oldonload();
@@ -32,7 +42,7 @@
   addLoadEvent(buble);
 
   function buble() { if (document.getElementById) {
-    var i, rats, div;
+    let i, rats, div;
     for (i=0; i<bubbles; i++) {
       rats=createDiv("3px", "3px");
       rats.style.visibility="hidden";
@@ -77,7 +87,7 @@
   }}
 
   function bubble() {
-    var c;
+    let c;
     if (Math.abs(x-ox)>1 || Math.abs(y-oy)>1) {
       ox=x;
       oy=y;
@@ -139,8 +149,8 @@
 
   window.onresize=set_width;
   function set_width() {
-    var sw_min=999999;
-    var sh_min=999999;
+    let sw_min=999999;
+    let sh_min=999999;
     if (document.documentElement && document.documentElement.clientWidth) {
       if (document.documentElement.clientWidth>0) sw_min=document.documentElement.clientWidth;
       if (document.documentElement.clientHeight>0) sh_min=document.documentElement.clientHeight;
@@ -182,7 +192,7 @@
   }
 
   function createDiv(height, width) {
-    var div=document.createElement("div");
+    let div=document.createElement("div");
     div.style.position="absolute";
     div.style.height=height;
     div.style.width=width;
@@ -190,22 +200,6 @@
     div.style.backgroundColor="transparent";
     return (div);
   }
-  // ]]>
-</script>
-
-<!--
-mouse event cancel
--->
-<script>
-document.oncontextmenu = function (e) {
-    return false;
-};
-document.ondragstart = function (e) {
-    return false;
-};
-document.onselectstart = function (e) {
-    return false;
-};
 </script>
 
 {% include my-scripts.html %}

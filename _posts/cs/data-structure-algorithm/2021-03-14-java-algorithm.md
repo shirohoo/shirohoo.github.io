@@ -19,7 +19,11 @@ related_posts:
 
 &nbsp;  
 
-# ✅ 입력 시간을 단축 시키고 싶다면 BufferdReader 사용
+# ✅ BufferdReader
+
+---
+
+입력 시간을 단축 시키고 싶다면 `BufferdReader`를 사용한다.
 
 ```java
 BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -29,11 +33,21 @@ BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
 > ***[JAVA [자바] - 입력 뜯어보기 [Scanner, InputStream, BufferedReader]](https://st-lab.tistory.com/41?category=830901)***
 
-# ✅ 출력 시간을 단축 시키고 싶다면 StringBuilder 사용
+&nbsp;  
+
+# ✅ StringBuilder
+
+---
+
+출력 시간을 단축 시키고 싶다면 `StringBuilder`를 사용한다.
+
+&nbsp;  
 
 - 출력 시간을 단축시키고 싶다면 여러번의 `System.out.print` 가 아닌 `StringBuilder` 혹은 `StringBuffer`를 사용하여 문자열을 완성하고 한번의 `System.out.print` 를 호출한다
 - `Java`의 `String`은 대표적인 `VO(Value Object)` 로서 불변성을 갖기 때문에 매번 연산시 새로운 인스턴스를 생성하므로 메모리의 낭비가 심하다
 - `StringBuilder`와 `StringBuffer`의 차이는 `Thread Safe` 여부이며, 단일 `Thread`의 경우 `StringBuilder`의 성능이 압도적이므로 알고리즘 풀이 시 `StringBuilder`사용을 권장한다
+
+&nbsp;  
 
 ```java
 StringBuilder stringBuilder = new StringBuilder();
@@ -47,9 +61,15 @@ stringBuilder.append(" _.-;;-._\n")
 System.out.println(stringBuilder);
 ```
 
+&nbsp;  
+
+# ✅ BigInteger, BigDecimal
+
 ---
 
-# ✅ 큰 수 계산은 BigInteger, BigDecimal을 사용
+큰 수 계산은 `BigInteger`, `BigDecimal을` 사용한다.
+
+&nbsp;  
 
 -   Java의 각 정수 자료형은 다음과 같은 크기를 갖는다
 
@@ -71,6 +91,8 @@ long lNum;
 - `BigDecimal` 은 완벽에 가까운 정밀도로 인해 돈에 대한 데이터를 다루는 금융권, 핀테크 회사에서 많이 볼 수 있는 자료형이지만, Java에 현존하는 모든 자료형 중 손에 꼽을 만큼 무거운 자료형이므로***(클래스 내부 코드라인만 5,000라인, 대부분의 로직이 문자열 연산)*** PS에 사용 시 `TLE(Time Limit Exceeded)` 혹은 `MLE(Memory Limit Exceeded)`가 발생 할 가능성이 있다
 - `BigInteger` 는 상대적으로 가벼워 알고리즘 풀이에 쏠쏠하게 사용할 수 있으나, 역시 TLE가 발생 할 경우 어쩔수 없이 직접 문자열 연산을 구현해야만 한다
 - 생성자를 통해 객체를 생성할 경우 인수로 `int`, `long`등의 타입도 넘겨줄 수 있긴하나, <u>API 문서에 따르면 문자열을 넘겨 객체를 생성하는 것을 권장</u>하고 있다
+
+&nbsp;  
 
 ```java
 	BigInteger bigInteger1 = new BigInteger("11111111111111111111111111111");

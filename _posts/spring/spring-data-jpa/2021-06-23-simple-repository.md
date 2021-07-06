@@ -9,6 +9,8 @@ description: >
     Spring Data JPA의 핵심 콘크리트 클래스인
     `SimpleJpaRepository`에 대한 학습 테스트
 image: /assets/img/spring/spring-data-jpa/hibernate.jpg
+related_posts:
+    -
 ---
 
 * toc
@@ -26,7 +28,7 @@ image: /assets/img/spring/spring-data-jpa/hibernate.jpg
 
 `SimpleJpaRepository`의 대부분의 기능에 대한 학습 테스트코드를 작성하였다.
 
-전체 코드는 [GitHub Repository](https://github.com/shirohoo/jpa-in-action) 확인 !
+전체 코드는 [GitHub Repository](https://github.com/shirohoo/jpa-in-action) 를 확인 !
 
 <br />
 

@@ -149,7 +149,7 @@ description: >
 
 ---
 
-김영한님의 [JPA 책](http://www.kyobobook.co.kr/product/detailViewKor.laf?mallGb=KOR&ejkGb=KOR&barcode=9788960777330){:target="_blank"} 을 통한 <u>기초회귀학습</u>
+김영한님의 [JPA 책](http://www.kyobobook.co.kr/product/detailViewKor.laf?mallGb=KOR&ejkGb=KOR&barcode=9788960777330){:target="_blank"}을 통한 <u>기초회귀학습</u>
 
 그동안의 <u>실무 경험을 복기하며 내용을 정리</u>하고 있는 프로젝트
 

@@ -66,7 +66,7 @@ description: >
 
 &nbsp;  
 
-# ***✨ Skill***
+# ***✨ Skills***
 
 > ***업무에 사용중, 혹은 사용했던 기술들***
 

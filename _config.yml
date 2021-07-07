@@ -54,7 +54,7 @@ menu:
     url:               /diary/
   - title:             Debugging
     url:               /debugging/
-  - title:             컴퓨터 과학
+  - title:             Computer Science
     url:               /cs/
     submenu:
       - title:         소프트웨어 설계

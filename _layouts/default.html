@@ -37,7 +37,7 @@ layout: base
       {% endfor %}
     </ul>
   {% endif %}
-
+  {% include analytics.html %}
   {% assign pages = site.html_pages | where:"layout","page" | where_exp:"page","page.sitemap != false" %}
   {% if pages.size > 0 %}
     <h2 class="hr-bottom">{{ strings.pages | default:"Pages" }}</h2>

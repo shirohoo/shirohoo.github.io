@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://shirohoo.github.io/sitemap.xml

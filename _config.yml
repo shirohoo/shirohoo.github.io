@@ -54,18 +54,18 @@ menu:
     url:               /diary/
   - title:             Debugging
     url:               /debugging/
-  - title:             CS
+  - title:             컴퓨터 과학
     url:               /cs/
     submenu:
-      - title:         Software Design
+      - title:         소프트웨어 설계
         url:           /software-design/
-      - title:         Database Construct
+      - title:         데이터베이스 구축
         url:           /database-construct/
-      - title:         Leverage Programming
+      - title:         프로그래밍 활용
         url:           /leverage-programming/
-      - title:         Information System
+      - title:         정보시스템 구축
         url:           /information-system/
-      - title:         DS & Algorithm
+      - title:         자료구조 & 알고리즘
         url:           /data-structure-algorithm/
   - title:             BackEnd
     url:               /backend/

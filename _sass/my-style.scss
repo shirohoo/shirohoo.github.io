@@ -307,6 +307,11 @@ body.no-break-layout {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-rss2:before {
+  color: whitesmoke !important;
+  content: "\ea9b";
+}
+
 .icon-mail:before {
   color: whitesmoke !important;
   content: "\ea83";

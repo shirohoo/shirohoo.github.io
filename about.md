@@ -6,7 +6,7 @@ description: >
     My development experience and projects.
 ---
 
-# ***Introduction***
+# ***😎 Introduction***
 
 ---
 
@@ -16,7 +16,7 @@ description: >
 
 - ***Major*** : <u>Java Server Developer</u>
 
-# ***History***
+# ***📖 History***
 
 ---
 
@@ -27,13 +27,13 @@ description: >
 - ***2021.02*** ~ : <u>서비스회사 서버 개발자</u>로 근무 중
 
 
-# ***Certification***
+# ***✔ Certification***
 
 ---
 
-- ***2021.06*** : 정보처리기사
+- ***2021.06*** : 정보처리기사 취득
 
-# ***Experience***
+# ***👏 Experience***
 
 > ***경험, 역량***
 
@@ -42,35 +42,35 @@ description: >
 - <u>APM</u>을 이용한 <u>성능 테스트 및 개선</u>
 - <u>JPA / Querydsl</u>을 사용한 <u>성능 개선</u>
 - <u>Spring Batch API</u> 개발
-- Spring Security를 사용한 <u>Dynamic ACL</u> 개발
+- <u>Spring Security</u>를 사용한 <u>Dynamic ACL</u> 개발
 - IDC 인프라 운영 관리 (on-premise)
     - <u>Jenkins를 이용한 CI/CD</u>
     - Jenkins를 이용한 배치 서버 운영
     - Jenkins / Nginx를 이용한 <u>무중단 배포 및 로드 밸런싱</u>
 
-# ***Skill***
+# ***✨ Skill***
 
 > ***업무에 사용중, 혹은 사용했던 기술들***
 
-## ***BackEnd***
+## ***🔐 BackEnd***
 
 ---
 
 - <u>Java</u>, Groovy, Python
-- <u>Spring Boot, Spring MVC, Spring Batch, Spring Security, Spring Data JPA</u>
-- <u>JPA, Querydsl, Hibernate</u>
+- <u>Spring Boot</u>, <u>Spring MVC</u>, <u>Spring Batch</u>, <u>Spring Security</u>, <u>Spring Data JPA</u>
+- <u>JPA</u>, <u>Querydsl</u>, <u>Hibernate</u>
 - <u>Junit5</u>, Mockito
 - <u>Gradle</u>, Maven
 - <u>IntelliJ</u>, Visual Studio Code
 
-## ***FrontEnd***
+## ***🎨 FrontEnd***
 
 ---
 
 - ES6, Jquery
 - <u>Vue.js</u>
 
-## ***DevOps***
+## ***🕋 DevOps***
 
 ---
 
@@ -82,7 +82,7 @@ description: >
     - RDS
     - Route 53
 
-# ***Projects***
+# ***📦 Projects***
 
 > ***여가 시간에 직접 개발하거나, 참여했던 프로젝트들***
 

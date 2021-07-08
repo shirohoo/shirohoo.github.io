@@ -14,8 +14,8 @@
 }
 
 code{
-  // background-color: #ffffe9;
-  background-color: #fbe8c9;
+   background-color: lightcyan;
+  //background: linear-gradient(to bottom right, lightcyan, pink);
   border-radius: 5px;
 }
 
@@ -157,7 +157,7 @@ a::after{
 u{
   text-decoration: none;
   font-weight: bold;
-  background: linear-gradient(180deg,rgba(255,255,255,0) 50%, #fbe8c9 50%);
+  background: linear-gradient(180deg, rgba(255,255,255,0) 90%, rgb(255, 251, 0) 50%);
 }
 
 // for katex maths

@@ -450,29 +450,29 @@ sass:
 # Jekyll Compose Defaults
 # ---------------------------------------------------------------------------------------
 
-jekyll_compose:
-  default_front_matter:
-    drafts:
-      layout: post
-      description: >
-        A short ~160 character description of your post for search engines,
-        social media previews, etc.
-      image:
-        path: /assets/img/sidebar-bg.gif
-    posts:
-      layout: post
-      description: >
-        A short ~160 character description of your post for search engines,
-        social media previews, etc.
-      image:
-        path: /assets/img/sidebar-bg.gif
-    projects:
-      layout: project
-      description: >
-        A short ~160 character description of your post for search engines,
-        social media previews, etc.
-      image:
-        path: /assets/img/sidebar-bg.gif
-      links:
-        - title: Project Link
-          url: https://example.com
+#jekyll_compose:
+#  default_front_matter:
+#    drafts:
+#      layout: post
+#      description: >
+#        A short ~160 character description of your post for search engines,
+#        social media previews, etc.
+#      image:
+#        path: /assets/img/sidebar-bg.gif
+#    posts:
+#      layout: post
+#      description: >
+#        A short ~160 character description of your post for search engines,
+#        social media previews, etc.
+#      image:
+#        path: /assets/img/sidebar-bg.gif
+#    projects:
+#      layout: project
+#      description: >
+#        A short ~160 character description of your post for search engines,
+#        social media previews, etc.
+#      image:
+#        path: /assets/img/sidebar-bg.gif
+#      links:
+#        - title: Project Link
+#          url: https://example.com

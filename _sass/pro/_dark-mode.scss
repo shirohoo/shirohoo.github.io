@@ -20,7 +20,7 @@
     -moz-osx-font-smoothing: grayscale;
   }
 
-  p > code {
+  p > code, li > code {
     background-color: white;
     color: black;
     border-radius: 5px;

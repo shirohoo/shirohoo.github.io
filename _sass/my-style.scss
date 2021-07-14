@@ -13,9 +13,10 @@
   }
 }
 
-code {
+p > code {
   background-color: lightcyan;
   border-radius: 5px;
+  font-weight: bold;
 }
 
 // for swiper
@@ -301,15 +302,6 @@ u {
     display: inline-block;
     font-size: smaller;
     margin-right: .25rem;
-  }
-}
-
-body.no-break-layout {
-  div.highlight > button {
-    margin: 5px;
-    background-color: whitesmoke;
-    box-shadow: 1px 1px 1px 1px gray;
-    border-radius: 7px;
   }
 }
 

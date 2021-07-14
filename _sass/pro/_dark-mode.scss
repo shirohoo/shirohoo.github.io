@@ -20,10 +20,11 @@
     -moz-osx-font-smoothing: grayscale;
   }
 
-  code {
+  p > code {
     background-color: white;
     color: black;
     border-radius: 5px;
+    font-weight: bold;
   }
 }
 

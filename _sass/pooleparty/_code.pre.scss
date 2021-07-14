@@ -99,7 +99,7 @@ div.highlight {
     @extend .pre-header-common;
     display: block;
     color: var(--gray)!important;
-    background-color: var(--gray-bg);
+    //background-color: var(--gray-bg);
 
     > span {
       font-size: smaller;
@@ -144,7 +144,7 @@ div.highlight {
         animation-timing-function: ease;
       }
     }
-    > .icon-copy { 
+    > .icon-copy {
       display: inline-block;
     }
     > .icon-checkmark {

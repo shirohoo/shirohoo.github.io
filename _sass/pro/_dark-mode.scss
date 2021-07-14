@@ -19,6 +19,12 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
+
+  code {
+    background-color: white;
+    color: black;
+    border-radius: 5px;
+  }
 }
 
 @media screen {

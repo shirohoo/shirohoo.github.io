@@ -3,7 +3,7 @@ layout: post
 category:
     - backend
     - test
-title: Spring Rest Docs와 Swagger 함께 사용하기
+title: Spring Rest Docs와 Swagger 조합하기
 description: >
     `API 문서 자동화`를 도와주는 `Spring Rest Docs`와 `Swagger`의 장점만을 누려봅시다.
 image: /assets/img/backend/test-logo.png

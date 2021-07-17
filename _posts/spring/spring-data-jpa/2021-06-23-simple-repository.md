@@ -22,15 +22,13 @@ related_posts:
 
 ---
 
-`Spring Data JPA`에는 `CRUD`를 정의한 `CrudRepository` 인터페이스가 존재하며
-
-이를 상속하여 구현한 `Spring Data JPA`의 핵심적인 콘크리트 클래스가 `SimpleJpaRepository`이다.
+`Spring Data JPA`에는 `CRUD`를 정의한 `CrudRepository` 인터페이스가 존재하며 이를 상속하여 구현한 `Spring Data JPA`의 핵심적인 콘크리트 클래스가 `SimpleJpaRepository`이다.
 
 내부적으로 <u>JPA의 persist, merge, flush, remove</u> 등으로 구현돼있으며, `@Transactional`이 선언돼있다.
 
 `SimpleJpaRepository`의 대부분의 기능에 대한 학습 테스트코드를 작성하였다.
 
-전체 코드는 [GitHub Repository](https://github.com/shirohoo/jpa-in-action) 를 확인 !
+전체 코드가 궁금하시다면 [깃허브](https://github.com/shirohoo/jpa-in-action)를 확인바랍니다.
 
 <br />
 

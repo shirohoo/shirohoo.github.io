@@ -224,6 +224,8 @@ repositories {
 
 dependencies {
     // ...
+    
+    // 자신이 사용하는 테스트 방식에 따라 택일
     testCompile('com.epages:restdocs-api-spec-mockmvc:0.11.4')
     testCompile('com.epages:restdocs-api-spec-webtestclient:0.11.4')
     testCompile('com.epages:restdocs-api-spec-restassured:0.11.4')

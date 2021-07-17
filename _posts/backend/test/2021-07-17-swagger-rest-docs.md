@@ -644,7 +644,7 @@ class UserApiControllerTest {
 
 둘째로 요청, 응답을 검증하고 문서화하는 부분이다.
 
-위 코드에서는 대체로 요청, 응답 바디에 `JSON`을 넣어 통신했기 때문에 `requestFields`를 사용하였다.
+위 코드에서는 대체로 `Http Body`를 통해 통신했기 때문에 `requestFields`를 사용하였다.
 
 말고도 `requestParameters`와 `pathParameters`가 존재하는데, `requestParameters`는 `get방식`에서 사용하는 `queryString`을 검증하고 문서화하는 메서드다.
 

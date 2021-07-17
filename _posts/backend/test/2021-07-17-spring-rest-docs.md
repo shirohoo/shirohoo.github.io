@@ -71,7 +71,8 @@ related_posts:
 ---
 
 - 테스트 코드가 강제되기 때문에 테스트 코드에 익숙하지 않다면 도입 난이도가 굉장히 높다
-- 문서 커스터마이징을 시도하려면 `AsciiDoc` 문법을 알아야 한다
+- 문서를 커스터마이징 하려면 `AsciiDoc` 문법을 알아야 한다
+- `Swagger` 문서와 다르게 문서에서 API를 즉석으로 테스트 할 수 없다
 
 <br />
 
@@ -159,7 +160,7 @@ asciidoctor {
 <br />
 
 ```java
-// file: 'main/src/docs/asciidoc/docs.adoc')
+// file: 'main/src/docs/asciidoc/api-docs.adoc')
 :basedir: {docdir}/../../../
 :snippets: {basedir}/build/generated-snippets
 

@@ -78,7 +78,9 @@ related_posts:
 
 # 📕 Spring Rest Docs 적용
 
-## 🚀 환경
+<br />
+
+## 🚀 개발환경
 
 --- 
 
@@ -97,7 +99,7 @@ related_posts:
 
 `Spring5`부터 `RestTemplate`이 `Deprecated`되고 `WebClient` 사용을 권장하고 있으므로 WebClient 테스트로 진행 할 것이다.
 
-`Spring Rest Docs`는 테스트 결과를 여러개의 adoc 스니펫(조각)으로 생성해준다.
+`Spring Rest Docs`는 테스트 결과를 여러개의 `adoc 스니펫(조각)`으로 생성해준다.
 
 이후 개발자가 생성된 스니펫들을 `AsciiDoc` 문법을 사용해 하나의 문서로 조합하는 방식으로 동작한다.
 
@@ -195,7 +197,7 @@ include::{snippets}/user/response-fields.adoc[]
 
 <br />
 
-전체 소스 코드는 [깃허브](https://github.com/shirohoo/spring-rest-docs/tree/spring-rest-docs)를 참고바랍니다.
+전체 소스 코드는 [깃허브](https://github.com/shirohoo/spring-rest-docs/tree/spring-rest-docs)에 공개돼있습니다.
 
 <br />
 

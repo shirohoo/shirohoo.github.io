@@ -3,7 +3,6 @@ layout: post
 category:
     - backend
     - test
-date: 2021-07-17 13:08
 title: Spring Rest Docs로 API 문서작성 자동화하기
 description: >
     개발자간 협업에 아주 큰 도움이 되는 `API 문서`작성을 자동화 합니다

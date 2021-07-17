@@ -79,7 +79,9 @@ published: true
 
 # 📕 Spring Rest Docs 적용
 
-Spring Rest Docs를 적용하기 위한 방법에 대해 설명한다.
+---
+
+`Spring Rest Docs`를 적용하기 위한 방법에 대해 설명한다.
 
 <br />
 

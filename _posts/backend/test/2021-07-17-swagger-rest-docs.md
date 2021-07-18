@@ -1,14 +1,15 @@
 ---
 layout: post
 category:
-    - backend
-    - test
+  - backend
+  - test
 title: Spring Rest Docs와 Swagger 조합하기
-description: >
-    `API 문서 자동화`를 도와주는 `Spring Rest Docs`와 `Swagger`의 장점만을 누려봅시다.
+description: |
+  `API 문서 자동화`를 도와주는 `Spring Rest Docs`와 `Swagger`의 장점만을 누려봅시다.
 image: /assets/img/backend/test-logo.png
 related_posts:
-    -
+  - null
+published: true
 ---
 
 * toc
@@ -149,7 +150,7 @@ related_posts:
 
 <br />
 
-> [😎 restdocs-api-spec](https://github.com/ePages-de/restdocs-api-spec){:target="_blank"}
+> [😎 ePages-de/restdocs-api-spec GitHub](https://github.com/ePages-de/restdocs-api-spec){:target="_blank"}
 
 <br />
 
@@ -161,15 +162,15 @@ related_posts:
 
 <br />
 
-사용 방법도 매우 간단하게, 기존 작성된 `Spring Rest Docs`의 코드를 거의 건드리지 않는다.
+사용 방법도 매우 간단하다. 기존에 작성된 `Spring Rest Docs`의 코드를 거의 건드리지 않게 만들어져 있기 때문이다.
 
-단지 기존 테스트 코드의 API 문서 생성부 구현체를 이 라이브러리에서 제공하는 구현체로 바꾸기만 하면 된다.
+단지 기존 테스트 코드의 API 문서 생성부의 구현체를 이 라이브러리에서 제공하는 구현체로 바꾸기만 하면 된다.
 
 <br />
 
-개인적으로 아쉬웠던 것은 `README`가 꽤 잘 되있어서 적용하는데 큰 문제는 없었으나, 내부 구현이 모두 `코틀린`으로 돼있어서 소스코드 분석은 거의 하지 못했다.
+`README`가 꽤 잘 되있어서 적용하는데 큰 문제는 없었으나, 개인적으로 아쉬웠던 것은 내부 구현이 모두 `코틀린`으로 돼있어서 소스코드 분석은 거의 하지 못한부분이다.
 
-필자가 아직 코틀린에 대해 아예 모르기 때문이다.
+필자가 아직 코틀린에 대해 모르기 때문이다.
 
 <br />
 
@@ -223,6 +224,8 @@ repositories {
 
 dependencies {
     // ...
+    
+    // 자신이 사용하는 테스트 방식에 따라 택일
     testCompile('com.epages:restdocs-api-spec-mockmvc:0.11.4')
     testCompile('com.epages:restdocs-api-spec-webtestclient:0.11.4')
     testCompile('com.epages:restdocs-api-spec-restassured:0.11.4')
@@ -641,7 +644,7 @@ class UserApiControllerTest {
 
 둘째로 요청, 응답을 검증하고 문서화하는 부분이다.
 
-위 코드에서는 대체로 요청, 응답 바디에 `JSON`을 넣어 통신했기 때문에 `requestFields`를 사용하였다.
+위 코드에서는 대체로 `Http Body`를 통해 통신했기 때문에 `requestFields`를 사용하였다.
 
 말고도 `requestParameters`와 `pathParameters`가 존재하는데, `requestParameters`는 `get방식`에서 사용하는 `queryString`을 검증하고 문서화하는 메서드다.
 

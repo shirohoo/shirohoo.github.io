@@ -8,8 +8,8 @@ description: >
   개발자간 협업에 아주 큰 도움이 되는 `API 문서`작성을 자동화 합니다
 image: /assets/img/backend/test-logo.png
 related_posts:
-  - null
-published: true
+  - _posts/backend/test/2021-07-17-swagger-rest-docs.md
+  - _posts/backend/test/2021-07-18-jacoco.md
 ---
 
 * toc
@@ -53,7 +53,7 @@ published: true
 
 <br />
 
-> [📜 Spring Rest Docs 문서 예시](/assets/html/api-docs.html){:target="_blank"}
+> [📜 Spring Rest Docs 문서 예시](/assets/docs/rest/api-docs.html){:target="_blank"}
 
 <br />
 
@@ -375,7 +375,7 @@ BUILD SUCCESSFUL in 1s
 
 <br />
 
-> [📜 api-docs.html](/assets/html/api-docs.html){:target="_blank"}
+> [📜 api-docs.html](/assets/docs/rest/api-docs.html){:target="_blank"}
 
 <br />
 

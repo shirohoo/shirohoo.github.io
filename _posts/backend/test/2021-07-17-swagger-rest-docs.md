@@ -4,12 +4,12 @@ category:
   - backend
   - test
 title: Spring Rest Docs와 Swagger 조합하기
-description: |
-  `API 문서 자동화`를 도와주는 `Spring Rest Docs`와 `Swagger`의 장점만을 누려봅시다.
+description: >
+  `API 문서 자동화`를 도와주는 `Spring Rest Docs`와 `Swagger`을 조합해, 단점은 버리고 장점만 누려봅시다
 image: /assets/img/backend/test-logo.png
 related_posts:
-  - null
-published: true
+  - _posts/backend/test/2021-07-17-spring-rest-docs.md
+  - _posts/backend/test/2021-07-18-jacoco.md
 ---
 
 * toc
@@ -31,7 +31,7 @@ published: true
 
 ---
 
-> [📜 Spring Rest Docs 문서 예시](/assets/html/api-docs.html){:target="_blank"}
+> [📜 Spring Rest Docs 문서 예시](/assets/docs/rest/api-docs.html){:target="_blank"}
 
 <br />
 
@@ -59,7 +59,7 @@ published: true
 
 ---
 
-> [📜 Swagger 문서 예시](/assets/docs/swagger.html){:target="_blank"}
+> [📜 Swagger 문서 예시](/assets/docs/swagger/swagger.html){:target="_blank"}
 
 <br />
 
@@ -752,6 +752,6 @@ window.onload = function() {
 
 <br />
 
-> [📜 완성된 Swagger API 문서](/assets/docs/swagger.html){:target="_blank"}
+> [📜 완성된 Swagger API 문서](/assets/docs/swagger/swagger.html){:target="_blank"}
 
 <br />

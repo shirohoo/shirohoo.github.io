@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>UserApiController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">spring-rest-docs</a> &gt; <a href="index.source.html" class="el_package">io.shirohoo.docs.controller</a> &gt; <span class="el_source">UserApiController.java</span></div><h1>UserApiController.java</h1><pre class="source lang-java linenums">package io.shirohoo.docs.controller;
+
+import io.shirohoo.docs.domain.UserRequest;
+import io.shirohoo.docs.domain.UserResponse;
+import io.shirohoo.docs.model.User;
+import io.shirohoo.docs.service.UserService;
+import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
+
+@RestController
+<span class="fc" id="L15">@RequiredArgsConstructor</span>
+@RequestMapping(&quot;/api/v1/user&quot;)
+public class UserApiController {
+    private final UserService service;
+    private final ModelMapper mapper;
+
+    @PostMapping(&quot;&quot;)
+    public ResponseEntity&lt;UserResponse&gt; create(@RequestBody UserRequest request) {
+<span class="fc" id="L23">        return ResponseEntity.ok(mapper.map(service.create(request), UserResponse.class));</span>
+    }
+
+    @GetMapping(&quot;{id}&quot;)
+    public ResponseEntity&lt;UserResponse&gt; read(@PathVariable(&quot;id&quot;) Optional&lt;User&gt; user) {
+        try {
+<span class="pc" id="L29">            return ResponseEntity.ok(mapper.map(user.orElseThrow(() -&gt; new NullPointerException()), UserResponse.class));</span>
+        }
+<span class="nc" id="L31">        catch(NullPointerException e) {</span>
+<span class="nc" id="L32">            return ResponseEntity.notFound().build();</span>
+        }
+    }
+
+    @PutMapping(&quot;&quot;)
+    public ResponseEntity&lt;UserResponse&gt; update(@RequestBody UserRequest request) {
+<span class="fc" id="L38">        return ResponseEntity.ok(mapper.map(service.update(request), UserResponse.class));</span>
+    }
+
+    @DeleteMapping(&quot;{id}&quot;)
+    public ResponseEntity delete(@PathVariable Long id) {
+<span class="fc" id="L43">        boolean result = service.delete(id);</span>
+<span class="pc bpc" id="L44" title="1 of 2 branches missed.">        if(!result) {</span>
+<span class="nc" id="L45">            return ResponseEntity.notFound().build();</span>
+        }
+<span class="fc" id="L47">        return ResponseEntity.ok(null);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

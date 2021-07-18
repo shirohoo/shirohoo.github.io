@@ -27,7 +27,7 @@ published: true
 
 <br />
 
-가장 원시적인 방법으로 API를 개발하고, 이를 개발자가 직접 문서로 작성하여 공유하는 방법이 있다.
+가장 원시적인 방법으로 API를 개발하고, 이를 개발자가 직접 문서로 작성하여(wiki같은...) 공유하는 방법이 있다.
 
 이 방법의 경우 API 스펙이 변하게 되면 문서도 따라서 변경해줘야 하기 때문에 시간이 지날수록 점점 관리되지 않는 문서가 될 가능성이 높다.
 
@@ -71,7 +71,7 @@ published: true
 
 ---
 
-- 테스트 코드가 강제되기 때문에 테스트 코드에 익숙하지 않다면 도입 난이도가 굉장히 높다
+- 문서를 작성하려면 테스트 코드가 강제되기 때문에 테스트 코드에 익숙하지 않다면 도입 난이도가 굉장히 높다
 - 문서를 커스터마이징 하려면 `AsciiDoc` 문법을 알아야 한다
 - `Swagger` 문서와 다르게 문서에서 API를 즉석으로 테스트 할 수 없다
 
@@ -102,7 +102,7 @@ published: true
 
 --- 
 
-`Spring5`부터 `RestTemplate`이 `Deprecated`되고 `WebClient` 사용을 권장하고 있으므로 WebClient 테스트로 진행 할 것이다.
+`Spring5`부터 `RestTemplate`이 `Deprecated`되고 `WebClient` 사용을 권장하고 있으므로 `WebClient` 테스트로 진행 할 것이다.
 
 `Spring Rest Docs`는 테스트 결과를 여러개의 `adoc 스니펫(조각)`으로 생성해준다.
 
@@ -184,7 +184,7 @@ asciidoctor {
 == User Api
 
 // Spring Rest Docs로 생성된 스니펫을 조합한다
-// 경로에서 특히 user는 추후 설정에 따라 변경하여야 할 수 있다
+// 이부분은 개발환경에 따라 직접적으로 건들일이 많다
 include::{snippets}/user/curl-request.adoc[]
 include::{snippets}/user/http-request.adoc[]
 include::{snippets}/user/request-fields.adoc[]
@@ -349,7 +349,7 @@ BUILD SUCCESSFUL in 28s
 ```
 <br />
 
-빌드가 성공하면 문서 작성을 위한 `asciidoctor task`를 실행한다.
+빌드가 성공하면 문서 작성을 위한 `asciidoctor` 태스크를 실행한다.
 
 <br />
 
@@ -379,7 +379,7 @@ BUILD SUCCESSFUL in 1s
 
 <br />
 
-여기서 문제가 하나 있는데, 문서 작성을 위한 gradle task는 수동으로 실행해줘야 한다는 것이다.
+여기서 문제가 하나 있는데, 문서 작성을 위한 태스크는 수동으로 실행해줘야 한다는 것이다.
 
 이를 자동화하기 위한 빌드 스크립트를 추가한다.
 
@@ -394,10 +394,10 @@ bootJar {
 
 <br />
 
-문서를 생성하는 `asciidoctor task`는 `test task`가 완료된 후에 실행되어야 한다.
+문서를 생성하는 `asciidoctor` 태스크는 `test` 태스크가 완료된 후에 실행되어야 한다.
 
-따라서 최종 패키징 단계인 `bootJar task`가 실행되기 전에 `asciidoctor task`가 먼저 유발될 수 있도록 해준다.
+따라서 최종 패키징 단계인 `bootJar` 태스크가 실행되기 전에 `asciidoctor` 태스크가 먼저 유발될 수 있도록 해준다.
 
-이후부터는 `build task`만 실행시키면 문서 생성작업이 자동화된다.
+이후부터는 `build` 태스크만 실행시키면 문서 생성작업이 자동화된다.
 
 <br />

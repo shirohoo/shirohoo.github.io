@@ -87,9 +87,9 @@ related_posts:
 
 `Swagger`를 사용할 경우 느끼는 가장 큰 불편은 `컨트롤러 계층`과 `요청`, `응답 객체`에 `Swagger` 코드를 떡칠해야 한다는 것이다.
 
-이로 인해 코드가 쓸데없이 비대해지고 가독성이 큰 폭으로 떨어진다.
+그래서 새로운 코드를 작성할 때마다 매번 `Swagger` 코드를 추가적으로 작성해야 하는게 매우매우매우 번거롭고 귀찮다.
 
-그리고 새로운 코드를 작성할 때마다 매번 `Swagger` 코드를 추가적으로 작성해야 하는게 매우매우매우 번거롭고 귀찮다.
+또한, 이로 인해 코드가 쓸데없이 비대해지고 가독성이 큰 폭으로 떨어진다.
 
 <br />
 
@@ -103,11 +103,11 @@ related_posts:
 
 하지만 가장 큰 문제점은 `테스트 코드가 강제`된다는 것이다.
 
-필자는 요즘들어 이게 오히려 장점이라고 보긴 하는데, 테스트 코드. 그중에서도 통합 테스트 코드를 잘 못 짜던 시절에는 이게 너무 큰 단점이었다.
+필자는 요즘들어 이게 오히려 장점이라고 보긴 하는데, 테스트 코드. 그중에서도 통합 테스트 코드를 잘 못 짜던 시절에는 이게 너무 큰 단점이라고 생각됐다.
 
 <br />
 
-테스트 코드를 잘 짜지 못하니 테스트 코드 작성을 위해 많은 시간을 할애해야 했고, 이로 인한 진입장벽이 매우매우 높았다.
+테스트 코드를 잘 짜지 못하니 테스트 코드 작성을 위해 많은 시간을 할애해야 했고, 이로 인한 체감 진입장벽이 매우매우 높았기 때문이다.
 
 <br />
 
@@ -139,13 +139,13 @@ related_posts:
 
 <br />
 
-그렇다면 OpenAPI 작성을 `Spring Rest Docs`의 테스트 코드로 작성하고, 이렇게 작성된 `OpenAPI`를 `Swagger-UI`와 연동하면 되지 않을까?
+그렇다면 `OpenAPI` 작성을 `Spring Rest Docs`의 테스트 코드로 작성하고, 이렇게 작성된 `OpenAPI`를 `Swagger-UI`와 연동하면 되지 않을까?
 
-그러면 모든 API를 테스트 코드로 검증할 수 있고, `OpenAPI` 작성을 위한 `Swagger` 코드 작성을 스킵할 수 있게되며, `Swagger-UI`로 API 문서를 만들 수 있을 것 같았다.
+그러면 문서로 남기고자 하는 모든 API를 테스트 코드로 검증할 수 있고, `OpenAPI` 작성을 위한 `Swagger` 코드 작성을 스킵할 수 있게되며, `Swagger-UI`로 API 문서를 만들 수 있을 것 같았다.
 
 <br />
 
-항상 그렇듯이 분명 이런 고민을 한 사람이 있을거라 생각했고, 구글링 결과 아주 좋은 오픈소스를 찾았다.
+항상 그렇듯이 분명 이런 고민을 이미 했던 사람이 있을거라 생각했고, 구글링 결과 아주 좋은 오픈소스를 찾았다.
 
 <br />
 
@@ -548,7 +548,7 @@ class UserApiControllerTest {
 
     @Test
     @Order(3)
-    void 사용자_정보를_업데이트한다() throws Exception {
+    void 사용자_정보를_수정한다() throws Exception {
         // given
         Mono<String> request = Mono.just(mapper.writeValueAsString(UserRequest.builder()
                                                                               .id(1L)
@@ -651,14 +651,14 @@ class UserApiControllerTest {
 
 `인메모리 DB`로 간단하게 테스트하기 위해 별로 좋아하진 않지만, 임시로 테스트에 순서를 지정하였다.
 
-`생성` -> `조회` -> `업데이트` -> `삭제` 순으로 실행된다.
+`생성` -> `조회` -> `수정` -> `삭제` 순으로 실행된다.
 
 그리고 테스트를 돌려보면 ...
 
 <br />
 
 {: style="text-align: center" }
-![image](https://user-images.githubusercontent.com/71188307/126042792-a920fb3b-bd3f-41f7-8da3-326070a52fa1.png)
+![image](https://user-images.githubusercontent.com/71188307/126054429-6f3cd208-e0f7-47e6-914a-0ba1f5e2e9b8.png)
 
 <br />
 
@@ -715,7 +715,7 @@ BUILD SUCCESSFUL in 19s
 
 <br />
 
-> [📜 Swagger-UI 다운로드 페이지](https://github.com/swagger-api/swagger-ui/releases/tag/v3.51.1)
+> [📜 Swagger-UI 설치 페이지](https://github.com/swagger-api/swagger-ui/releases/tag/v3.51.1){:target="_blank"}
 
 <br />
 
@@ -723,7 +723,9 @@ BUILD SUCCESSFUL in 19s
 
 `dist`에 있는 파일들을 모두 `src/main/resources/static/docs`에 풀어준다.
 
-그리고 `index.html`을 열어 스크립트를 변경해준다.
+그리고 그중 `index.html`을 열어 스크립트를 변경해준다.
+
+기존에 연동돼있는 데이터가 아닌 `Spring Rest Docs`로 생성된 `OpenAPI` 를 연동해줘야 한다.
 
 <br />
 

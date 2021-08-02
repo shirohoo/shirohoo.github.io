@@ -1,45 +1,28 @@
 ---
-layout: null
 ---
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset
-	xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
-    http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd"
->
-<url>
-	<loc>https://shirohoo.github.io/</loc>
-	<lastmod>{{ page.last_modified_at | date_to_xmlschema }}</lastmod>
-</url>
-{% assign collections = site.collections | where_exp:'collection','collection.output != false' %}
-{% for collection in collections %}
-{% assign docs = collection.docs | where_exp:'doc','doc.sitemap != false' %}
-	{% for doc in docs %}
-		<url>
-			<loc>https://shirohoo.github.io{{ doc.url | replace:'/index.html','/' | absolute_url | xml_escape }}</loc>
-			{% if doc.last_modified_at or doc.date %}
-			<lastmod>{{ doc.last_modified_at | default: doc.date | date_to_xmlschema }}</lastmod>
-			{% endif %}
-		</url>
-	{% endfor %}
-{% endfor %}
-
-{% assign pages = site.html_pages | where_exp:'doc','doc.sitemap != false' | where_exp:'doc','doc.url != "/404.html"' %}
-{% for page in pages %}
+<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+	{% for post in site.posts %}
 	<url>
-		<loc>https://shirohoo.github.io{{ page.url | replace:'/index.html','/' | absolute_url | xml_escape }}</loc>
-		{% if page.last_modified_at %}
-		<lastmod>{{ page.last_modified_at | date_to_xmlschema }}</lastmod>
+		<loc>{{ site.hosturl }}{{ post.url }}</loc>
+		{% if post.lastmod == null %}
+		<lastmod>{{ post.date | date_to_xmlschema }}</lastmod>
+		{% else %}
+		<lastmod>{{ post.lastmod | date_to_xmlschema }}</lastmod>
 		{% endif %}
-	</url>
-{% endfor %}
 
-{% assign static_files = page.static_files | where_exp:'page','page.sitemap != false' | where_exp:'page','page.name != "404.html"' %}
-{% for file in static_files %}
-	<url>
-		<loc>https://shirohoo.github.io{{ file.path | replace:'/index.html','/' | absolute_url | xml_escape }}</loc>
-		<lastmod>{{ file.modified_time | date_to_xmlschema }}</lastmod>
+		{% if post.sitemap.changefreq == null %}
+		<changefreq>weekly</changefreq>
+		{% else %}
+		<changefreq>{{ post.sitemap.changefreq }}</changefreq>
+		{% endif %}
+
+		{% if post.sitemap.priority == null %}
+		<priority>0.5</priority>
+		{% else %}
+		<priority>{{ post.sitemap.priority }}</priority>
+		{% endif %}
+
 	</url>
-{% endfor %}
+	{% endfor %}
 </urlset>

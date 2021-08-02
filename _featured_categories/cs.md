@@ -1,13 +1,12 @@
 ---
 layout: list
 type: category
-title: <u>컴퓨터 과학</u>
-slug: cs
+title: cs
 description: >
     컴퓨터 과학 과목들에 대해 정리합니다
 ---
 
-## 컴퓨터 과학
+## Computer Science
 * [소프트웨어 설계]{:.heading.flip-title}
 * [데이터베이스 구축]{:.heading.flip-title}
 * [프로그래밍 활용]{:.heading.flip-title}

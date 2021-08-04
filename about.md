@@ -1,9 +1,9 @@
 ---
 layout: about
 title: <u>About Me</u>
-description: >
-    A brief introduction to me.
-    My development experience and projects.
+description: |
+  A brief introduction to me. My development experience and projects.
+published: true
 ---
 
 <br />
@@ -36,8 +36,9 @@ description: >
 
 ---
 
-- 2021.09 ~ : 한국방송통신대학교 컴퓨터과학과 편입
+- 2021-07-19 ~ 2021-09-15 : Next Step TDD, Clean Code with Java 12기
 
+- 2021.09 ~ : 한국방송통신대학교 컴퓨터과학과 편입
 
 <br />
 

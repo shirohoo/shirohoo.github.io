@@ -2,7 +2,7 @@
 layout: about
 title: <u>About Me</u>
 description: |
-  A brief introduction to me. My development experience and projects.
+  A brief introduction to my development experience and projects.
 published: true
 ---
 
@@ -24,9 +24,9 @@ published: true
 
 ---
 
-- 2012 ~ 2020.08 : 전기업계 근무
+- 2012 ~ 2020.08 : 타 업종 근무
 
-- <u>2020.08</u> ~ : <u>개발 독학 시작</u>
+- <u>2020.08</u> ~ : <u>개발자로 전업하기 위해 개발 독학 시작</u>
 
 - 2021.02 ~ : 자사 서비스 회사 \| 자바 서버 개발자로 근무 중
 

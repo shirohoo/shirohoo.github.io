@@ -70,8 +70,8 @@ error:
 # Separators
 # ---------------------------------------------------------------------------------------
 posted:                'Posted'
-last_modified_at:      'Last modified at'
-last_modified_at_icon: 'icon-history'
+last_modified_at:       'Last modified at'
+last_modified_at_icon:  'icon-history'
 colon:                 ':'
 separator:             '|'
 category_start:        '&nbsp;in&nbsp;'
@@ -86,7 +86,7 @@ breadcrumbs_separator: '/'
 # ---------------------------------------------------------------------------------------
 date_formats:
   post:                '%d %b %Y'
-  last_modified_at:    '%Y-%m-%d'
+  last_modified_at:     '%Y-%m-%d'
   related_post:        '%d %b %Y'
   list_group_by:       '%Y'
   list_entry:          '%d %b'
@@ -138,7 +138,7 @@ resume:
   publications_title:  <!--name--> by <!--publisher-->
   references:          References
   languages:           Languages
-  fluency:             Fluency
+  fluency:              Fluency
   skills:              Skills
   level:               Level
   interests:           Interests

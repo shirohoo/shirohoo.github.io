@@ -4,5 +4,5 @@ type: category
 title: <u>Debugging</u>
 slug: debugging
 description: >
-    Development issues and debugging experiences 
+    development issues and debugging experiences 
 ---

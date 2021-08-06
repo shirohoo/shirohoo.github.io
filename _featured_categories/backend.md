@@ -4,10 +4,9 @@ type: category
 title: <u>BackEnd</u>
 slug: backend
 description: >
-    BackEnd full stack
+    backend full stack for java
 ---
 
-## BackEnd
 * [Test]{:.heading.flip-title}
 * [Java]{:.heading.flip-title}
 * [Groovy]{:.heading.flip-title}
@@ -15,9 +14,9 @@ description: >
 * [Database]{:.heading.flip-title}
 * [Server Side]{:.heading.flip-title}
 
-[Test]: /test/
-[Java]: /java/
-[Groovy]: /groovy/
-[Gradle]: /gradle/
-[Database]: /database/
-[Server Side]: /server-side/
+[Test]: /backend/test/
+[Java]: /backend/java/
+[Groovy]: /backend/groovy/
+[Gradle]: /backend/gradle/
+[Database]: /backend/database/
+[Server Side]: /backend/server-side/

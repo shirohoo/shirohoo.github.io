@@ -1,10 +1,8 @@
 ---
 layout: list
 type: category
-title: <u>Diary</u>
+title: <u>개발일기</u>
 slug: diary
 description: >
-    Records special events in your daily life.
+    records special events in my daily life
 ---
-
-

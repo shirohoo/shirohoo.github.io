@@ -58,53 +58,53 @@ menu:
     url:               /cs/
     submenu:
       - title:         소프트웨어 설계
-        url:           /software-design/
+        url:           /cs/software-design/
       - title:         데이터베이스 구축
-        url:           /database-construct/
+        url:           /cs/database-construct/
       - title:         프로그래밍 활용
-        url:           /leverage-programming/
+        url:           /cs/leverage-programming/
       - title:         정보시스템 구축
-        url:           /information-system/
+        url:           /cs/information-system/
       - title:         자료구조 & 알고리즘
-        url:           /data-structure-algorithm/
+        url:           /cs/data-structure-algorithm/
   - title:             BackEnd
     url:               /backend/
     submenu:
       - title:         Test
-        url:           /test/
+        url:           /backend/test/
       - title:         Java
-        url:           /java/
+        url:           /backend/java/
       - title:         Groovy
-        url:           /groovy/
+        url:           /backend/groovy/
       - title:         Gradle
-        url:           /gradle/
+        url:           /backend/gradle/
       - title:         Database
-        url:           /database/
+        url:           /backend/database/
       - title:         Server Side
-        url:           /server-side/
+        url:           /backend/server-side/
   - title:             Spring
     url:               /spring/
     submenu:
       - title:         Spring MVC
-        url:           /spring-mvc/
+        url:           /spring/spring-mvc/
       - title:         Spring Security
-        url:           /spring-security/
+        url:           /spring/spring-security/
       - title:         Spring Data Jpa
-        url:           /spring-data-jpa/
+        url:           /spring/spring-data-jpa/
       - title:         Spring Batch
-        url:           /spring-batch/
+        url:           /spring/spring-batch/
   - title:             FrontEnd
     url:               /frontend/
     submenu:
       - title:         Javascript
-        url:           /javascript/
+        url:           /frontend/javascript/
       - title:         Vue.js
-        url:           /vue/
+        url:           /frontend/vue/
   - title:             IDE
     url:               /ide/
     submenu:
       - title:         IntelliJ
-        url:           /intellij/
+        url:           /ide/intellij/
 
 # Add links to the footer.
 # Typically you'll want to link to your cookie- or privacy policy (if appliable), etc..

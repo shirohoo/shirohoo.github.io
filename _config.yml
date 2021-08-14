@@ -394,10 +394,10 @@ plugins:
 # ---------------------------------------------------------------------------------------
 
 # Where you proof that you own this site (used by jekyll-seo-tag)
-# google_site_verification: <verification-id>
+google_site_verification: google-site-verification=QP6xbvFbQ-RK1rEeDlge0lpDYvcCG0FdC5crTSd-aDs
 # -- or --
 webmaster_verifications:
-  google:               google-site-verification=o0yqsE9wB6TR4cDmy4PfUmbxhx_zE_rH9r7x9qne0Q8
+  google: google-site-verification=QP6xbvFbQ-RK1rEeDlge0lpDYvcCG0FdC5crTSd-aDs
 #   bing:                <verification-id>
 #   alexa:               <verification-id>
 #   yandex:              <verification-id>

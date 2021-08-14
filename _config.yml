@@ -397,7 +397,7 @@ plugins:
 # google_site_verification: <verification-id>
 # -- or --
 # webmaster_verifications:
-   google:               google-site-verification=o0yqsE9wB6TR4cDmy4PfUmbxhx_zE_rH9r7x9qne0Q8
+google:               google-site-verification=o0yqsE9wB6TR4cDmy4PfUmbxhx_zE_rH9r7x9qne0Q8
 #   bing:                <verification-id>
 #   alexa:               <verification-id>
 #   yandex:              <verification-id>

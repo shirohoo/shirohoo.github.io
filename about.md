@@ -107,6 +107,18 @@ published: true
 
 ---
 
+## [🖥 SFTP Client Module](https://github.com/shirohoo/sftp-client){:target="_blank"}
+
+---
+
+처음 개발해서 [메이븐 중앙 저장소(Maven Central)](https://repo1.maven.org/maven2/io/github/shirohoo/sftp-client/1.7/){:target="_blank"}에 배포까지 해본 오픈소스 프로젝트.
+
+[JSch](https://github.com/is/jsch){:target="_blank"}를 래핑하여 <u>더 쉽고 간단하게 사용할 수 있는 SFTP 클라이언트 모듈</u>을 개발하였음
+
+자세한 사항은 [README](https://github.com/shirohoo/sftp-client/blob/master/README.md){:target="_blank"}를 참고 바랍니다
+
+<br />
+
 ## [🖥 개발사전](http://15.165.178.142/#/){:target="_blank"}
 
 ---
@@ -146,16 +158,6 @@ published: true
 김영한님의 [JPA 책](http://www.kyobobook.co.kr/product/detailViewKor.laf?mallGb=KOR&ejkGb=KOR&barcode=9788960777330){:target="_blank"}을 통한 `기초회귀학습`
 
 그동안의 <u>실무 경험을 복기하며 내용을 정리</u>
-
-<br />
-
-## [🖥 SFTP Client Module](https://github.com/shirohoo/sftp-client){:target="_blank"}
-
----
-
-[JSch](https://github.com/is/jsch){:target="_blank"}를 래핑하여 <u>더 쉽고 간단하게 사용할 수 있는 SFTP 클라이언트 모듈</u>을 개발하였음
-
-자세한 사항은 [README](https://github.com/shirohoo/sftp-client/blob/master/README.md){:target="_blank"}를 참고 바랍니다
 
 <br />
 

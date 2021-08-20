@@ -152,13 +152,3 @@ published: true
 <u>테이블에 정확하게 매핑되는 엔티티 객체를 자동 생성</u>해준다.
 
 <br />
-
-## [🖥 HKL Mart](https://github.com/shirohoo/hkl-mart){:target="_blank"}
-
----
-
-개발 독학 5개월차에 처음 경험해본 팀 프로젝트로 주제는 `쇼핑몰`.
-
-관련 더미데이터는 파이썬을 사용하여 <a href="https://abcmart.a-rt.com/" target="_blank">ABC Mart</a>를 `스크래핑`하였음.
-
-<br />

@@ -112,7 +112,7 @@ published: true
 
 ---
 
-처음으로 [메이븐 중앙 저장소(Maven Central)](https://search.maven.org/artifact/io.github.shirohoo/sftp-client/1.7/jar){:target="_blank"}에 배포까지 해본 오픈소스 프로젝트.
+처음으로 [메이븐 중앙 저장소(Maven Central)](https://mvnrepository.com/artifact/io.github.shirohoo/sftp-client){:target="_blank"}에 배포까지 해본 오픈소스 프로젝트.
 
 [JSch](https://github.com/is/jsch){:target="_blank"}를 래핑하여 <u>SFTP 프로토콜로 아주 쉽고 간단하게 파일 CRUD를 할 수 있는 모듈</u>을 개발하였음.
 

@@ -1,14 +1,15 @@
 ---
 layout: post
 category:
-    - spring
-    - spring-security
+  - spring
+  - spring-security
 title: Spring Security - REST API 기반의 인증 아키텍처
-description: >
-    Spring Security - REST API 기반의 인증 아키텍처
+description: |
+  Spring Security - REST API 기반의 인증 아키텍처
 image: /assets/img/spring/spring-security/security-logo.png
 related_posts:
-    - _posts/spring/spring-security/2021-05-02-authentication.md
+  - _posts/spring/spring-security/2021-05-02-authentication.md
+published: true
 ---
 
 * toc
@@ -237,7 +238,7 @@ public class RestLoginProcessingFilter extends AbstractAuthenticationProcessingF
             throw new IllegalStateException("no email or password entered.");
         }
         
-        // 인증되지 않은 사용자의 토큰을 생성해야 하므로 `RestAuthenticationToken`의 생성자를 호출합니다.
+        // 인증되지 않은 사용자의 토큰을 생성해야 하므로 RestAuthenticationToken의 생성자를 호출합니다.
         return getAuthenticationManager().authenticate(new RestAuthenticationToken(memberDto.getEmail(), memberDto.getPassword()));
     }
 

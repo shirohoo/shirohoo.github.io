@@ -117,9 +117,11 @@ dependencies {
 // 테스트 컨테이너를 매 테스트 케이스마다 올렸다 내렸다 하는 것은 굉장히 비효율적입니다.
 // 따라서 테스트가 실행될 때 테스트 컨테이너를 최초에 한번 올리고, 모든 테스트가 끝나면 테스트 컨테이너를 내려야 합니다.
 // BeforeAllCallback, AfterAllCallback를 구현합니다.
+@Testcontainers
 public class MySQL80Extension implements BeforeAllCallback, AfterAllCallback {
     // MySQL8.0을 도커로 띄울 것이기 때문에 TestContainers에서 이를 추상화한 객체를 선언합니다.
-    private MySQLContainer<?> MYSQL;
+    @Container
+    private static MySQLContainer<?> MYSQL;
  
     // 공식 문서에 따르면 별로 중요한 내용들은 아니라고 하였으니 구색만 맞춰서 대충 작성해줬습니다.
     private static final String DATABASE_NAME = "inflearn_backend";
@@ -168,7 +170,8 @@ public class MySQL80Extension implements BeforeAllCallback, AfterAllCallback {
 ```properties
 # src/test/resources/application-test.properties
 
-spring.jpa.hibernate.ddl-auto=create
+hibernate.dialect=org.hibernate.dialect.MySQL8Dialect
+spring.jpa.hibernate.ddl-auto=update
 spring.jpa.properties.hibernate.format_sql=true
 decorator.datasource.p6spy.enable-logging=true
 ```
@@ -186,6 +189,7 @@ decorator.datasource.p6spy.enable-logging=true
 @Retention(RetentionPolicy.RUNTIME)
 @ActiveProfiles("test") // 추가한 프로파일을 사용합니다.
 @ExtendWith(MySQL80Extension.class) // 추가한 MySQL8.0 확장을 사용합니다.
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE) // 임베디드 DB를 사용하지 않습니다.
 public @interface EnableDockerContainers {
 }
 ```

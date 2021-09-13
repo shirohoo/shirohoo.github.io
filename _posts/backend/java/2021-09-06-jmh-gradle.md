@@ -1,14 +1,15 @@
 ---
 layout: post
 category:
-    - backend
-    - java
+  - backend
+  - java
 title: Gradle로 JMH 사용해보기
-description: >
-    3rd Party plugin을 사용하여 jmh를 쉽게 사용해봅니다.
+description: |
+  3rd Party plugin을 사용하여 jmh를 쉽게 사용해봅니다.
 image: /assets/img/backend/java.png
 related_posts:
-    - 
+  - null
+published: true
 ---
 
 * toc
@@ -22,7 +23,7 @@ related_posts:
 
 설정은 원 저작자 문서에도 잘 나와 있습니다만, 샘플 코드를 게시합니다.
 
-주인장이 작성한 더 자세한 코드와 한글 문서는 [📜 주인장 깃허브 레파지토리](https://github.com/shirohoo/jvm-benchmark) 를 참고해주세요.
+이 글의 깃허브는 [📜 여기](https://github.com/shirohoo/jvm-benchmark) 를 참고해주세요.
 
 제가 구성한 빌드 스크립트는 다음과 같습니다.
 

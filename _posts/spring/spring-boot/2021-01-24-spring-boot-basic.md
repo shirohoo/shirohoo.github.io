@@ -2,7 +2,7 @@
 layout: post
 category:
     - spring
-    - spring-mvc
+    - spring-boot
 date: 2021-01-24 21:52
 title: Spring Boot 살펴보기
 description: >

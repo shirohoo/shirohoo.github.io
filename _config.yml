@@ -84,6 +84,8 @@ menu:
   - title:             Spring
     url:               /spring/
     submenu:
+      - title:         Spring Boot
+        url:           /spring/spring-boot/
       - title:         Spring MVC
         url:           /spring/spring-mvc/
       - title:         Spring Security

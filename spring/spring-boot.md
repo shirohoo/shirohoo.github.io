@@ -1,10 +1,10 @@
 ---
 layout: list
 category: spring
-title: <u>Spring Data Jpa</u>
-slug: spring-data-jpa
+title: <u>Spring Boot</u>
+slug: spring-boot
 description: >
-  <u>Spring Data Jpa</u>에 대해 정리합니다 
+  <u>Spring Boot</u>에 대해 정리합니다 
 related_posts:
   -
 addons:

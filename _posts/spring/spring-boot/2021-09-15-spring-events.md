@@ -1,14 +1,15 @@
 ---
 layout: post
 category:
-    - spring
-    - spring-boot
+  - spring
+  - spring-boot
 title: 스프링 부트의 이벤트 처리
-description: >
-    스트링 부트에서 `Event Driven` 방식의 처리를 어떻게 하는지 정리합니다.
+description: |
+  스트링 부트에서 `Event Driven` 방식의 처리를 어떻게 하는지 정리합니다.
 image: /assets/img/spring/spring-mvc/spring-mvc-logo.png
 related_posts:
-    -
+  - null
+published: true
 ---
 
 * toc
@@ -18,7 +19,7 @@ related_posts:
 
 `스프링 4.2` 이후로 이벤트 처리 방식이 아주 쉽게 바뀌었습니다.
 
-`스프링 부트 2+`를 사용하신다면 기본적으로 `스프링 5`를 사용할 것이기 때문에, 이 방식을 바로 적용할 수 있습니다.
+만약 `스프링 부트 2+`를 사용하신다면 자연스럽게 구현체로 `스프링 5+`를 사용하실 것이기 때문에, 이 방식을 바로 적용하실 수 있습니다.
 
 어떤 처리를 한 후 이벤트를 발생시키면, 해당 이벤트를 수신하는 리스너 객체가 특정한 처리를 해주는 것으로, 콜백이라고 생각하셔도 무방합니다.
 

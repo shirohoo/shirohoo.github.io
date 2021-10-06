@@ -56,15 +56,14 @@ published: true
 
 ---
 
-- <u>APM</u> 활용한 <u>성능 분석</u> 및 <u>개선</u>
+- <u>APM</u> 을 활용한 <u>서버 모니터링</u>, <u>성능 분석</u> 및 <u>개선</u>
 - <u>JPA / Querydsl</u> 사용 <u>성능 최적화 경험</u>
 - <u>Spring Batch API</u> 개발 및 운영
 - <u>Spring Security</u>를 사용한 <u>Dynamic ACL</u> 개발
 - IDC 인프라 운영 관리 (on-premise)
-    - Jenkins / Nginx를 이용한 <u>무중단 배포</u> 구축
+    - Jenkins / Nginx를 이용한 <u>로드 밸런싱, 무중단 배포</u> 구축
     - Jenkins, Github Actions를 이용한 <u>CI/CD</u>
     - Jenkins를 이용한 <u>배치 서버 운영</u>
-    - Nginx를 이용한 <u>로드 밸런싱</u>
 
 <br />
 
@@ -76,7 +75,7 @@ published: true
 
 ---
 
-- <u>Java</u>, <u>Groovy</u>, Python
+- <u>Java</u>, <u>Groovy</u>
 - <u>Spring Boot</u>, <u>Spring MVC</u>, <u>Spring Batch</u>, <u>Spring Security</u>, <u>Spring Data JPA</u>
 - <u>JPA</u>, <u>Querydsl</u>, <u>Hibernate</u>
 - <u>Junit5</u>, <u>Mockito</u>

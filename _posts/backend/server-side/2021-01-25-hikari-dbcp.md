@@ -8,7 +8,7 @@ title: Hikari DBCP
 description: >
     `Hikari DBCP` 초고성능 `DBCP`에 대해 알아봅시다
 image: /assets/img/backend/hikari-logo.png
-relatedposts:
+related_posts:
     - 
 ---
 

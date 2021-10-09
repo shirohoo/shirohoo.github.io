@@ -102,7 +102,7 @@ URL 문법은 대체로 9개의 컴포넌트로 나눠집니다.
 
 <br />
 
-> <scheme>://<username>:<password>@<host>:<port>/<path>;<parameter>?<query>#<fragment>
+![image](https://user-images.githubusercontent.com/71188307/136656473-e60782a3-92f5-477d-b690-6af0a6a2573e.png)
 
 <br />
 

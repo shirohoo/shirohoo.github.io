@@ -310,6 +310,8 @@ public final class RememberMeConfigurer<H extends HttpSecurityBuilder<H>> extend
 - 만료일
 - 키
 
+<br />
+
 위의 네가지 정보가 모두 올바른 값이라면, 유효한 시그니처가 생성되게 되고, 이 시그니처를 토대로 `체크섬`하여 유효성을 검증합니다.
 
 <br />
@@ -319,6 +321,8 @@ public final class RememberMeConfigurer<H extends HttpSecurityBuilder<H>> extend
 - 사용자명
 - 만료일
 - 시그니처
+
+<br />
 
 웹 브라우저에서 보내오는 쿠키에서 시그니처를 만드는데 필요한 `사용자명`, `만료일`을 얻을 수 있습니다.
 
@@ -375,9 +379,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 이 방식은 세션-쿠키 방식과 유사하며, 이 방식을 사용하기 위해서는 먼저 두가지 속성을 이해해야 합니다.
 
-- 시리즈(Series): 사용자가 처음 로그인할 때 생성되는 랜덤한 고유값이며, 이후 사용자가 Remember-Me 기능을 이용해 인증을 시도할 때마다 역시 동일한 값을 가지며, `불변`합니다. 데이터베이스의 PK를 담당합니다.
+- 시리즈(Series): `사용자가 처음 로그인할 때 생성되는 랜덤한 고유 값`이며 `불변`합니다. 즉, 이후 사용자가 `Remember-Me` 기능을 이용해 인증을 시도할 때마다 항상 동일한 값을 가집니다. 데이터베이스의 `PK(Primary Key)`가 됩니다.
 
-- 토큰(Token): 사용자가 Remember-Me 기능을 이용해 인증을 시도할 때마다 계속해서 변경되는 고유한 값입니다.
+- 토큰(Token): 사용자가 `Remember-Me` 기능을 이용해 인증을 시도할 때마다 `계속해서 변경되는 고유 값`입니다.
+
+<br />
 
 처음 인증 시 인증 토큰을 데이터베이스에 저장해두고, 이후 사용자가 보내오는 쿠키와 데이터베이스의 쿠키를 비교합니다.
 
@@ -391,7 +397,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 `데이터베이스`는 `H2`를 사용할것이며, `데이터베이스 접속 방식`은 `JPA(Hibernate)`를 이용할 것입니다.
 
-먼저, 스프링 시큐리티 팀에서 제공하는 `DDL`을 적용해야 하는데, 이 포스팅에서는 JPA를 이용 할 것이므로 해당 DDL을 참고만 합니다.
+먼저, 스프링 시큐리티 팀에서 제공하는 `DDL`을 적용해야 하는데, 이 포스팅에서는 JPA를 이용 할 것이므로 해당 DDL을 참고하여 엔티티를 설계 및 구현합니다.
 
 <br />
 
@@ -407,9 +413,7 @@ create table persistent_logins
 
 <br />
 
-이를 엔티티로 구현하면 대략 다음과 같습니다.
-
-위의 SQL에 매핑되는 엔티티를 구성함과 동시에, 나중에 사용하게 될 몇가지 메서드를 추가하였습니다.
+이를 엔티티로 구현하면 대략 다음과 같습니다. 그리고 나중에 사용하게 될 몇가지 메서드를 함께 추가하였습니다.
 
 <br />
 
@@ -438,7 +442,6 @@ public class PersistentLogin implements Serializable {
         this.token = token.getTokenValue();
         this.lastUsed = token.getDate();
     }
-
 
     // 정적 팩토리 메서드
     public static PersistentLogin from(final PersistentRememberMeToken token) {
@@ -655,15 +658,15 @@ spring:
 
 <br />
 
-1. 화면 좌측 메뉴의 `PERSISTENT_LOGINS` 를 클릭하면 우측 콘솔에 SELECT 쿼리가 생성됩니다.
+1. 화면 좌측 메뉴의 `PERSISTENT_LOGINS` 를 클릭하면 우측 콘솔에 `SELECT 쿼리`가 생성됩니다.
 2. 바로 위의 `RUN`을 누르면 생성된 쿼리가 실행됩니다.
 3. 화면 하단에 쿼리의 결과가 노출됩니다.
 
 <br />
 
-현재는 로그인을 단 한번도 하지 않았으므로 데이터베이스에 토큰이 없는게 당연합니다.
+현재는 로그인을 단 한번도 하지 않았으므로 데이터베이스에 토큰이 없는것이 당연합니다.
 
-`localhost:8080/login`으로 접속해 test/test를 입력하고, Remember-Me 기능을 사용할 것임을 체크하고 로그인한 뒤 다시 H2 콘솔을 확인하도록 합니다.
+`localhost:8080/login`으로 접속해 아이디와 비밀번호(test/test)를 입력하고, `Remember-Me` 기능을 사용할 것임을 체크하고 로그인한 뒤 다시 H2 콘솔을 확인하도록 합니다.
 
 <br />
 
@@ -671,7 +674,7 @@ spring:
 
 <br />
 
-우선 로그인 후 역시 remember-me 쿠키가 별 문제없이 응답된 것을 확인할 수 있습니다.
+우선 로그인 후 역시 `remember-me` 쿠키가 잘 응답된 것을 확인할 수 있습니다.
 
 <br />
 
@@ -679,11 +682,11 @@ spring:
 
 <br />
 
-H2 콘솔에 접속 후 동일한 쿼리를 실행하면 위와 같이 새로운 영구토큰이 데이터베이스에 저장됐음을 확인할 수 있습니다.
+H2 콘솔에 접속 후 동일한 쿼리를 실행하면 위와 같이 새로운 영구토큰이 데이터베이스에 저장됐음도 확인할 수 있습니다.
 
 <br />
 
-이후 로그아웃이 될 경우 세션 종료를 의미하기 때문에, 클라이언트에 설정된 remember-me 쿠키와 데이터베이스에 저장된 영구 토큰이 모두 제거되어야만 합니다.
+이후 로그아웃이 될 경우 세션 종료를 의미하기 때문에, `클라이언트에 설정된 remember-me 쿠키`와 `데이터베이스에 저장된 영구 토큰`이 모두 제거되어야만 합니다.
 
 `localhost:8080/logout`으로 접속하여 로그아웃한 후 다시 한번 더 확인해봅니다.
 
@@ -697,7 +700,7 @@ H2 콘솔에 접속 후 동일한 쿼리를 실행하면 위와 같이 새로운
 
 <br />
 
-모두 성공적으로 제거된 모습을 확인할 수 있습니다.
+모두 성공적으로 제거된 것을 확인할 수 있습니다.
 
 <br />
 
@@ -705,9 +708,11 @@ H2 콘솔에 접속 후 동일한 쿼리를 실행하면 위와 같이 새로운
 
 ---
 
-여기까지는 remember-me 쿠키를 영속성 레이어에 저장하고 관리하는 기본적인 방법들이었습니다.
+여기까지는 `remember-me 쿠키`를 `영속성 레이어(Persistent Layer)`에 저장하고 관리하는 기본적인 방법들에 대해 알아봤습니다.
 
-만약 쿠키에 대한 추가적인 제어가 필요하다면 스프링 시큐리티에서 제공하는 `PersistentTokenBasedRememberMeServices`를 통해 다음과 같이 간단하게 몇가지 제어를 더 추가할 수 있으며, 더 복잡한 구성이 필요 할 경우 `PersistentTokenBasedRememberMeServices`를 확장해 커스터마이징 하면 되겠습니다.
+<br />
+
+만약 쿠키에 대한 추가적인 제어가 필요하다면 스프링 시큐리티에서 제공하는 `PersistentTokenBasedRememberMeServices`를 통해 다음과 같이 간단하게 몇가지 제어를 더 추가할 수 있으며, 더욱 복잡한 구성이 필요 할 경우 `PersistentTokenBasedRememberMeServices`를 확장하면 되겠습니다.
 
 <br />
 
@@ -718,8 +723,7 @@ public PersistentTokenBasedRememberMeServices rememberMeServices(final Persisten
   PersistentTokenBasedRememberMeServices services = new PersistentTokenBasedRememberMeServices("key", userDetailsService(), repository);
 
   services.setAlwaysRemember(true);
-  services.setParameter("remember-me");
-  services.setTokenValiditySeconds(86400);
+  services.setParameter("remember-me-param-name");
 
   return services;
 }

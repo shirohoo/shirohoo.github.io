@@ -66,6 +66,12 @@ dependencies {
 
 사용자가 서버에 인증한 순간 웹 브라우저에 `remember-me` 쿠키를 저장해 놓음으로써 이후 사용자의 세션이 만료되거나, 불특정한 사유로 `JSESSIONID`가 없어졌을 경우에도 해당 사용자를 기억할 수 있게 됩니다.
 
+<br />
+
+![image](https://user-images.githubusercontent.com/71188307/136892834-76bc7b75-fd44-4ed9-9757-7f0dfc30364a.png)
+
+<br />
+
 즉, `Spring Security Filter Chain`에서 유효한 `remember-me` 쿠키를 인식하면 해당 사용자가 현재 인증되지 않은 사용자라고 할지라도 즉시 자동으로 재 인증을 시켜주므로, 사용자는 이 기능을 통해 로그인 시 쿠키가 유효한 시점까지 아이디/패스워드 등의 정보를 다시 입력하지 않아도 되게 됩니다.
 
 단, 사용자에게 편의성을 제공하면 할수록 보안 수준은 반비례하여 점점 떨어질 수 밖에 없기 때문에, 이 부분은 항상 주의해야 합니다.
@@ -111,7 +117,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .and()
 
             .rememberMe().key("key") // remember-me 토큰 암호화에 사용할 키를 설정합니다. 기본값은 무작위로 설정된 문자열입니다.
-            .userDetailsService(userDetailsServiceBean()) // Remember-Me 기능 설정에 필요한 필수 옵션
+            .userDetailsService(userDetailsService()) // Remember-Me 기능 설정에 필요한 필수 옵션
 
             .and()
 
@@ -326,7 +332,7 @@ public final class RememberMeConfigurer<H extends HttpSecurityBuilder<H>> extend
 
 <br />
 
-### Attribute
+### 속성
 
 ---
 
@@ -339,7 +345,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(final HttpSecurity http) throws Exception {
         http
             .rememberMe().key("key") // remember-me 토큰 암호화에 사용할 키를 설정합니다. 기본값은 무작위로 설정된 문자열입니다.
-            .userDetailsService(userDetailsServiceBean()) // Remember-Me 기능 설정에 필요한 필수 옵션입니다.
+            .userDetailsService(userDetailsService()) // Remember-Me 기능 설정에 필요한 필수 옵션입니다.
 
 //            .rememberMeParameter("remember-me") // 클라이언트 뷰에서 설정한 파라미터명과 동일해야 합니다. 기본값은 remember-me
 //            .tokenValiditySeconds(86400) // 토큰 유효기간을 설정합니다. 기본값은 14일이며 단위는 초입니다. -1로 설정 할 경우 브라우저가 종료되면 함께 사라집니다.
@@ -383,13 +389,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 ---
 
-데이터베이스는 H2를 사용할것이며, 데이터베이스 접속 방식은 JPA(Hibernate)를 이용할 것입니다.
+`데이터베이스`는 `H2`를 사용할것이며, `데이터베이스 접속 방식`은 `JPA(Hibernate)`를 이용할 것입니다.
 
-먼저, 스프링 시큐리티 팀에서 제공하는 DDL을 적용해야 하는데, 이 포스팅에서는 JPA를 이용 할 것이므로 해당 DDL을 참고만 합니다.
+먼저, 스프링 시큐리티 팀에서 제공하는 `DDL`을 적용해야 하는데, 이 포스팅에서는 JPA를 이용 할 것이므로 해당 DDL을 참고만 합니다.
 
 <br />
 
-```shell
+```sql
 create table persistent_logins
 (
     username  varchar(64) not null,
@@ -483,7 +489,7 @@ public interface PersistentLoginRepository extends JpaRepository<PersistentLogin
 
 그리고 위에서 작성한 구현체들을 스프링 시큐리티에서 제공하는 `PersistentTokenRepository`로 확장해줘야 합니다.
 
-이렇게 하는 이유는, `SecurityConfiguration`에서 `Remember-Me` 기능을 데이터베이스 기반 영구 토큰 방식으로 구현 할 경우 데이터베이스 접근 할 때 사용할 `Repository` 구현체를 요구하게 되는데, 기본적으로 JPA를 이용한 구현체가 제공되지 않기 때문에 직접 확장하는 것입니다.
+이렇게 하는 이유는, `SecurityConfiguration`에서 `Remember-Me` 기능을 `데이터베이스 기반 토큰 방식`으로 구현 할 경우 데이터베이스에 접근 할 때 사용할 `Repository` 구현체를 요구하게 되는데, 기본적으로 스프링 시큐리티에서 JPA를 이용한 구현체가 제공되지 않기 때문에 이 구현체를 직접 구현해 확장하는 것입니다.
 
 <br />
 
@@ -532,7 +538,7 @@ public class JpaPersistentTokenRepository implements PersistentTokenRepository {
     // 세션이 종료될 경우 데이터베이스에서 영구 토큰을 제거합니다.
     @Override
     public void removeUserTokens(final String username) {
-        repository.deleteAll(repository.findByUsername(username));
+        repository.deleteAllInBatch(repository.findByUsername(username));
     }
 
 }
@@ -542,7 +548,7 @@ public class JpaPersistentTokenRepository implements PersistentTokenRepository {
 
 그리고 위의 커스텀 구현체들을 `SecurityConfiguration`에  추가해줍니다.
 
-테스트를 위해 몇가지 설정을 더 추가하였으나, 이 포스팅의 상단에서 설정한 것과 크게 달라진 것은 없을것입니다.
+테스트를 위해 몇가지 설정을 더 추가하였으나, 이 포스팅의 상단에서 설정한 것과 크게 달라진 것은 없을 것입니다.
 
 <br />
 
@@ -576,7 +582,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .and()
 
             .rememberMe().key("key") // remember-me 토큰 암호화에 사용할 키를 설정합니다. 기본값은 무작위로 설정된 문자열입니다.
-            .userDetailsService(userDetailsServiceBean()) // Remember-Me 기능 설정에 필요한 필수 옵션
+            .userDetailsService(userDetailsService()) // Remember-Me 기능 설정에 필요한 필수 옵션
             .tokenRepository(tokenRepository)
 
 //            .rememberMeParameter("remember-me") // 클라이언트 뷰에서 설정한 파라미터명과 동일해야 한다. 기본값은 remember-me
@@ -631,7 +637,7 @@ spring:
 
 <br />
 
-`H2 콘솔`을 사용할 것이라고 설정했기 때문에, H2가 인메모리로 기동되며 데이터베이스 콘솔에 접속할 수 있는 수단을 제공해줍니다.
+스프링 설정에 `H2 콘솔`을 사용할 것이라고 설정했기 때문에 스프링에서 인메모리 데이터베이스 콘솔에 접속할 수 있는 수단을 제공해줍니다.
 
 서버가 기동된 후 `http://localhost:8080/h2-console/` 로 접속하면 다음과 같은 화면에 들어갈 수 있는데, 위에서 찾은 `JDBC URL`을 입력합니다.
 
@@ -695,4 +701,127 @@ H2 콘솔에 접속 후 동일한 쿼리를 실행하면 위와 같이 새로운
 
 <br />
 
-작성중...
+### 확장
+
+---
+
+여기까지는 remember-me 쿠키를 영속성 레이어에 저장하고 관리하는 기본적인 방법들이었습니다.
+
+만약 쿠키에 대한 추가적인 제어가 필요하다면 스프링 시큐리티에서 제공하는 `PersistentTokenBasedRememberMeServices`를 통해 다음과 같이 간단하게 몇가지 제어를 더 추가할 수 있으며, 더 복잡한 구성이 필요 할 경우 `PersistentTokenBasedRememberMeServices`를 확장해 커스터마이징 하면 되겠습니다.
+
+<br />
+
+```java
+// file: 'SecurityConfiguration.java'
+@Bean
+public PersistentTokenBasedRememberMeServices rememberMeServices(final PersistentTokenRepository repository) {
+  PersistentTokenBasedRememberMeServices services = new PersistentTokenBasedRememberMeServices("key", userDetailsService(), repository);
+
+  services.setAlwaysRemember(true);
+  services.setParameter("remember-me");
+  services.setTokenValiditySeconds(86400);
+
+  return services;
+}
+```
+
+<br />
+
+위 방식의 경우 만료된 토큰들에 대한 상세한 제어가 없습니다.
+
+따라서 만료된 토큰들을 주기적으로 데이터베이스에서 제거하는 코드를 추가로 작성합니다.
+
+<br />
+
+```java
+// Runnable을 구현하여 별도의 스레드로 동작시키도록 합니다.
+public class ExpiredTokenJpaRepositoryCleaner implements Runnable {
+
+    private final PersistentLoginRepository repository;
+    private final long tokenValidityInMs;
+
+    private ExpiredTokenJpaRepositoryCleaner(final PersistentLoginRepository repository, final long tokenValidityInMs) {
+        if (isNull(repository)) {
+            throw new IllegalArgumentException("PersistentTokenRepository cannot be null.");
+        }
+
+        if (tokenValidityInMs < 1) {
+            throw new IllegalArgumentException("tokenValidityInMs must be greater than 0. Got " + tokenValidityInMs);
+        }
+
+        this.repository = repository;
+        this.tokenValidityInMs = tokenValidityInMs;
+    }
+
+    public static ExpiredTokenJpaRepositoryCleaner of(final PersistentLoginRepository repository, final long tokenValidityInMs) {
+        return new ExpiredTokenJpaRepositoryCleaner(repository, tokenValidityInMs);
+    }
+
+    @Override
+    public void run() {
+        final long expiredInMs = System.currentTimeMillis() - tokenValidityInMs;
+        repository.deleteAllInBatch(repository.findByLastUsedAfter(new Date(expiredInMs)));
+    }
+
+}
+```
+
+<br />
+
+이제 위의 설정을 스프링에서 제공하는 스케쥴러를 이용해 주기적으로 실행시키도록 하면 됩니다.
+
+<br />
+
+```java
+@Configuration
+@EnableScheduling
+public class ScheduleConfiguration {
+
+    private final PersistentLoginRepository persistentLoginRepository;
+
+    public ScheduleConfiguration(final PersistentLoginRepository persistentLoginRepository) {
+        this.persistentLoginRepository = persistentLoginRepository;
+    }
+
+    @Scheduled(fixedDelay = 10_000) // 단위는 ms. 따라서 1,000=1초. 10초에 한번 실행됨을 의미함.
+    public void cleanExpiredTokens() {
+        // 토큰의 유효시간이 10초
+        new Thread(ExpiredTokenJpaRepositoryCleaner.of(persistentLoginRepository, 10_000L))
+            .start();
+    }
+
+}
+```
+
+<br />
+
+이후 서버를 기동하고 로그인을 하면 remember-me 쿠키가 발급되고, 토큰의 유효기간을 10초로 설정하였으므로 약 10초 후에 다음과 같은 쿼리가 발생합니다.
+
+<br />
+
+```shell
+Hibernate: 
+    select
+        persistent0_.series as series1_0_,
+        persistent0_.last_used as last_use2_0_,
+        persistent0_.token as token3_0_,
+        persistent0_.username as username4_0_ 
+    from
+        persistent_logins persistent0_ 
+    where
+        persistent0_.last_used>?
+Hibernate: 
+    delete 
+    from
+        persistent_logins 
+    where
+        series=?
+```
+
+<br />
+
+# 참고
+
+---
+
+- Spring Security - Third Edition: Secure your web applications, RESTful services, and microservice architectures (ISBN 9781787129511)

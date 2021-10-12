@@ -779,11 +779,11 @@ public class ExpiredTokenJpaRepositoryCleaner implements Runnable {
 ```java
 @Configuration
 @EnableScheduling
-public class ScheduleConfiguration {
+public class ScheduleConfigurer {
 
     private final PersistentLoginRepository persistentLoginRepository;
 
-    public ScheduleConfiguration(final PersistentLoginRepository persistentLoginRepository) {
+    public ScheduleConfigurer(final PersistentLoginRepository persistentLoginRepository) {
         this.persistentLoginRepository = persistentLoginRepository;
     }
 

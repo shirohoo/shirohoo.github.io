@@ -1,15 +1,16 @@
 ---
 layout: post
 category:
-    - spring
-    - spring-security
+  - spring
+  - spring-security
 title: Remember-Me
-description: >
-    주로 자동로그인 등에 사용되는 `Remember-Me` 기능에 대해 알아봅시다.
+description: |
+  주로 자동로그인 등에 사용되는 `Remember-Me` 기능에 대해 알아봅시다.
 image: /assets/img/spring/spring-security/security-logo.png
 related_posts:
-    - _posts/spring/spring-security/2021-05-02-authentication.md
-    - _posts/spring/spring-security/2021-08-30-rest-login.md
+  - _posts/spring/spring-security/2021-05-02-authentication.md
+  - _posts/spring/spring-security/2021-08-30-rest-login.md
+published: true
 ---
 
 * toc
@@ -360,6 +361,338 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 ---
 
-`작성중 ...`
+<br />
+
+![image](https://user-images.githubusercontent.com/78329064/136879483-48e3d5de-a441-4e65-83ad-4f021eb1b0ed.png)
+
+<br />
+
+이 방식은 세션-쿠키 방식과 유사하며, 이 방식을 사용하기 위해서는 먼저 두가지 속성을 이해해야 합니다.
+
+- 시리즈(Series): 사용자가 처음 로그인할 때 생성되는 랜덤한 고유값이며, 이후 사용자가 Remember-Me 기능을 이용해 인증을 시도할 때마다 역시 동일한 값을 가지며, `불변`합니다. 데이터베이스의 PK를 담당합니다.
+
+- 토큰(Token): 사용자가 Remember-Me 기능을 이용해 인증을 시도할 때마다 계속해서 변경되는 고유한 값입니다.
+
+처음 인증 시 인증 토큰을 데이터베이스에 저장해두고, 이후 사용자가 보내오는 쿠키와 데이터베이스의 쿠키를 비교합니다.
+
+따라서 remember-me 쿠키가 탈취당했는지의 여부를 알 수 있고, 만약 쿠키가 탈취당했다면 해당 토큰을 강제로 정지시켜버리거나, 사용자에게 쿠키가 탈취당했음을 경고하는 등의 작업도 할 수 있게 됩니다.
 
 <br >
+
+### 구현
+
+---
+
+데이터베이스는 H2를 사용할것이며, 데이터베이스 접속 방식은 JPA(Hibernate)를 이용할 것입니다.
+
+먼저, 스프링 시큐리티 팀에서 제공하는 DDL을 적용해야 하는데, 이 포스팅에서는 JPA를 이용 할 것이므로 해당 DDL을 참고만 합니다.
+
+<br />
+
+```shell
+create table persistent_logins
+(
+    username  varchar(64) not null,
+    series    varchar(64) primary key,
+    token     varchar(64) not null,
+    last_used timestamp   not null
+)
+```
+
+<br />
+
+이를 엔티티로 구현하면 대략 다음과 같습니다.
+
+위의 SQL에 매핑되는 엔티티를 구성함과 동시에, 나중에 사용하게 될 몇가지 메서드를 추가하였습니다.
+
+<br />
+
+```java
+@Entity
+@Table(name = "persistent_logins")
+public class PersistentLogin implements Serializable {
+
+    @Id
+    private String series;
+
+    private String username;
+
+    private String token;
+
+    private Date lastUsed;
+
+    // JPA의 한계로 기본생성자가 반드시 필요하지만 private으로는 설정할 수 없다.
+    protected PersistentLogin() {
+    }
+
+    // 생성자를 외부에 노출하지 않습니다.
+    private PersistentLogin(final PersistentRememberMeToken token) {
+        this.series = token.getSeries();
+        this.username = token.getUsername();
+        this.token = token.getTokenValue();
+        this.lastUsed = token.getDate();
+    }
+
+
+    // 정적 팩토리 메서드
+    public static PersistentLogin from(final PersistentRememberMeToken token) {
+        return new PersistentLogin(token);
+    }
+
+    public String getSeries() {
+        return series;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public Date getLastUsed() {
+        return lastUsed;
+    }
+
+    public void updateToken(final String tokenValue, final Date lastUsed) {
+        this.token = tokenValue;
+        this.lastUsed = lastUsed;
+    }
+
+}
+```
+
+<br />
+
+이후 위 엔티티를 데이터베이스와 결합하게 도와줄 JPA Repository를 작성합니다.
+
+<br />
+
+```java
+public interface PersistentLoginRepository extends JpaRepository<PersistentLogin, String> {
+
+    Optional<PersistentLogin> findBySeries(final String series);
+
+    List<PersistentLogin> findByUsername(final String username);
+
+}
+```
+
+<br />
+
+그리고 위에서 작성한 구현체들을 스프링 시큐리티에서 제공하는 `PersistentTokenRepository`로 확장해줘야 합니다.
+
+이렇게 하는 이유는, `SecurityConfiguration`에서 `Remember-Me` 기능을 데이터베이스 기반 영구 토큰 방식으로 구현 할 경우 데이터베이스 접근 할 때 사용할 `Repository` 구현체를 요구하게 되는데, 기본적으로 JPA를 이용한 구현체가 제공되지 않기 때문에 직접 확장하는 것입니다.
+
+<br />
+
+```java
+// PersistentTokenRepository에서 요구하는 네가지 메서드를 재정의(Override)하도록 합니다.
+public class JpaPersistentTokenRepository implements PersistentTokenRepository {
+
+    // 스프링 팀에서 권장하는 생성자 DI를 이용합니다
+    private final PersistentLoginRepository repository;
+
+    public JpaPersistentTokenRepository(final PersistentLoginRepository repository) {
+        this.repository = repository;
+    }
+
+    // 새로운 remember-me 쿠키를 발급할 때 담을 토큰을 생성하기 위한 메서드입니다.
+    @Override
+    public void createNewToken(final PersistentRememberMeToken token) {
+        repository.save(PersistentLogin.from(token));
+    }
+
+    // 토큰을 변경할때 호출될 메서드입니다.
+    @Override
+    public void updateToken(final String series, final String tokenValue, final Date lastUsed) {
+        repository.findBySeries(series)
+            .ifPresent(persistentLogin -> {
+                persistentLogin.updateToken(tokenValue, lastUsed);
+                repository.save(persistentLogin);
+            });
+    }
+
+    // 사용자에게서 remember-me 쿠키를 이용한 인증 요청이 들어올 경우 호출될 메서드입니다.
+    // 사용자가 보내온 쿠키에 담긴 시리즈로 데이터베이스를 검색해 토큰을 찾습니다.
+    @Override
+    public PersistentRememberMeToken getTokenForSeries(final String seriesId) {
+        return repository.findBySeries(seriesId)
+            .map(persistentLogin ->
+                new PersistentRememberMeToken(
+                    persistentLogin.getUsername(),
+                    persistentLogin.getSeries(),
+                    persistentLogin.getToken(),
+                    persistentLogin.getLastUsed()
+                ))
+            .orElseThrow(IllegalArgumentException::new);
+    }
+
+    // 세션이 종료될 경우 데이터베이스에서 영구 토큰을 제거합니다.
+    @Override
+    public void removeUserTokens(final String username) {
+        repository.deleteAll(repository.findByUsername(username));
+    }
+
+}
+```
+
+<br />
+
+그리고 위의 커스텀 구현체들을 `SecurityConfiguration`에  추가해줍니다.
+
+테스트를 위해 몇가지 설정을 더 추가하였으나, 이 포스팅의 상단에서 설정한 것과 크게 달라진 것은 없을것입니다.
+
+<br />
+
+```java
+@EnableWebSecurity
+public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
+
+    @Autowired
+    private PersistentTokenRepository tokenRepository;
+
+
+    @Override
+    protected void configure(final AuthenticationManagerBuilder auth) throws Exception {
+        auth
+            .inMemoryAuthentication()
+            .withUser("test").password("{noop}test").authorities("ROLE_USER");
+    }
+
+    @Override
+    protected void configure(final HttpSecurity http) throws Exception {
+        http
+            .csrf().disable() // 테스트 편의성을 위해 CSRF 비활성화
+            .headers().frameOptions().sameOrigin() // H2-Console에 접속해 영구 토큰을 확인하기 위해 설정
+
+            .and()
+
+            .authorizeRequests() // 서버로 오는 요청들에 대한 보안 정책
+            .antMatchers("/h2-console/**").permitAll() // H2-Console에 접속해 영구 토큰을 확인하기 위해 설정
+            .anyRequest().authenticated() // 모든 요청에 대해 인증이 필요합니다.
+
+            .and()
+
+            .rememberMe().key("key") // remember-me 토큰 암호화에 사용할 키를 설정합니다. 기본값은 무작위로 설정된 문자열입니다.
+            .userDetailsService(userDetailsServiceBean()) // Remember-Me 기능 설정에 필요한 필수 옵션
+            .tokenRepository(tokenRepository)
+
+//            .rememberMeParameter("remember-me") // 클라이언트 뷰에서 설정한 파라미터명과 동일해야 한다. 기본값은 remember-me
+//            .tokenValiditySeconds(86400) // 토큰 유효기간을 설정한다. 기본값은 14일이며 초단위이다. -1로 설정 할 경우 브라우저가 종료되면 함께 사라진다.
+//            .alwaysRemember(true) // Remember-Me 기능이 활성화 되지 않아도(체크박스에 체크하지 않아도, 혹은 체크박스가 아예 없더라도) 항상 적용하도록 한다.
+//            .rememberMeCookieName("remember-me") // Remember-Me 응답 쿠키이름. 기본값은 remember-me
+
+            .and()
+
+            .formLogin()
+        ;
+    }
+
+    @Bean
+    public PersistentTokenRepository persistentTokenRepository(final PersistentLoginRepository repository) {
+        return new JpaPersistentTokenRepository(repository);
+    }
+
+}
+```
+
+<br />
+
+그리고 간단한 테스트를 위해 프로젝트 설정을 조금 추가해줍니다.
+
+<br />
+
+```yaml
+# file: 'resources/application.yaml'
+spring:
+  h2:
+    console:
+      enabled: true
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+    hibernate:
+      ddl-auto: create
+```
+
+<br />
+
+이후 서버를 기동하면 서버 콘솔에 로그가 쭉 뜨는데, 그중 다음과 같은 로그를 찾습니다.
+
+<br />
+
+```shell
+2021-10-12 11:37:38.744  INFO 10844 --- [  restartedMain] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:b1152f26-a567-4c05-9bf4-4f4260366b44'
+```
+
+<br />
+
+`H2 콘솔`을 사용할 것이라고 설정했기 때문에, H2가 인메모리로 기동되며 데이터베이스 콘솔에 접속할 수 있는 수단을 제공해줍니다.
+
+서버가 기동된 후 `http://localhost:8080/h2-console/` 로 접속하면 다음과 같은 화면에 들어갈 수 있는데, 위에서 찾은 `JDBC URL`을 입력합니다.
+
+<br />
+
+![image](https://user-images.githubusercontent.com/78329064/136882012-522f74a0-bc2e-44cb-89f0-dd5cfd51924a.png)
+
+<br />
+
+이후 접속하면 다음과 같은 화면이 뜹니다.
+
+<br />
+
+![image](https://user-images.githubusercontent.com/78329064/136882234-cb33e88c-bdf1-487b-92de-50eb35a9e81b.png)
+
+<br />
+
+1. 화면 좌측 메뉴의 `PERSISTENT_LOGINS` 를 클릭하면 우측 콘솔에 SELECT 쿼리가 생성됩니다.
+2. 바로 위의 `RUN`을 누르면 생성된 쿼리가 실행됩니다.
+3. 화면 하단에 쿼리의 결과가 노출됩니다.
+
+<br />
+
+현재는 로그인을 단 한번도 하지 않았으므로 데이터베이스에 토큰이 없는게 당연합니다.
+
+`localhost:8080/login`으로 접속해 test/test를 입력하고, Remember-Me 기능을 사용할 것임을 체크하고 로그인한 뒤 다시 H2 콘솔을 확인하도록 합니다.
+
+<br />
+
+![image](https://user-images.githubusercontent.com/78329064/136882495-cf9579d0-6a28-454d-9544-93a1e4560cf0.png)
+
+<br />
+
+우선 로그인 후 역시 remember-me 쿠키가 별 문제없이 응답된 것을 확인할 수 있습니다.
+
+<br />
+
+![image](https://user-images.githubusercontent.com/78329064/136882508-35cbb5ff-a343-455d-b2d4-d67ac11202f2.png)
+
+<br />
+
+H2 콘솔에 접속 후 동일한 쿼리를 실행하면 위와 같이 새로운 영구토큰이 데이터베이스에 저장됐음을 확인할 수 있습니다.
+
+<br />
+
+이후 로그아웃이 될 경우 세션 종료를 의미하기 때문에, 클라이언트에 설정된 remember-me 쿠키와 데이터베이스에 저장된 영구 토큰이 모두 제거되어야만 합니다.
+
+`localhost:8080/logout`으로 접속하여 로그아웃한 후 다시 한번 더 확인해봅니다.
+
+<br />
+
+![image](https://user-images.githubusercontent.com/78329064/136882673-e0529f7d-55af-4f16-9ef1-914ab8f48c0b.png)
+
+<br />
+
+![image](https://user-images.githubusercontent.com/78329064/136882690-c4d225b7-09a6-4551-82b6-84a64c1f812f.png)
+
+<br />
+
+모두 성공적으로 제거된 모습을 확인할 수 있습니다.
+
+<br />
+
+작성중...

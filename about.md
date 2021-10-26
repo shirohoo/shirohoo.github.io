@@ -107,6 +107,18 @@ published: true
 
 ---
 
+## [🖥 Full Text Mapper](https://github.com/shirohoo/full-text-mapper){:target="_blank"}
+
+---
+
+TCP 형식의 전문(Full-Text)를 자바 클래스와 매핑할 수 있게 해주는 모듈입니다.
+
+`ObjectMapper`에서 영감을 얻었으며, 노가다성으로 반복되는 전문 개발을 편하게 해보고자 개발하고 있습니다.
+
+자세한 사항은 [README](https://github.com/shirohoo/full-text-mapper/blob/main/README.md){:target="_blank"}를 참고 바랍니다.
+
+<br />
+
 ## [🖥 인프런 클론 코딩 - 백엔드](https://github.com/Ark-inflearn/inflearn-clone-back){:target="_blank"}
 
 ---

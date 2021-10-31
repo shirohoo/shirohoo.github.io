@@ -113,9 +113,11 @@ published: true
 
 ---
 
-`전문(Full-Text)`을 자바 클래스와 매핑할 수 있게 해주는 모듈입니다.
+`전문`을 자바 클래스와 매핑할 수 있게 해주는 모듈입니다.
 
-`ObjectMapper`에서 영감을 얻었으며, 반복되는 노가다성의 전문 개발을 조금이라도 편하게 해보고자 개발하고 있습니다.
+`ObjectMapper`에서 영감을 얻었으며, 노가다성의 전문통신 개발을 조금이라도 더 편하게 해보고자 개발했습니다.
+
+자바 리플렉션을 통해 동작합니다.
 
 자세한 사항은 [README](https://github.com/shirohoo/full-text-mapper/blob/main/README.md){:target="_blank"}를 참고 바랍니다.
 
@@ -165,25 +167,3 @@ published: true
 
 <br />
 
-## [🖥 Spring Security](https://github.com/shirohoo/spring-security-dynamic-acl){:target="_blank"}
-
----
-
-`정적권한관리`를 넘어 `동적권한관리`, `미세접근제어`를 목표로 합니다.
-
-`Dynamic ACL` 개발 실무를 위해 학습했던 프로젝트입니다.
-
-[Spring Security Docs](https://docs.spring.io/spring-security/site/docs/current/reference/html5/){:target="_blank"} 를 참고하여 진행하였습니다.
-
-<br />
-
-
-## [🖥 JPA 엔티티 생성](https://github.com/shirohoo/create-automation-jpa-entity){:target="_blank"}
-
----
-
-데이터베이스 스키마를 기반으로 동작하는 `Groovy Script`.
-
-<u>테이블에 정확하게 매핑되는 엔티티 객체를 자동 생성</u>해줍니다.
-
-<br />

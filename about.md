@@ -58,11 +58,13 @@ published: true
 
 ---
 
+- OOP에 대한 관심과 이해
+- 테스트 코드 작성
 - <u>APM</u> 을 활용한 <u>서버 모니터링</u>, <u>성능 분석</u> 및 <u>개선</u>
-- <u>JPA / Querydsl</u> 사용 <u>성능 최적화 경험</u>
-- <u>Spring Batch API</u> 개발 및 운영
-- <u>Spring Security</u>를 사용한 <u>Dynamic ACL</u> 개발
-- IDC 인프라 운영 관리 (on-premise)
+- <u>JPA / Querydsl</u>을 사용한 <u>성능 최적화 경험</u>
+- <u>Spring Batch</u> 개발 및 운영
+- <u>Spring Security</u>를 사용한 시큐어 코딩
+- 인프라 운영
     - Jenkins / Nginx를 이용한 <u>로드 밸런싱, 무중단 배포</u> 구축
     - Jenkins, Github Actions를 이용한 <u>CI/CD</u>
     - Jenkins를 이용한 <u>배치 서버 운영</u>
@@ -97,7 +99,6 @@ published: true
 
 - <u>Jenkins</u>
 - Nginx, <u>Tomcat</u>
-- Apache Kafka, Elasticsearch, Logstash, Kibana
 - AWS
     - <u>EC2</u>
     - RDS
@@ -115,7 +116,9 @@ published: true
 
 `전문(Full-Text)`을 자바 클래스와 매핑할 수 있게 해주는 모듈입니다.
 
-`ObjectMapper`에서 영감을 얻었으며, 반복되는 노가다성의 전문 개발을 조금이라도 편하게 해보고자 개발하고 있습니다.
+`ObjectMapper`에서 영감을 얻었으며, 반복되는 노가다성의 전문통신 개발을 조금이라도 더 편하게 해보고자 개발했습니다.
+
+자바의 리플렉션 기술을 통해 동작하며, 몇 가지 디자인 패턴을 적용해보았습니다.
 
 자세한 사항은 [README](https://github.com/shirohoo/full-text-mapper/blob/main/README.md){:target="_blank"}를 참고 바랍니다.
 
@@ -165,25 +168,3 @@ published: true
 
 <br />
 
-## [🖥 Spring Security](https://github.com/shirohoo/spring-security-dynamic-acl){:target="_blank"}
-
----
-
-`정적권한관리`를 넘어 `동적권한관리`, `미세접근제어`를 목표로 합니다.
-
-`Dynamic ACL` 개발 실무를 위해 학습했던 프로젝트입니다.
-
-[Spring Security Docs](https://docs.spring.io/spring-security/site/docs/current/reference/html5/){:target="_blank"} 를 참고하여 진행하였습니다.
-
-<br />
-
-
-## [🖥 JPA 엔티티 생성](https://github.com/shirohoo/create-automation-jpa-entity){:target="_blank"}
-
----
-
-데이터베이스 스키마를 기반으로 동작하는 `Groovy Script`.
-
-<u>테이블에 정확하게 매핑되는 엔티티 객체를 자동 생성</u>해줍니다.
-
-<br />

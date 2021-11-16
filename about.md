@@ -124,25 +124,25 @@ published: true
 
 <br />
 
-## [🖥 인프런 클론 코딩 - 백엔드](https://github.com/Ark-inflearn/inflearn-clone-back){:target="_blank"}
+## [🖥 SPROUT](https://github.com/TEAM-ARK/sprout-backend){:target="_blank"}
 
 ---
 
-- [📜 이슈](https://github.com/Ark-inflearn/inflearn-clone-back/issues){:target="_blank"}
-- [📜 위키](https://github.com/Ark-inflearn/inflearn-clone-back/wiki){:target="_blank"}
-- [📜 풀 리퀘스트](https://github.com/Ark-inflearn/inflearn-clone-back/pulls){:target="_blank"}
+- [📜 이슈](https://github.com/TEAM-ARK/sprout-backend/issues){:target="_blank"}
+- [📜 위키](https://github.com/TEAM-ARK/sprout-backend/wiki){:target="_blank"}
+- [📜 풀 리퀘스트](https://github.com/TEAM-ARK/sprout-backend/pulls){:target="_blank"}
+- [📜 SonarQube](https://sonarcloud.io/project/overview?id=TEAM-ARK_sprout-backend){:target="_blank"}
+- [📜 Codeclimate](https://codeclimate.com/github/TEAM-ARK/sprout-backend){:target="_blank"}
 
 <br />
 
 현업에 재직중이신 주니어분들과 진행중인 `사이드 프로젝트`로 `프론트 팀`, `백엔드 팀`으로 나뉘어 협업 중입니다. 
 
-`CI/CD`를 모두 적용하였으며, 다 같이 `Jira`를 도입하여 학습하며 이슈를 관리하고 있습니다.
+`코드 품질` 확보를 위해 `CI/CD`를 모두 적용하였고, `Jira`를 도입하여 이슈를 관리하고 있으며, 팀원간 `코드 리뷰`를 진행하고 있습니다.
 
 ![CI](https://user-images.githubusercontent.com/71188307/131324482-803a4b44-8d9b-4257-9a2a-dac9102ec464.png)
 
 ![Jira](https://user-images.githubusercontent.com/71188307/131324607-827b188f-7400-44dd-8a14-de866644dd40.png)
-
-팀원간 `코드 리뷰`를 통해 `코드 품질`을 끌어올리고자 노력하고 있습니다.
 
 <br />
 
@@ -167,4 +167,3 @@ published: true
 주로 출퇴근길에 최대한 간단하게 사용하기 위해 개발하였으며, 모바일 환경에 특화돼있습니다.
 
 <br />
-

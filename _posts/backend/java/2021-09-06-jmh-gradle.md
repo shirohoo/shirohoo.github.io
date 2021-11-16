@@ -34,7 +34,7 @@ published: true
 <br />
 
 ```groovy
-// file: build.gradle
+// file: 'build.gradle'
 plugins {
     id 'java'
     id 'me.champeau.jmh' version '0.6.6'

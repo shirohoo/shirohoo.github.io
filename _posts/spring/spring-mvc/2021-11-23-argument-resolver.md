@@ -302,7 +302,7 @@ private List<HandlerMethodArgumentResolver> getDefaultArgumentResolvers() {
 	
 	...
 	
-	resolvers.add(new ServletModelAttributeMethodProcessor(true)); // @ModelAttribute가 없는 경우
+	resolvers.add(new ServletModelAttributeMethodProcessor(true)); // @ModelAttribute가 있는 경우
 
 	return resolvers;
 }

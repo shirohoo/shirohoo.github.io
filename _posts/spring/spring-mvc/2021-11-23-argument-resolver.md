@@ -283,44 +283,25 @@ private List<HandlerMethodArgumentResolver> getDefaultArgumentResolvers() {
 	List<HandlerMethodArgumentResolver> resolvers = new ArrayList<>(30);
 
 	// Annotation-based argument resolution
-	resolvers.add(new RequestParamMethodArgumentResolver(getBeanFactory(), false));
-	resolvers.add(new RequestParamMapMethodArgumentResolver());
-	resolvers.add(new PathVariableMethodArgumentResolver());
-	resolvers.add(new PathVariableMapMethodArgumentResolver());
-	resolvers.add(new MatrixVariableMethodArgumentResolver());
-	resolvers.add(new MatrixVariableMapMethodArgumentResolver());
+
+	...
+	
 	resolvers.add(new ServletModelAttributeMethodProcessor(false)); // @ModelAttribute가 없는 경우
-	resolvers.add(new RequestResponseBodyMethodProcessor(getMessageConverters(), this.requestResponseBodyAdvice));
-	resolvers.add(new RequestPartMethodArgumentResolver(getMessageConverters(), this.requestResponseBodyAdvice));
-	resolvers.add(new RequestHeaderMethodArgumentResolver(getBeanFactory()));
-	resolvers.add(new RequestHeaderMapMethodArgumentResolver());
-	resolvers.add(new ServletCookieValueMethodArgumentResolver(getBeanFactory()));
-	resolvers.add(new ExpressionValueMethodArgumentResolver(getBeanFactory()));
-	resolvers.add(new SessionAttributeMethodArgumentResolver());
-	resolvers.add(new RequestAttributeMethodArgumentResolver());
+	
+	...
 
 	// Type-based argument resolution
-	resolvers.add(new ServletRequestMethodArgumentResolver());
-	resolvers.add(new ServletResponseMethodArgumentResolver());
-	resolvers.add(new HttpEntityMethodProcessor(getMessageConverters(), this.requestResponseBodyAdvice));
-	resolvers.add(new RedirectAttributesMethodArgumentResolver());
-	resolvers.add(new ModelMethodProcessor());
-	resolvers.add(new MapMethodProcessor());
-	resolvers.add(new ErrorsMethodArgumentResolver());
-	resolvers.add(new SessionStatusMethodArgumentResolver());
-	resolvers.add(new UriComponentsBuilderMethodArgumentResolver());
-	if (KotlinDetector.isKotlinPresent()) {
-		resolvers.add(new ContinuationHandlerMethodArgumentResolver());
-	}
+	
+	... 
 
 	// Custom arguments
-	if (getCustomArgumentResolvers() != null) {
-		resolvers.addAll(getCustomArgumentResolvers());
-	}
+	
+	...
 
 	// Catch-all
-	resolvers.add(new PrincipalMethodArgumentResolver());
-	resolvers.add(new RequestParamMethodArgumentResolver(getBeanFactory(), true));
+	
+	...
+	
 	resolvers.add(new ServletModelAttributeMethodProcessor(true)); // @ModelAttribute가 없는 경우
 
 	return resolvers;
@@ -337,7 +318,7 @@ private List<HandlerMethodArgumentResolver> getDefaultArgumentResolvers() {
 - `수정자(Setter)`를 무조건 달아야 하는 줄 알았어서 객체지향을 공부하다 보니 이게 매우 불-편했는데, **코드를 뜯어보니 수정자가 항상 필요한건 아니다.**
   - 즉, 생성자로 데이터 바인딩을 커버칠 수 있다면 수정자는 아예 없어도 된다
   - 다만 `접근자(Getter)`는 무조건 있어야만 하는데, 이유는 데이터를 반환할때 데이터를 꺼내야하기 때문이다.
-  - 결과 반환 시 객체에 접근해야 하는데 접근자가 없다면 하기와 같은 예외가 발생한다.
+  - 접근자를 제거했더니 하기와 같은 예외가 발생했다.
 
 > DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpMediaTypeNotAcceptableException: Could not find acceptable representation]
 

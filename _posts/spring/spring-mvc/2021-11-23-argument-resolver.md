@@ -61,6 +61,15 @@ public class Person {
 
 <br />
 
+서버를 기동하고 브라우저에 `localhost:8080/v1/hello?name=siro&age=11`을 입력하면 데이터가 서버로 전송되고, 핸들러 매핑을 통해 결국 위 컨트롤러 코드에 도달할 것이다.
+
+이때 `Person`이라는 객체를 만들고 이곳에 핸들러 어댑터에게 전달받은 데이터들을 바인딩한 후 컨트롤러로 넘겨주는 역할을 `ArgumentResolver`가 한다.
+
+그러면 개발자는 그냥 `Person`을 바로 사용하기만 하면 된다. 굉장히 편리하다.
+
+테스트를 하기에 앞서 매번 서버를 껏다켰다하는 노가다를 할 수는 없으니 간단한 테스트 코드를 작성했다.
+
+<br />
 
 ```java
 // file: 'HelloApiControllerTest.class'
@@ -79,14 +88,6 @@ class HelloApiControllerTest {
 
 }
 ```
-
-<br />
-
-서버를 기동하고 브라우저에 `localhost:8080/v1/hello?name=siro&age=11`을 입력하면 데이터가 서버로 전송되고, 핸들러 매핑을 통해 결국 위 컨트롤러 코드에 도달할 것이다.
-
-이때 `Person`이라는 객체를 만들고 이곳에 핸들러 어댑터에게 전달받은 데이터들을 바인딩한 후 컨트롤러로 넘겨주는 역할을 `ArgumentResolver`가 한다.
-
-그러면 개발자는 그냥 `Person`을 바로 사용하기만 하면 된다. 굉장히 편리하다.
 
 <br />
 

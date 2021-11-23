@@ -42,9 +42,9 @@ related_posts:
 public class HelloApiController {
 
     @GetMapping("/v1/hello")
-    public String helloV1(@ModelAttribute Person person) { // Person을 ArgumentResolver가 만들어준다 !
+    public Person helloV1(@ModelAttribute Person person) { // Person을 ArgumentResolver가 만들어준다 !
         log.info("person={}", person);
-        return "ok";
+        return person;
     }
     
 }
@@ -55,6 +55,27 @@ public class Person {
 
     private String name;
     private int age;
+
+}
+```
+
+<br />
+
+
+```java
+// file: 'HelloApiControllerTest.class'
+@WebMvcTest(HelloApiController.class)
+class HelloApiControllerTest {
+
+    @Autowired
+    private MockMvc mvc;
+
+    @Test
+    void helloV1() throws Exception {
+        mvc.perform(get("/v1/hello?name=siro&age=11"))
+            .andDo(print())
+            .andExpect(status().isOk());
+    }
 
 }
 ```

@@ -270,9 +270,9 @@ public final Object resolveArgument(MethodParameter parameter, @Nullable ModelAn
 
 ---
 
-- 코드상으로 보기에 `@ModelAttribute`가 하는 일이 `ModelAndView`에 데이터를 바인딩해주는 것이 주 목적으로 보이는데 약간 혼선이 온다.
-  - 실제로 `@ModelAttribute`가 없어도 `QueryString`으로 넘어오는 데이터들은 바인딩이 아주 잘 된다. 
-  - 그렇다면 만약 `SSR` 방식이 아니고 `CSR` 방식이라 `@RestController`를 사용한다면 `@ModelAttribute`를 생략하는 것이 조금 더 효율적일까?  
+- 코드상으로 보기에 `@ModelAttribute`가 하는 일은 `ModelAndView`를 세팅하는것이 주 목적으로 보이는데, 이 부분에서 약간 혼선이 온다.
+  - 실제로 `@ModelAttribute`가 없어도 `QueryString`으로 넘어오는 데이터들은 매개변수에 바인딩이 아주 잘 된다. 
+  - 그렇다면 만약 `SSR` 방식이 아니고 `CSR` 방식이라 `@RestController`를 사용한다면 어차피 `ModelAndView`를 신경쓰지 않아도 되므로 그냥 `@ModelAttribute`를 생략하는 것이 조금 더 효율적일까?  
     - 이렇게 보기엔 `RequestMappingHandlerAdapter`가 처음에는 `@ModelAttribute`가 없는 매개변수를 조회하고, 마지막에는 `@ModelAttribute`가 있는 매개변수를 다시 조회한다.
     - 따라서 어차피 `@ModelAttribute`가 있든 없든 무조건 조회되므로 효율적이라고 보기 힘들 것 같다.
     - 이런 구조로 만든 이유가 무엇일까? 지금 내 수준으로선 짐작하기 어렵다.

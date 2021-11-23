@@ -266,7 +266,7 @@ public final Object resolveArgument(MethodParameter parameter, @Nullable ModelAn
 
 <br />
 
-# 생각해볼 사항
+# 🤔 정리
 
 ---
 
@@ -276,6 +276,56 @@ public final Object resolveArgument(MethodParameter parameter, @Nullable ModelAn
     - 이렇게 보기엔 `RequestMappingHandlerAdapter`가 처음에는 `@ModelAttribute`가 없는 매개변수를 조회하고, 마지막에는 `@ModelAttribute`가 있는 매개변수를 다시 조회한다.
     - 따라서 어차피 `@ModelAttribute`가 있든 없든 무조건 조회되므로 효율적이라고 보기 힘들 것 같다.
     - 이런 구조로 만든 이유가 무엇일까? 지금 내 수준으로선 짐작하기 어렵다.
+
+```java
+// file: 'RequestMappingHandlerAdapter.class'
+private List<HandlerMethodArgumentResolver> getDefaultArgumentResolvers() {
+	List<HandlerMethodArgumentResolver> resolvers = new ArrayList<>(30);
+
+	// Annotation-based argument resolution
+	resolvers.add(new RequestParamMethodArgumentResolver(getBeanFactory(), false));
+	resolvers.add(new RequestParamMapMethodArgumentResolver());
+	resolvers.add(new PathVariableMethodArgumentResolver());
+	resolvers.add(new PathVariableMapMethodArgumentResolver());
+	resolvers.add(new MatrixVariableMethodArgumentResolver());
+	resolvers.add(new MatrixVariableMapMethodArgumentResolver());
+	resolvers.add(new ServletModelAttributeMethodProcessor(false)); // @ModelAttribute가 없는 경우
+	resolvers.add(new RequestResponseBodyMethodProcessor(getMessageConverters(), this.requestResponseBodyAdvice));
+	resolvers.add(new RequestPartMethodArgumentResolver(getMessageConverters(), this.requestResponseBodyAdvice));
+	resolvers.add(new RequestHeaderMethodArgumentResolver(getBeanFactory()));
+	resolvers.add(new RequestHeaderMapMethodArgumentResolver());
+	resolvers.add(new ServletCookieValueMethodArgumentResolver(getBeanFactory()));
+	resolvers.add(new ExpressionValueMethodArgumentResolver(getBeanFactory()));
+	resolvers.add(new SessionAttributeMethodArgumentResolver());
+	resolvers.add(new RequestAttributeMethodArgumentResolver());
+
+	// Type-based argument resolution
+	resolvers.add(new ServletRequestMethodArgumentResolver());
+	resolvers.add(new ServletResponseMethodArgumentResolver());
+	resolvers.add(new HttpEntityMethodProcessor(getMessageConverters(), this.requestResponseBodyAdvice));
+	resolvers.add(new RedirectAttributesMethodArgumentResolver());
+	resolvers.add(new ModelMethodProcessor());
+	resolvers.add(new MapMethodProcessor());
+	resolvers.add(new ErrorsMethodArgumentResolver());
+	resolvers.add(new SessionStatusMethodArgumentResolver());
+	resolvers.add(new UriComponentsBuilderMethodArgumentResolver());
+	if (KotlinDetector.isKotlinPresent()) {
+		resolvers.add(new ContinuationHandlerMethodArgumentResolver());
+	}
+
+	// Custom arguments
+	if (getCustomArgumentResolvers() != null) {
+		resolvers.addAll(getCustomArgumentResolvers());
+	}
+
+	// Catch-all
+	resolvers.add(new PrincipalMethodArgumentResolver());
+	resolvers.add(new RequestParamMethodArgumentResolver(getBeanFactory(), true));
+	resolvers.add(new ServletModelAttributeMethodProcessor(true)); // @ModelAttribute가 없는 경우
+
+	return resolvers;
+}
+```
 
 <br />
 

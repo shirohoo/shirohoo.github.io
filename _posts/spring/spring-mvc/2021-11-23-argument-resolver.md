@@ -22,7 +22,9 @@ related_posts:
 
 <br />
 
-코드는 [깃허브 저장소](https://github.com/shirohoo/spring-boot-examples/tree/main/spring-mvc-argsresolver)에 있습니다.
+- **코드는 [📦 깃허브](https://github.com/shirohoo/spring-boot-examples/tree/main/spring-mvc-argsresolver){:target="_blank"} 에 있습니다.**
+
+<br />
 
 `ArgumentResolver`는 클라이언트가 서버로 보낸 데이터를 핸들러(여기서 말하는 핸들러는 우리가 흔히 이야기하는 컨트롤러이다)의 매개변수 인스턴스로 생성해주는 역할을 담당한다.
 

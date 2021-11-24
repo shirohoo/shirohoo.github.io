@@ -99,7 +99,7 @@ class HelloApiControllerTest {
 
 ---
 
-코드에 이해한 내용을 주석으로 달았다.
+이해한 내용을 코드에 주석으로 달았다.
 
 <br />
 

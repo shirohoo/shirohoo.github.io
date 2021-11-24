@@ -318,7 +318,7 @@ public final Object resolveArgument(MethodParameter parameter, @Nullable ModelAn
 
 ---
 
-- 코드상으로 보기에 `@ModelAttribute`가 하는 일이 `ModelAndView`를 설정하는 것이 주 목적으로 보이는데 이 부분에서 약간 혼선이 온다.
+- 코드상으로 보기에 `@ModelAttribute`가 하는 일은 `ModelAndView`를 설정하는 것으로 보이는데 이 부분에서 약간 혼선이 온다.
     - 실제로 `@ModelAttribute`가 없어도 `QueryString`으로 넘어오는 데이터들은 바인딩이 아주 잘 된다.
     - 결국 `@ModelAttribute`가 있고 없고의 차이는 `mavContainer(ModelAndViewContainer)`를 어떻게 처리하는가이다.
     - 그렇다면 만약 `SSR` 방식이 아니고 `CSR` 방식이라 `@RestController`를 사용한다면 `@ModelAttribute`를 생략하는 것이 조금 더 효율적일까? 

@@ -22,7 +22,7 @@ related_posts:
 
 <br />
 
-- **코드는 [📦 깃허브](https://github.com/shirohoo/spring-boot-examples/tree/main/spring-mvc-argsresolver){:target="_blank"} 에 있습니다.**
+- **코드는 [📦 깃허브](https://github.com/shirohoo/spring-boot-examples/tree/main/spring-mvc){:target="_blank"} 에 있습니다.**
 
 <br />
 

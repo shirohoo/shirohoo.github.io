@@ -105,46 +105,45 @@ class HelloApiControllerTest {
 
 ```java
 // file: 'InvocableHandlerMethod.class'
-protected Object[] getMethodArgumentValues(NativeWebRequest request, @Nullable ModelAndViewContainer mavContainer,
-			Object... providedArgs) throws Exception {
+protected Object[] getMethodArgumentValues(NativeWebRequest request, @Nullable ModelAndViewContainer mavContainer, Object... providedArgs) throws Exception {
 
-		MethodParameter[] parameters = getMethodParameters(); // 컨트롤러의 메서드에 선언된 매개변수의 개수를 의미한다. 여기선 1개(Person)가 되겠다
-		if (ObjectUtils.isEmpty(parameters)) { // 컨트롤러의 메서드에 선언된 매개변수의 개수가 0개라면 ArgumentResolver가 어떤 처리를 할 필요가 없다
-			return EMPTY_ARGS;
-		}
+    MethodParameter[] parameters = getMethodParameters(); // 컨트롤러의 메서드에 선언된 매개변수의 개수를 의미한다. 여기선 1개(Person)가 되겠다
+    if (ObjectUtils.isEmpty(parameters)) { // 컨트롤러의 메서드에 선언된 매개변수의 개수가 0개라면 ArgumentResolver가 어떤 처리를 할 필요가 없다
+        return EMPTY_ARGS;
+    }
 
-		Object[] args = new Object[parameters.length]; // 만들어야 할 매개변수의 수만큼의 길이를 갖는 정적배열을 생성한다
-		for (int i = 0; i < parameters.length; i++) {
-			MethodParameter parameter = parameters[i];
-			parameter.initParameterNameDiscovery(this.parameterNameDiscoverer); 
-			args[i] = findProvidedArgument(parameter, providedArgs); // 커스텀 확장을 위해 열어둔 부분으로 사료된다
-			if (args[i] != null) {
-				continue;
-			}
-			if (!this.resolvers.supportsParameter(parameter)) { // ArgumentResolver가 해당 매개변수를 만들어낼 수 있는지를 체크
-				throw new IllegalStateException(formatArgumentError(parameter, "No suitable resolver")); // 만들어낼 수 없다면 예외를 던진다
-			}
-			try {
-                // 실제로 컨트롤러에 전달될 매개변수를 만들어내는 부분으로 내부 구현은 커맨드 패턴으로 이루어져있다.
-                // resolveArgument()는 HandlerMethodArgumentResolverComposite.getArgumentResolver()를 호출한다
-                // getArgumentResolver()는 ArgumentResolver가 들어있는 List를 순회하며 resolver.supportsParameter()를 호출한다
-                // 해당 매개변수를 생성 할 수 있는 ArgumentResolver를 찾아 반환한다. 없다면 null을 반환한다.
-                // resolveArgument()는 반환받은 ArgumentResolver의 resolveArgument()를 호출해 데이터가 바인딩 된 매개변수 인스턴스를 생성하고 반환한다.
-				args[i] = this.resolvers.resolveArgument(parameter, mavContainer, request, this.dataBinderFactory); 
-			}
-			catch (Exception ex) {
-				// Leave stack trace for later, exception may actually be resolved and handled...
-				if (logger.isDebugEnabled()) {
-					String exMsg = ex.getMessage();
-					if (exMsg != null && !exMsg.contains(parameter.getExecutable().toGenericString())) {
-						logger.debug(formatArgumentError(parameter, exMsg));
-					}
-				}
-				throw ex;
-			}
-		}
-		return args;
+    Object[] args = new Object[parameters.length]; // 만들어야 할 매개변수의 수만큼의 길이를 갖는 정적배열을 생성한다
+    for (int i = 0; i < parameters.length; i++) {
+	MethodParameter parameter = parameters[i];
+	parameter.initParameterNameDiscovery(this.parameterNameDiscoverer); 
+	args[i] = findProvidedArgument(parameter, providedArgs); // 커스텀 확장을 위해 열어둔 부분으로 사료된다
+	if (args[i] != null) {
+	    continue;
 	}
+	if (!this.resolvers.supportsParameter(parameter)) { // ArgumentResolver가 해당 매개변수를 만들어낼 수 있는지를 체크
+	    throw new IllegalStateException(formatArgumentError(parameter, "No suitable resolver")); // 만들어낼 수 없다면 예외를 던진다
+	}
+	try {
+            // 실제로 컨트롤러에 전달될 매개변수를 만들어내는 부분으로 내부 구현은 커맨드 패턴으로 이루어져있다.
+            // resolveArgument()는 HandlerMethodArgumentResolverComposite.getArgumentResolver()를 호출한다
+            // getArgumentResolver()는 ArgumentResolver가 들어있는 List를 순회하며 resolver.supportsParameter()를 호출한다
+            // 해당 매개변수를 생성 할 수 있는 ArgumentResolver를 찾아 반환한다. 없다면 null을 반환한다.
+            // resolveArgument()는 반환받은 ArgumentResolver의 resolveArgument()를 호출해 데이터가 바인딩 된 매개변수 인스턴스를 생성하고 반환한다.
+	    args[i] = this.resolvers.resolveArgument(parameter, mavContainer, request, this.dataBinderFactory); 
+	}
+	catch (Exception ex) {
+	    // Leave stack trace for later, exception may actually be resolved and handled...
+	    if (logger.isDebugEnabled()) {
+	        String exMsg = ex.getMessage();
+		if (exMsg != null && !exMsg.contains(parameter.getExecutable().toGenericString())) {
+		    logger.debug(formatArgumentError(parameter, exMsg));
+	        }
+	    }
+	throw ex;
+        }
+    }
+    return args;
+}
 ```
 
 <br />
@@ -337,7 +336,7 @@ private List<HandlerMethodArgumentResolver> getDefaultArgumentResolvers() {
 
 	...
 	
-	resolvers.add(new ServletModelAttributeMethodProcessor(false)); // @ModelAttribute가 없는 경우
+	resolvers.add(new ServletModelAttributeMethodProcessor(false)); // @ModelAttribute가 있는 경우
 	
 	...
 
@@ -353,7 +352,7 @@ private List<HandlerMethodArgumentResolver> getDefaultArgumentResolvers() {
 	
 	...
 	
-	resolvers.add(new ServletModelAttributeMethodProcessor(true)); // @ModelAttribute가 있는 경우
+	resolvers.add(new ServletModelAttributeMethodProcessor(true)); // @ModelAttribute가 없는 경우
 
 	return resolvers;
 }

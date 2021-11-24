@@ -150,24 +150,6 @@ protected Object[] getMethodArgumentValues(NativeWebRequest request, @Nullable M
 
 ```java
 // file: 'HandlerMethodArgumentResolverComposite.class'
-@Override
-@Nullable
-public Object resolveArgument(MethodParameter parameter, @Nullable ModelAndViewContainer mavContainer,
-        NativeWebRequest webRequest, @Nullable WebDataBinderFactory binderFactory) throws Exception {
-
-        HandlerMethodArgumentResolver resolver = getArgumentResolver(parameter); // 매개변수를 생성해낼 ArgumentResolver를 가져온다 
-        if (resolver == null) { // ArgumentResolver가 null이면 예외를 던진다
-            throw new IllegalArgumentException("Unsupported parameter type [" +
-                parameter.getParameterType().getName() + "]. supportsParameter should be called first.");
-        }
-    return resolver.resolveArgument(parameter, mavContainer, webRequest, binderFactory); // ArgumentResolver가 존재한다면 매개변수 생성을 위임한다
-}
-```
-
-<br />
-
-```java
-// file: 'HandlerMethodArgumentResolverComposite.class'
 public class HandlerMethodArgumentResolverComposite implements HandlerMethodArgumentResolver { 
     
     ...
@@ -177,12 +159,12 @@ public class HandlerMethodArgumentResolverComposite implements HandlerMethodArgu
     public Object resolveArgument(MethodParameter parameter, @Nullable ModelAndViewContainer mavContainer,
         NativeWebRequest webRequest, @Nullable WebDataBinderFactory binderFactory) throws Exception {
 
-        HandlerMethodArgumentResolver resolver = getArgumentResolver(parameter);
+        HandlerMethodArgumentResolver resolver = getArgumentResolver(parameter); // 매개변수를 생성해낼 ArgumentResolver를 가져온다 
         if (resolver == null) { // 매개변수를 생성할 수 있는 ArgumentResolver가 없다면 IllegalArgumentException를 던진다
             throw new IllegalArgumentException("Unsupported parameter type [" +
                 parameter.getParameterType().getName() + "]. supportsParameter should be called first.");
         }
-        return resolver.resolveArgument(parameter, mavContainer, webRequest, binderFactory);
+        return resolver.resolveArgument(parameter, mavContainer, webRequest, binderFactory); // ArgumentResolver가 존재한다면 매개변수 생성을 위임한다
     }
 
     @Nullable

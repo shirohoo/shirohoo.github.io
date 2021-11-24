@@ -22,6 +22,8 @@ related_posts:
 
 <br />
 
+코드는 [깃허브 저장소](https://github.com/shirohoo/spring-boot-examples/tree/main/spring-mvc-argsresolver)에 있습니다.
+
 `ArgumentResolver`는 클라이언트가 서버로 보낸 데이터를 핸들러(여기서 말하는 핸들러는 우리가 흔히 이야기하는 컨트롤러이다)의 매개변수 인스턴스로 생성해주는 역할을 담당한다.
 
 이때 만약 클라이언트가 `POST` 등의 `HTTP Method`를 통해 요청을 보내어 데이터가 `HTTP Body`에 존재하는 경우엔 `MessageConverter`에게 처리를 위임한다.
@@ -121,7 +123,12 @@ protected Object[] getMethodArgumentValues(NativeWebRequest request, @Nullable M
 				throw new IllegalStateException(formatArgumentError(parameter, "No suitable resolver")); // 만들어낼 수 없다면 예외를 던진다
 			}
 			try {
-				args[i] = this.resolvers.resolveArgument(parameter, mavContainer, request, this.dataBinderFactory); // 실제로 컨트롤러에 전달될 매개변수를 만들어내는 부분
+                // 실제로 컨트롤러에 전달될 매개변수를 만들어내는 부분으로 내부 구현은 커맨드 패턴으로 이루어져있다.
+                // resolveArgument()는 HandlerMethodArgumentResolverComposite.getArgumentResolver()를 호출한다
+                // getArgumentResolver()는 ArgumentResolver가 들어있는 List를 순회하며 resolver.supportsParameter()를 호출한다
+                // 해당 매개변수를 생성 할 수 있는 ArgumentResolver를 찾아 반환한다. 없다면 null을 반환한다.
+                // resolveArgument()는 반환받은 ArgumentResolver의 resolveArgument()를 호출해 데이터가 바인딩 된 매개변수 인스턴스를 생성하고 반환한다.
+				args[i] = this.resolvers.resolveArgument(parameter, mavContainer, request, this.dataBinderFactory); 
 			}
 			catch (Exception ex) {
 				// Leave stack trace for later, exception may actually be resolved and handled...
@@ -153,6 +160,46 @@ public Object resolveArgument(MethodParameter parameter, @Nullable ModelAndViewC
                 parameter.getParameterType().getName() + "]. supportsParameter should be called first.");
         }
     return resolver.resolveArgument(parameter, mavContainer, webRequest, binderFactory); // ArgumentResolver가 존재한다면 매개변수 생성을 위임한다
+}
+```
+
+<br />
+
+```java
+// file: 'HandlerMethodArgumentResolverComposite.class'
+public class HandlerMethodArgumentResolverComposite implements HandlerMethodArgumentResolver { 
+    
+    ...
+
+    @Override
+    @Nullable
+    public Object resolveArgument(MethodParameter parameter, @Nullable ModelAndViewContainer mavContainer,
+        NativeWebRequest webRequest, @Nullable WebDataBinderFactory binderFactory) throws Exception {
+
+        HandlerMethodArgumentResolver resolver = getArgumentResolver(parameter);
+        if (resolver == null) { // 매개변수를 생성할 수 있는 ArgumentResolver가 없다면 IllegalArgumentException를 던진다
+            throw new IllegalArgumentException("Unsupported parameter type [" +
+                parameter.getParameterType().getName() + "]. supportsParameter should be called first.");
+        }
+        return resolver.resolveArgument(parameter, mavContainer, webRequest, binderFactory);
+    }
+
+    @Nullable
+    private HandlerMethodArgumentResolver getArgumentResolver(MethodParameter parameter) {
+        HandlerMethodArgumentResolver result = this.argumentResolverCache.get(parameter);
+        if (result == null) {
+            for (HandlerMethodArgumentResolver resolver : this.argumentResolvers) {
+                // ArgumentResolver 가 들어있는 List를 순회하며 매개변수를 생성할 수 있는 ArgumentResolver 를 찾는다
+                if (resolver.supportsParameter(parameter)) { 
+                    result = resolver;
+                    this.argumentResolverCache.put(parameter, result);
+                    break;
+                }
+            }
+        }
+        return result;
+    }
+
 }
 ```
 
@@ -270,12 +317,14 @@ public final Object resolveArgument(MethodParameter parameter, @Nullable ModelAn
 
 ---
 
-- 코드상으로 보기에 `@ModelAttribute`가 하는 일은 `ModelAndView`를 세팅하는것이 주 목적으로 보이는데, 이 부분에서 약간 혼선이 온다.
-  - 실제로 `@ModelAttribute`가 없어도 `QueryString`으로 넘어오는 데이터들은 매개변수에 바인딩이 아주 잘 된다. 
-  - 그렇다면 만약 `SSR` 방식이 아니고 `CSR` 방식이라 `@RestController`를 사용한다면 어차피 `ModelAndView`를 신경쓰지 않아도 되므로 그냥 `@ModelAttribute`를 생략하는 것이 조금 더 효율적일까?  
-    - 이렇게 보기엔 `RequestMappingHandlerAdapter`가 처음에는 `@ModelAttribute`가 없는 매개변수를 조회하고, 마지막에는 `@ModelAttribute`가 있는 매개변수를 다시 조회한다.
-    - 따라서 어차피 `@ModelAttribute`가 있든 없든 무조건 조회되므로 효율적이라고 보기 힘들 것 같다.
-    - 이런 구조로 만든 이유가 무엇일까? 지금 내 수준으로선 짐작하기 어렵다.
+- 코드상으로 보기에 `@ModelAttribute`가 하는 일이 `ModelAndView`를 설정하는 것이 주 목적으로 보이는데 이 부분에서 약간 혼선이 온다.
+    - 실제로 `@ModelAttribute`가 없어도 `QueryString`으로 넘어오는 데이터들은 바인딩이 아주 잘 된다.
+    - 결국 `@ModelAttribute`가 있고 없고의 차이는 `mavContainer(ModelAndViewContainer)`를 어떻게 처리하는가이다.
+    - 그렇다면 만약 `SSR` 방식이 아니고 `CSR` 방식이라 `@RestController`를 사용한다면 `@ModelAttribute`를 생략하는 것이 조금 더 효율적일까? 
+    - `CSR` 방식이라면 `ModelAndView`를 신경쓰지 않아도 된다.
+        - 이렇게 보기엔 `RequestMappingHandlerAdapter`가 처음에는 `@ModelAttribute`가 없는 매개변수를 조회하고, 마지막에는 `@ModelAttribute`가 있는 매개변수를 다시 조회한다.
+        - 따라서 어차피 `@ModelAttribute`가 있든 없든 무조건 조회되므로 효율적이라고 보기 힘들 것 같다.
+        - 이런 구조로 만든 이유가 무엇일까? 지금 내 수준으로선 짐작하기 어렵다.
 
 ```java
 // file: 'RequestMappingHandlerAdapter.class'
@@ -311,22 +360,22 @@ private List<HandlerMethodArgumentResolver> getDefaultArgumentResolvers() {
 <br />
 
 - 정적 팩토리 메서드를 사용해 생성자의 접근제한자가 `private`이나 `protected`가 되더라도 상관없다. 리플렉션을 통해 별도의 설정을 하고 접근하기 때문에 접근가능하다.
-  - 즉, 기본 생성자를 숨기고 정적팩토리 메서드를 생성해도 바인딩이 아주 잘 된다.
+    - 즉, 기본 생성자를 숨기고 정적팩토리 메서드를 생성해도 바인딩이 아주 잘 된다.
 
 <br />
 
 - `수정자(Setter)`를 무조건 달아야 하는 줄 알았어서 객체지향을 공부하다 보니 이게 매우 불-편했는데, **코드를 뜯어보니 수정자가 항상 필요한건 아니다.**
-  - 즉, 생성자로 데이터 바인딩을 커버칠 수 있다면 수정자는 아예 없어도 된다
-  - 다만 `접근자(Getter)`는 무조건 있어야만 하는데, 이유는 데이터를 반환할때 데이터를 꺼내야하기 때문이다.
-  - 접근자를 제거했더니 하기와 같은 예외가 발생했다.
+    - 즉, 생성자로 데이터 바인딩을 커버칠 수 있다면 수정자는 아예 없어도 된다
+    - 다만 `접근자(Getter)`는 무조건 있어야만 하는데, 이유는 데이터를 반환할때 데이터를 꺼내야하기 때문이다.
+    - 접근자를 제거했더니 하기와 같은 예외가 발생했다.
 
 > DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpMediaTypeNotAcceptableException: Could not find acceptable representation]
 
 <br />
 
 - 굉장히 웃기지만 하기와 같은 방식으로도 바인딩이 가능하다.
-  - 생성자를 통해 `String name`에 `siro`를 바인딩한다.
-  - 수정자를 통해 `int age`에 `11`을 바인딩한다.
+    - 생성자를 통해 `String name`에 `siro`를 바인딩한다.
+    - 수정자를 통해 `int age`에 `11`을 바인딩한다.
 
 ```java
 @ToString

@@ -305,8 +305,11 @@ public final Object resolveArgument(MethodParameter parameter, @Nullable ModelAn
     - 결국 `@ModelAttribute`가 있고 없고의 차이는 `mavContainer(ModelAndViewContainer)`를 어떻게 처리하는가이다.
     - `CSR` 방식이라면 `ModelAndView`를 신경쓰지 않아도 된다. 그렇다면 만약 `SSR` 방식이 아닌 `CSR` 방식을 채택해 `@RestController`를 사용한다면 `@ModelAttribute`를 생략하는 것이 조금 더 효율적일까? 
         - 이렇게 보기엔 `RequestMappingHandlerAdapter`가 처음에는 `@ModelAttribute`가 있는 매개변수를 조회하고, 마지막에는 `@ModelAttribute`가 없는 매개변수를 다시 조회하는 구조임을 빼놓고 이야기할 수 없다.
-        - 위 구조로 인해 어차피 `@ModelAttribute`가 있든 없든 무조건 조회되므로 효율적이라고 보기 힘들 것 같다.
+        - 위 구조로 인해 `@ModelAttribute`가 있다면 루프에서 거의 최우선순위로 처리가 되는데, `ModelAndView`를 처리하는 작업이 쓸데가 없다.
+        - `@ModelAttribute`가 없다면 `ModelAndView`를 처리하지 않지만 루프에서 최하위 순위로 처리가 된다.
         - 그렇다면 구루들이 이런 구조로 만든 이유가 무엇일까? 지금 내 수준으로선 짐작하기 어렵다.
+
+<br />
 
 ```java
 // file: 'RequestMappingHandlerAdapter.class'
@@ -351,13 +354,17 @@ private List<HandlerMethodArgumentResolver> getDefaultArgumentResolvers() {
     - 다만 `접근자(Getter)`는 무조건 있어야만 하는데, 이유는 데이터를 반환할때 데이터를 꺼내야하기 때문이다.
     - 접근자를 제거했더니 하기와 같은 예외가 발생했다.
 
+<br />
+
 > DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpMediaTypeNotAcceptableException: Could not find acceptable representation]
 
 <br />
 
-- 굉장히 웃기지만 하기와 같은 방식으로도 바인딩이 가능하다.
+- 재밌게도 하기와 같은 방식으로도 바인딩이 가능하다.
     - 생성자를 통해 `String name`에 `siro`를 바인딩한다.
     - 수정자를 통해 `int age`에 `11`을 바인딩한다.
+
+<br />
 
 ```java
 @ToString

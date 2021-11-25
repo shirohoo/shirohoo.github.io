@@ -51,26 +51,27 @@ related_posts:
 @RestController
 public class HelloApiController {
 
-    @GetMapping("/v1/hello")
-    public Person helloV1(Person person) { // Person을 HandlerMethodArgumentResolver가 만들어준다 !
+    // 사용자의 요청을 파싱해 helloV1()에 선언된 Person을 만들고 데이터를 바인딩해준다
+    @GetMapping("/v1/hello")  
+    public Person helloV1(Person person) { // @ModelAttribute가 없는 경우
         log.info("person={}", person);
         return person;
     }
 
     @GetMapping("/v2/hello")
-    public Person helloV2(@ModelAttribute Person person) {
+    public Person helloV2(@ModelAttribute Person person) { // @ModelAttribute가 있는 경우
         log.info("person={}", person);
         return person;
     }
 
     @GetMapping("/v3/hello")
-    public String helloV3(String name, int age) {
+    public String helloV3(String name, int age) { // @RequestParam이 없는 경우
         log.info("name={}, age={}", name, age);
         return "ok";
     }
 
     @GetMapping("/v4/hello")
-    public String helloV4(@RequestParam String name, @RequestParam int age) {
+    public String helloV4(@RequestParam String name, @RequestParam int age) { // @RequestParam이 있는 경우
         log.info("name={}, age={}", name, age);
         return "ok";
     }
@@ -511,7 +512,7 @@ public class RequestParamMethodArgumentResolver extends AbstractNamedValueMethod
 ---
 
 - `@RequestParam`은 생략하지 않고 붙여주면 쓸데없는 루프 순회를 줄이는데 도움을 준다.
-- `@RequestParam`을 생략하면 쓸데없는 루프를 수십번 더 돌지만 코드가 조금 더 간결해진다.
+- `@RequestParam`을 생략하면 스레드당 필요없는 루프 순회를 적게는 수십번, 많게는 수백번 더 돌지만 코드가 더 간결해진다.
 - 코드상으로 보기에 `@ModelAttribute`가 하는 일이 `ModelAndView`를 설정하는 것이 주 목적으로 보이는데 이 부분에서 약간 혼선이 온다.
     - 실제로 `@ModelAttribute`가 없어도 `QueryString`으로 넘어오는 데이터들은 바인딩이 아주 잘 된다.
     - 결국 `@ModelAttribute`가 있고 없고의 차이는 `mavContainer(ModelAndViewContainer)`를 어떻게 처리하는가이다.

@@ -77,6 +77,16 @@ public class HelloApiController {
     }
 
 }
+
+@Getter
+@Setter
+@ToString
+public class Person {
+
+    private String name;
+    private int age;
+
+}
 ```
 
 <br />
@@ -142,7 +152,7 @@ class HelloApiControllerTest {
 
 <br />
 
-1. 사용자의 요청을 받아 관리하는 `DispatcherServlet` (Dispatcher의 뜻은 관제탑에서 모니터 여러개 두고 이렇게하세요~ 이렇게하세요~ 하는 사람들을 연상하면 된다.)
+1. 사용자의 요청을 받아 관리하는 `DispatcherServlet` <u>(Dispatcher의 뜻은 관제탑에서 앞에 모니터 여러개 두고 헤드셋끼고 이렇게하세요~ 이렇게하세요~ 하는 사람들을 연상하면 된다.)</u>
 2. 사용자의 요청을 처리할 핸들러(=컨트롤러)를 찾아주는 `HandlerMapping`
 3. 사용자의 요청을 처리할 핸들러를 `DispatcherServlet`와 연결해주는 `HandlerAdapter`
 4. `HandlerAdapter`의 요청(메시지)를 받아 요청을 파싱해 핸들러에 넘어갈 매개변수로 만들어주는 `HandlerMethodArgumentResolver`
@@ -174,46 +184,48 @@ class HelloApiControllerTest {
 
 ```java
 // file: 'InvocableHandlerMethod.class'
-protected Object[] getMethodArgumentValues(NativeWebRequest request, @Nullable ModelAndViewContainer mavContainer,
-			Object... providedArgs) throws Exception {
+public class InvocableHandlerMethod extends HandlerMethod {
+    protected Object[] getMethodArgumentValues(NativeWebRequest request, @Nullable ModelAndViewContainer mavContainer,
+        Object... providedArgs) throws Exception {
 
-		MethodParameter[] parameters = getMethodParameters(); // 컨트롤러의 메서드에 선언된 매개변수의 개수를 의미한다. 여기선 1개(Person)가 되겠다
-		if (ObjectUtils.isEmpty(parameters)) { // 컨트롤러의 메서드에 선언된 매개변수의 개수가 0개라면 ArgumentResolver가 어떤 처리를 할 필요가 없다
-			return EMPTY_ARGS;
-		}
+        MethodParameter[] parameters = getMethodParameters(); // 컨트롤러의 메서드에 선언된 매개변수의 개수를 의미한다. 여기선 1개(Person)가 되겠다
+        if (ObjectUtils.isEmpty(parameters)) { // 컨트롤러의 메서드에 선언된 매개변수의 개수가 0개라면 ArgumentResolver가 어떤 처리를 할 필요가 없다
+            return EMPTY_ARGS;
+        }
 
-		Object[] args = new Object[parameters.length]; // 만들어야 할 매개변수의 수만큼의 길이를 갖는 정적배열을 생성한다
-		for (int i = 0; i < parameters.length; i++) {
-			MethodParameter parameter = parameters[i];
-			parameter.initParameterNameDiscovery(this.parameterNameDiscoverer); 
-			args[i] = findProvidedArgument(parameter, providedArgs); // 커스텀 확장을 위해 열어둔 부분으로 사료된다
-			if (args[i] != null) {
-				continue;
-			}
-			if (!this.resolvers.supportsParameter(parameter)) { // ArgumentResolver가 해당 매개변수를 만들어낼 수 있는지를 체크
-				throw new IllegalStateException(formatArgumentError(parameter, "No suitable resolver")); // 만들어낼 수 없다면 예외를 던진다
-			}
-			try {
+        Object[] args = new Object[parameters.length]; // 만들어야 할 매개변수의 수만큼의 길이를 갖는 정적배열을 생성한다
+        for (int i = 0; i < parameters.length; i++) {
+            MethodParameter parameter = parameters[i];
+            parameter.initParameterNameDiscovery(this.parameterNameDiscoverer);
+            args[i] = findProvidedArgument(parameter, providedArgs); // 커스텀 확장을 위해 열어둔 부분으로 사료된다
+            if (args[i] != null) {
+                continue;
+            }
+            if (!this.resolvers.supportsParameter(parameter)) { // ArgumentResolver가 해당 매개변수를 만들어낼 수 있는지를 체크
+                throw new IllegalStateException(formatArgumentError(parameter, "No suitable resolver")); // 만들어낼 수 없다면 예외를 던진다
+            }
+            try {
                 // 실제로 컨트롤러에 전달될 매개변수를 만들어내는 부분으로 내부 구현은 커맨드 패턴으로 이루어져있다.
                 // resolveArgument()는 HandlerMethodArgumentResolverComposite.getArgumentResolver()를 호출한다
                 // getArgumentResolver()는 ArgumentResolver가 들어있는 List를 순회하며 resolver.supportsParameter()를 호출한다
                 // 해당 매개변수를 생성 할 수 있는 ArgumentResolver를 찾아 반환한다. 없다면 null을 반환한다.
                 // resolveArgument()는 반환받은 ArgumentResolver의 resolveArgument()를 호출해 데이터가 바인딩 된 매개변수 인스턴스를 생성하고 반환한다.
-				args[i] = this.resolvers.resolveArgument(parameter, mavContainer, request, this.dataBinderFactory); 
-			}
-			catch (Exception ex) {
-				// Leave stack trace for later, exception may actually be resolved and handled...
-				if (logger.isDebugEnabled()) {
-					String exMsg = ex.getMessage();
-					if (exMsg != null && !exMsg.contains(parameter.getExecutable().toGenericString())) {
-						logger.debug(formatArgumentError(parameter, exMsg));
-					}
-				}
-				throw ex;
-			}
-		}
-		return args;
-	}
+                args[i] = this.resolvers.resolveArgument(parameter, mavContainer, request, this.dataBinderFactory);
+            }
+            catch (Exception ex) {
+                // Leave stack trace for later, exception may actually be resolved and handled...
+                if (logger.isDebugEnabled()) {
+                    String exMsg = ex.getMessage();
+                    if (exMsg != null && !exMsg.contains(parameter.getExecutable().toGenericString())) {
+                        logger.debug(formatArgumentError(parameter, exMsg));
+                    }
+                }
+                throw ex;
+            }
+        }
+        return args;
+    }
+}
 ```
 
 <br />
@@ -272,9 +284,10 @@ public final Object resolveArgument(MethodParameter parameter, @Nullable ModelAn
     Assert.state(mavContainer != null, "ModelAttributeMethodProcessor requires ModelAndViewContainer");
     Assert.state(binderFactory != null, "ModelAttributeMethodProcessor requires WebDataBinderFactory");
 
-    String name = ModelFactory.getNameForParameter(parameter); // 컨트롤러에 선언된 매개변수의 이름을 가져온다. 컨트롤러 매개변수를 Person person으로 선언했으므로 person이 나오게 된다.
+    // 컨트롤러에 선언된 매개변수의 이름을 가져온다. 컨트롤러 매개변수의 타입을 Person으로 선언했으므로 Person 인스턴스가 나오게 된다.
+    String name = ModelFactory.getNameForParameter(parameter); 
     ModelAttribute ann = parameter.getParameterAnnotation(ModelAttribute.class); // @ModelAttribute가 컨트롤러 매개변수에 선언돼있는지 체크한다
-    if (ann != null) { // @ModelAttribute가 있다면 ModelAndViewContainer에 객체를 바인딩한다. 이는 SSR시 View에 데이터가 바인딩되는 부분을 처리하는 듯 싶다.
+    if (ann != null) { // @ModelAttribute가 있다면 ModelAndViewContainer에 별도의 설정을한다. 이 부분은 SSR시 View에 데이터가 바인딩되는 부분을 처리하는 것 같다.
         mavContainer.setBinding(name, ann.binding());
     }
 
@@ -336,6 +349,8 @@ public final Object resolveArgument(MethodParameter parameter, @Nullable ModelAn
     // 이 시점에서 기본생성자를 호출했기 때문에 attribute = Person(name=null, age=0) 이며,
     // 만약 AllArgumentConstructor를 가져와 만들었다면 이 시점에서 Person(name=siro, age=11)이다.
     // mavContainer에 대한 처리가 아직 완료되지 않았으므로 이 시점에서 bindingResult는 항상 null 이다.
+    
+    // 어찌됐든 이 시점에서는 attribute = Person(name=null, age=0)이다.
         
     if (bindingResult == null) {
         WebDataBinder binder = binderFactory.createBinder(webRequest, attribute, name);
@@ -514,10 +529,10 @@ public class RequestParamMethodArgumentResolver extends AbstractNamedValueMethod
 - `@RequestParam`은 생략하지 않고 붙여주면 쓸데없는 루프 순회를 줄이는데 도움을 준다.
 - `@RequestParam`을 생략하면 스레드당 필요없는 루프 순회를 적게는 수십번, 많게는 수백번 더 돌지만 코드가 더 간결해진다.
 - 코드상으로 보기에 `@ModelAttribute`가 하는 일이 `ModelAndView`를 설정하는 것이 주 목적으로 보이는데 이 부분에서 약간 혼선이 온다.
-    - 실제로 `@ModelAttribute`가 없어도 `QueryString`으로 넘어오는 데이터들은 바인딩이 아주 잘 된다.
+    - 실제로 `@ModelAttribute`가 없어도 쿼리스트링으로 넘어오는 데이터들은 바인딩이 아주 잘 된다.
     - 결국 `@ModelAttribute`가 있고 없고의 차이는 `mavContainer(ModelAndViewContainer)`를 어떻게 처리하는가이다.
     - 그렇다면 만약 `SSR` 방식이 아니고 `CSR` 방식이라 `@RestController`를 사용한다면 `@ModelAttribute`를 생략하는 것이 조금 더 효율적일까? `CSR` 방식이라면 `ModelAndView`를 신경쓰지 않아도 된다.
-        - 이렇게 보기엔 `RequestMappingHandlerAdapter`가 처음에는 `@ModelAttribute`가 없는 매개변수를 조회하고, 마지막에는 `@ModelAttribute`가 있는 매개변수를 다시 조회한다.
+        - 이렇게 보기엔 `RequestMappingHandlerAdapter`가 처음에는 `@ModelAttribute`가 있는 매개변수를 조회하고, 마지막에는 `@ModelAttribute`가 없는 매개변수를 다시 조회한다.
         - 따라서 어차피 `@ModelAttribute`가 있든 없든 무조건 조회되므로 효율적이라고 보기 힘들 것 같다.
         - 이런 구조로 만든 이유가 무엇일까? 지금 내 수준으로선 짐작하기 어렵다.
 
@@ -527,13 +542,13 @@ private List<HandlerMethodArgumentResolver> getDefaultArgumentResolvers() {
 	List<HandlerMethodArgumentResolver> resolvers = new ArrayList<>(30);
 
 	// Annotation-based argument resolution
-    resolvers.add(new RequestParamMethodArgumentResolver(getBeanFactory(), false));
+    resolvers.add(new RequestParamMethodArgumentResolver(getBeanFactory(), false)); // @RequestParam이 있는 경우
     resolvers.add(new RequestParamMapMethodArgumentResolver());
     resolvers.add(new PathVariableMethodArgumentResolver());
     resolvers.add(new PathVariableMapMethodArgumentResolver());
     resolvers.add(new MatrixVariableMethodArgumentResolver());
     resolvers.add(new MatrixVariableMapMethodArgumentResolver());
-    resolvers.add(new ServletModelAttributeMethodProcessor(false)); // @ModelAttribute가 없는 경우
+    resolvers.add(new ServletModelAttributeMethodProcessor(false)); // @ModelAttribute가 있는 경우
     resolvers.add(new RequestResponseBodyMethodProcessor(getMessageConverters(), this.requestResponseBodyAdvice));
     resolvers.add(new RequestPartMethodArgumentResolver(getMessageConverters(), this.requestResponseBodyAdvice));
     resolvers.add(new RequestHeaderMethodArgumentResolver(getBeanFactory()));
@@ -555,8 +570,8 @@ private List<HandlerMethodArgumentResolver> getDefaultArgumentResolvers() {
 
 	// Catch-all
     resolvers.add(new PrincipalMethodArgumentResolver());
-    resolvers.add(new RequestParamMethodArgumentResolver(getBeanFactory(), true));
-    resolvers.add(new ServletModelAttributeMethodProcessor(true)); // @ModelAttribute가 있는 경우
+    resolvers.add(new RequestParamMethodArgumentResolver(getBeanFactory(), true)); // @RequestParam이 없는 경우
+    resolvers.add(new ServletModelAttributeMethodProcessor(true)); // @ModelAttribute가 없는 경우
 	
 	return resolvers;
 }

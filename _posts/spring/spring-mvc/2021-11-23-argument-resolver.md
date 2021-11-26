@@ -26,23 +26,23 @@ related_posts:
 
 <br />
 
-스프링 MVC 프로젝트에는 사용자의 HTTP 요청을 파싱하고 처리한 후 컨트롤러에 값을 넘겨주는 `HandlerMethodArgumentResolver` 인터페이스가 있으며(여기서 말하는 핸들러는 우리가 흔히 이야기하는 컨트롤러이다),
-
-`HandlerMethodArgumentResolver`의 콘크리트 클래스는 20종이 넘게 존재한다.
+스프링 MVC 프로젝트에는 사용자의 HTTP 요청을 파싱하고 처리한 후 컨트롤러에 값을 넘겨주는 `HandlerMethodArgumentResolver` 인터페이스가 있으며 **(여기서 말하는 핸들러는 우리가 흔히 이야기하는 컨트롤러이다)**, `HandlerMethodArgumentResolver`의 콘크리트 클래스는 20종이 넘게 존재한다.
 
 <br />
 
-이때 만약 클라이언트가 `POST` 등의 `HTTP Method`를 통해 요청을 보내어 데이터가 `HTTP 바디`에 존재하는 경우엔 `MessageConverter`에게 처리를 위임한다. (응답도 마찬가지다.)
+`HandlerMethodArgumentResolver`는 데이터가 HTTP 헤더에 존재하는 경우 알아서 데이터를 파싱하고 객체에 바인딩 하지만, 만약 클라이언트가 `POST` 등의 방식을 통해 요청을 보내어 데이터가 `HTTP 바디`에 존재하는 경우엔  `MessageConverter`에게 처리를 위임한다. (응답도 마찬가지다.)
 
-위 경우에는 `HTTP 바디`의 데이터를 받겠다는 의미의 `@RequestBody`를 선언해주어야 한다. (응답에는 `@ResponseBody`를 선언 !)
+위 경우에는 `HTTP 바디`의 데이터를 받겠다는 의미의 `@RequestBody`를 선언해주어야 한다. 
+
+마찬가지로 응답에는 `@ResponseBody`를 선언하며 `@RestController`를 사용한다면 `@ResponseBody`를 생략할 수 있다.
 
 <br />
 
 무슨 말인지 잘 모르겠다면 역시 코드를 보자 !
 
-`ArgumentResolver`에 대한 포스팅이니 **상단 이미지의 5번부터 보면 되겠다.**
+`HandlerMethodArgumentResolver`에 대한 포스팅이니 **상단 이미지의 5번부터 보면 되겠다.**
 
-이 포스팅에서는 가장 많이 사용하는 `@ModelAttribute`와 `@RequestParam`에 대해서만 다룰 것이다.
+또한 이 포스팅에서는 가장 많이 사용하는 `@ModelAttribute`와 `@RequestParam`에 대해서만 다룰 것이다.
 
 <br />
 
@@ -91,11 +91,11 @@ public class Person {
 
 <br />
 
-서버를 기동하고 브라우저에 `localhost:8080/v1/hello?name=siro&age=11`을 입력하면 데이터가 서버로 전송되고, 핸들러 매핑을 통해 결국 위 컨트롤러 코드에 도달할 것이다.
+서버를 기동하고 브라우저에 `localhost:8080/v1/hello?name=siro&age=11`을 입력하면 데이터가 서버로 전송되고(GET), 핸들러 매핑을 통해 결국 위 컨트롤러 코드에 도달할 것이다.
 
 이때 `Person`이라는 객체를 만들고 이곳에 핸들러 어댑터에게 전달받은 데이터들을 바인딩한 후 컨트롤러로 넘겨주는 역할을 `HandlerMethodArgumentResolver`가 한다.
 
-그러면 개발자는 그냥 쿼리스트링을 전달받을 `Person` 클래스를 생성해서 선언하거나 혹은, `String`과 `int`만 선언하면 하면 된다. 굉장히 편리하다.
+그러면 개발자는 그냥 쿼리스트링을 전달받을 `Person` 클래스를 생성해서 선언하거나 혹은, 스칼라타입인 `String`과 `int`만 선언하면 하면 된다. 굉장히 편리하다.
 
 테스트를 하기에 앞서 매번 서버를 껏다켰다하는 노가다를 할 수는 없으니 간단한 테스트 코드를 작성했다.
 
@@ -152,23 +152,23 @@ class HelloApiControllerTest {
 
 <br />
 
-1. 사용자의 요청을 받아 관리하는 `DispatcherServlet` <u>(Dispatcher의 뜻은 관제탑에서 앞에 모니터 여러개 두고 헤드셋끼고 이렇게하세요~ 이렇게하세요~ 하는 사람들을 연상하면 된다.)</u>
+1. 사용자의 요청을 받아 관리하는 `DispatcherServlet` <u>(Dispatcher는 관제탑에서 앞에 모니터 여러개 두고 헤드셋 낀 상태로 ~하세요. ~하세요. 하는 사람들을 연상하면 된다.)</u>
 2. 사용자의 요청을 처리할 핸들러(=컨트롤러)를 찾아주는 `HandlerMapping`
 3. 사용자의 요청을 처리할 핸들러를 `DispatcherServlet`와 연결해주는 `HandlerAdapter`
 4. `HandlerAdapter`의 요청(메시지)를 받아 요청을 파싱해 핸들러에 넘어갈 매개변수로 만들어주는 `HandlerMethodArgumentResolver`
-5. `HandlerMethodArgumentResolver`가 처리하지 못하는 경우(데이터가 HTTP 바디에 들어있는 경우), 이를 대신 처리해줄 `MessageConverter`
+5. `HandlerMethodArgumentResolver`가 처리하지 못하는 경우(=데이터가 HTTP 바디에 들어있는 경우), 이를 대신 처리해줄 `MessageConverter`
 
 <br />
 
-가 있다, 물론 훨씬 더 많은 클래스가 존재하지만 너무너무 방대하므로 일단 이정도만 보자.
+가 있다, 물론 훨씬 더 많은 클래스가 존재하지만 다 보기에는 너무너무 방대하므로 일단 이정도만 보자.
 
-`HandlerAdapter`의 콘크리트 클래스중에는 `@RequestMapping`이 달려있는 컨트롤러들을 처리할 수 있게 도와주는 `RequestMappingHandlerAdapter`가 존재하며, 이녀석이 가장 높은 우선순위를 갖고 처리된다.
+`HandlerAdapter`의 콘크리트 클래스중에는 `@RequestMapping`이 달려있는 컨트롤러들을 처리하는 `RequestMappingHandlerAdapter`가 존재하며, 이녀석이 가장 높은 우선순위를 갖고 호출된다.
 
 `RequestMappingHandlerAdapter`는 매개변수 생성을 `ModelFactory`에 의존하며, `ModelFactory`는 `HandlerMethod`의 콘크리트 클래스인 `InvocableHandlerMethod`을 의존한다.
 
 그리고 `InvocableHandlerMethod`는 내부 필드로 `HandlerMethodArgumentResolverComposite`를 갖는데, 이름에서 이녀석이 하는 역할을 아주 극명하게 나타내고 있다.(여기서 `이펙티브 자바`의 <u>상속보다는 컴포지션을 활용하라</u>라는 문구가 떠올랐다.)
 
-`HandlerMethodArgumentResolverComposite`는 내부적으로 `HandlerMethodArgumentResolver`의 모든 콘크리트 클래스를 `ArrayList`로 갖고 있으며, 요청을 받으면 루프를 돌며 알맞은 `ArgumentResolver`를 찾고 처리를 위임한다.(커맨드 패턴)
+`HandlerMethodArgumentResolverComposite`는 내부적으로 `HandlerMethodArgumentResolver`의 모든 콘크리트 클래스를 `ArrayList`로 갖고 있으며(27개), 요청을 받으면 루프를 돌며 알맞은 `HandlerMethodArgumentResolver`를 찾고 처리를 위임한다.(=커맨드 패턴)
 
 <br />
 
@@ -213,7 +213,6 @@ public class InvocableHandlerMethod extends HandlerMethod {
                 args[i] = this.resolvers.resolveArgument(parameter, mavContainer, request, this.dataBinderFactory);
             }
             catch (Exception ex) {
-                // Leave stack trace for later, exception may actually be resolved and handled...
                 if (logger.isDebugEnabled()) {
                     String exMsg = ex.getMessage();
                     if (exMsg != null && !exMsg.contains(parameter.getExecutable().toGenericString())) {
@@ -242,7 +241,7 @@ public class HandlerMethodArgumentResolverComposite implements HandlerMethodArgu
         NativeWebRequest webRequest, @Nullable WebDataBinderFactory binderFactory) throws Exception {
 
         HandlerMethodArgumentResolver resolver = getArgumentResolver(parameter); // 매개변수를 생성해낼 ArgumentResolver를 가져온다 
-        if (resolver == null) { // 매개변수를 생성할 수 있는 ArgumentResolver가 없다면 IllegalArgumentException를 던진다
+        if (resolver == null) { // 매개변수를 생성할 수 있는 ArgumentResolver가 없다면 예외를 던진다
             throw new IllegalArgumentException("Unsupported parameter type [" +
                 parameter.getParameterType().getName() + "]. supportsParameter should be called first.");
         }
@@ -254,7 +253,7 @@ public class HandlerMethodArgumentResolverComposite implements HandlerMethodArgu
         HandlerMethodArgumentResolver result = this.argumentResolverCache.get(parameter);
         if (result == null) {
             for (HandlerMethodArgumentResolver resolver : this.argumentResolvers) {
-                // ArgumentResolver 가 들어있는 List를 순회하며 매개변수를 생성할 수 있는 ArgumentResolver 를 찾는다
+                // ArgumentResolver가 들어있는 List를 순회하며 매개변수를 생성할 수 있는 ArgumentResolver를 찾는다
                 if (resolver.supportsParameter(parameter)) { 
                     result = resolver;
                     this.argumentResolverCache.put(parameter, result);
@@ -284,30 +283,27 @@ public final Object resolveArgument(MethodParameter parameter, @Nullable ModelAn
     Assert.state(mavContainer != null, "ModelAttributeMethodProcessor requires ModelAndViewContainer");
     Assert.state(binderFactory != null, "ModelAttributeMethodProcessor requires WebDataBinderFactory");
 
-    // 컨트롤러에 선언된 매개변수의 이름을 가져온다. 컨트롤러 매개변수의 타입을 Person으로 선언했으므로 Person 인스턴스가 나오게 된다.
+    // 컨트롤러에 선언된 매개변수명을 가져온다. 컨트롤러 매개변수에 Person person으로 선언했으므로 "person"이 나오게 된다.
     String name = ModelFactory.getNameForParameter(parameter); 
     ModelAttribute ann = parameter.getParameterAnnotation(ModelAttribute.class); // @ModelAttribute가 컨트롤러 매개변수에 선언돼있는지 체크한다
     if (ann != null) { // @ModelAttribute가 있다면 ModelAndViewContainer에 별도의 설정을한다. 이 부분은 SSR시 View에 데이터가 바인딩되는 부분을 처리하는 것 같다.
         mavContainer.setBinding(name, ann.binding());
     }
 
-    Object attribute = null; // 실제로 생성될 매개변수 인스턴스를 참조할 변수
-    BindingResult bindingResult = null; // 바인딩 결과를 캡슐화한 클래스
+    Object attribute = null; // 실제로 생성될 매개변수 인스턴스를 담을 변수
+    BindingResult bindingResult = null; // ModelAndView 바인딩 결과를 캡슐화한 클래스
 
     if (mavContainer.containsAttribute(name)) { // ModelAndViewContainer에 person을 키로 갖는 인스턴스가 존재하면 꺼내온다 (HashMap)
         attribute = mavContainer.getModel().get(name);
     }
     else {
-        // Create attribute instance
         try {
             attribute = createAttribute(name, parameter, binderFactory, webRequest); // 인스턴스가 없다면 컨트롤러의 매개변수가 될 인스턴스를 새로 만들어야 할 것이므로 생성한다
         }
         catch (BindException ex) {
             if (isBindExceptionRequired(parameter)) {
-                // No BindingResult parameter -> fail with BindException
                 throw ex;
         }
-        // Otherwise, expose null/empty value and associated BindingResult
         if (parameter.getParameterType() == Optional.class) {
             attribute = Optional.empty();
         }
@@ -324,8 +320,9 @@ public final Object resolveArgument(MethodParameter parameter, @Nullable ModelAn
 protected Object createAttribute(String attributeName, MethodParameter parameter,
     WebDataBinderFactory binderFactory, NativeWebRequest webRequest) throws Exception {
 
-    MethodParameter nestedParameter = parameter.nestedIfOptional(); // 생성해야 할 매개변수의 타입이 Optional인 경우 별도의 처리를 진행하는걸로 보인다
-    Class<?> clazz = nestedParameter.getNestedParameterType(); // 생성해야 할 매개변수의 타입이 Optional인 경우 별도의 처리를 진행하는걸로 보인다
+    // 생성해야 할 매개변수의 타입이 Optional인 경우 별도의 처리를 진행하는걸로 보인다
+    MethodParameter nestedParameter = parameter.nestedIfOptional();
+    Class<?> clazz = nestedParameter.getNestedParameterType();
 
     // 생성해야 할 매개변수의 생성자를 가져온다. 기본적으로 기본생성자를 가져오지만, AllArgumentConstructor가 있다면 이것을 가져온다.
     Constructor<?> ctor = BeanUtils.getResolvableConstructor(clazz);  
@@ -387,9 +384,9 @@ public final Object resolveArgument(MethodParameter parameter, @Nullable ModelAn
 
 그중 `RequestParamMethodArgumentResolver`는 `@RequestParam`을 처리해주는 `HandlerMethodArgumentResolver`의 콘크리트 클래스 중 하나이다.
 
-`RequestParamMethodArgumentResolver`는 대부분의 처리를 상위 추상 클래스인 `AbstractNamedValueMethodArgumentResolver`에 의존하며 핵심 처리는 본인이 오버라이딩한 메서드를 통해 처리한다.
+`RequestParamMethodArgumentResolver`는 대부분의 처리를 상위 추상 클래스인 `AbstractNamedValueMethodArgumentResolver`에 의존하며 핵심 처리는 자신이 오버라이딩한 메서드를 통해 처리한다.
 
-코드에 이해한 내용을 주석으로 달았다.
+역시 이해한 내용을 코드에 주석으로 달았다.
 
 <br />
 
@@ -435,19 +432,23 @@ public class RequestParamMethodArgumentResolver extends AbstractNamedValueMethod
     // 어떤 경우 RequestParamMethodArgumentResolver가 처리를 진행할지에 대한 코드이다
     @Override
     public boolean supportsParameter(MethodParameter parameter) {
+    
         // 매개변수에 @RequestParam 이 선언된 경우 
         if (parameter.hasParameterAnnotation(RequestParam.class)) {
+	
             // @RequestParam Optional<E> var 식으로 선언된 경우 별도의 처리를 하고 결과를 반환
             if (Map.class.isAssignableFrom(parameter.nestedIfOptional().getNestedParameterType())) {
                 RequestParam requestParam = parameter.getParameterAnnotation(RequestParam.class);
                 return (requestParam != null && StringUtils.hasText(requestParam.name()));
             }
+	    
             // @RequestParam이 달려있으면서 Optional이 아닌 경우 true를 반환
             else {
                 return true;
             }
         }
         else {
+	
             // 매개변수에 @RequestPart가 선언된 경우 false를 반환
             if (parameter.hasParameterAnnotation(RequestPart.class)) {
                 return false;
@@ -465,14 +466,13 @@ public class RequestParamMethodArgumentResolver extends AbstractNamedValueMethod
             
             // useDefaultResolution=true 인 경우이므로 @RequestParam이 없으면서, SimpleProperty인 경우 true를 반환한다는 뜻이다
             // 문서에 의하면 SimpleProperty의 정의는 다음과 같다
-            // primitive or primitive wrapper
-            // enum
-            // String or other CharSequence
-            // Number
-            // Date
-            // Temporal
-            // URI or URL
-            // Locale or a Class.
+            // - primitive or primitive wrapper
+            // - enum
+            // - String or other CharSequence
+            // - Number
+            // - Date or Temporal            
+            // - URI or URL
+            // - Locale or a Class.
             else if (this.useDefaultResolution) { 
                 return BeanUtils.isSimpleProperty(parameter.getNestedParameterType());
             }
@@ -514,6 +514,7 @@ public class RequestParamMethodArgumentResolver extends AbstractNamedValueMethod
                 arg = (paramValues.length == 1 ? paramValues[0] : paramValues);
             }
         }
+	
         // 생성된 매개변수의 인스턴스를 반환한다
         return arg;
     }
@@ -531,7 +532,7 @@ public class RequestParamMethodArgumentResolver extends AbstractNamedValueMethod
 - 코드상으로 보기에 `@ModelAttribute`가 하는 일이 `ModelAndView`를 설정하는 것이 주 목적으로 보이는데 이 부분에서 약간 혼선이 온다.
     - 실제로 `@ModelAttribute`가 없어도 쿼리스트링으로 넘어오는 데이터들은 바인딩이 아주 잘 된다.
     - 결국 `@ModelAttribute`가 있고 없고의 차이는 `mavContainer(ModelAndViewContainer)`를 어떻게 처리하는가이다.
-    - 그렇다면 만약 `SSR` 방식이 아니고 `CSR` 방식이라 `@RestController`를 사용한다면 `@ModelAttribute`를 생략하는 것이 조금 더 효율적일까? `CSR` 방식이라면 `ModelAndView`를 신경쓰지 않아도 된다.
+    - 그렇다면 만약 `SSR` 방식이 아니고 `CSR` 방식이라 `@RestController`를 사용한다면 `@ModelAttribute`를 생략하는 것이 조금 더 효율적일까? `CSR` 방식이라면 `ModelAndView`를 신경쓰지 않아도 .
         - 이렇게 보기엔 `RequestMappingHandlerAdapter`가 처음에는 `@ModelAttribute`가 있는 매개변수를 조회하고, 마지막에는 `@ModelAttribute`가 없는 매개변수를 다시 조회한다.
         - 따라서 어차피 `@ModelAttribute`가 있든 없든 무조건 조회되므로 효율적이라고 보기 힘들 것 같다.
         - 이런 구조로 만든 이유가 무엇일까? 지금 내 수준으로선 짐작하기 어렵다.
@@ -539,9 +540,9 @@ public class RequestParamMethodArgumentResolver extends AbstractNamedValueMethod
 ```java
 // file: 'RequestMappingHandlerAdapter.class'
 private List<HandlerMethodArgumentResolver> getDefaultArgumentResolvers() {
-	List<HandlerMethodArgumentResolver> resolvers = new ArrayList<>(30);
+    List<HandlerMethodArgumentResolver> resolvers = new ArrayList<>(30);
 
-	// Annotation-based argument resolution
+    // Annotation-based argument resolution
     resolvers.add(new RequestParamMethodArgumentResolver(getBeanFactory(), false)); // @RequestParam이 있는 경우
     resolvers.add(new RequestParamMapMethodArgumentResolver());
     resolvers.add(new PathVariableMethodArgumentResolver());
@@ -558,29 +559,30 @@ private List<HandlerMethodArgumentResolver> getDefaultArgumentResolvers() {
     resolvers.add(new SessionAttributeMethodArgumentResolver());
     resolvers.add(new RequestAttributeMethodArgumentResolver());
     
-	...
+    ...
 
-	// Type-based argument resolution
+    // Type-based argument resolution
 	
-	... 
+    ... 
 
-	// Custom arguments
+    // Custom arguments
 	
-	...
+    ...
 
-	// Catch-all
+    // Catch-all
     resolvers.add(new PrincipalMethodArgumentResolver());
     resolvers.add(new RequestParamMethodArgumentResolver(getBeanFactory(), true)); // @RequestParam이 없는 경우
     resolvers.add(new ServletModelAttributeMethodProcessor(true)); // @ModelAttribute가 없는 경우
 	
-	return resolvers;
+    return resolvers;
 }
 ```
 
 <br />
 
-- 정적 팩토리 메서드를 사용해 생성자의 접근제한자가 `private`이나 `protected`가 되더라도 상관없다. 리플렉션을 통해 별도의 설정을 하고 접근하기 때문에 접근가능하다.
-    - 즉, 기본 생성자를 숨기고 정적팩토리 메서드를 생성해도 바인딩이 아주 잘 된다.
+- 정적 팩토리 메서드를 사용해 생성자의 접근제한자가 `private`이나 `protected`가 되더라도 상관없다. 
+- 리플렉션을 통해 별도의 설정을 하고 접근하기 때문에 접근가능하다.
+    - 즉, 생성자를 숨기고 정적팩토리 메서드를 노출해도 바인딩이 아주 잘 된다.
 
 <br />
 

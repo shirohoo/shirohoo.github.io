@@ -8,7 +8,7 @@ description: >
     `Spring MVC`의 `HandlerMethodArgumentResolver` 가 하는 일
 image: /assets/img/spring/spring-mvc/spring-boot-logo.png
 related_posts:
-    - 
+    - _posts/spring/spring-mvc/2021-11-29-http-message-converter.md
 ---
 
 * toc

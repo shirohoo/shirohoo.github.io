@@ -63,31 +63,31 @@ HTTP 메시지는 첫줄에 요청의 핵심정보를 표시하고, 이어서 �
 public interface HttpMessageConverter<T> {
 
     // HttpMessageConverter가 지정된 타입을 읽을 수 있는지의 여부를 판단한다.
-    // 첫번째 인자는 읽고자 하는 타입이며, 두번째 인자는 HTTP 헤더의 Content-Type을 의미한다.
-	boolean canRead(Class<?> clazz, @Nullable MediaType mediaType);
+    // 첫번째 인자는 읽고자 하는 타입이며, 두번째 인자는 HTTP 헤더의 Content-Type을 의미한다
+    boolean canRead(Class<?> clazz, @Nullable MediaType mediaType);
 
     // HttpMessageConverter가 지정된 타입을 작성할 수 있는지의 여부를 판단한다.
     // 첫번째 인자는 작성하고자 하는 타입이며, 두번째 인자는 HTTP 헤더의 Accept를 의미한다.
-	boolean canWrite(Class<?> clazz, @Nullable MediaType mediaType);
+    boolean canWrite(Class<?> clazz, @Nullable MediaType mediaType);
 
     // HttpMessageConverter가 지원하는 미디어타입의 목록을 반환한다.
-	List<MediaType> getSupportedMediaTypes();
+    List<MediaType> getSupportedMediaTypes();
 
     // 인자로 넘어온 타입에 대해 지원(읽기, 쓰기)하는 모든 미디어 타입을 반환한다.
-	default List<MediaType> getSupportedMediaTypes(Class<?> clazz) {
-		return (canRead(clazz, null) || canWrite(clazz, null) ?
-				getSupportedMediaTypes() : Collections.emptyList());
-	}
+    default List<MediaType> getSupportedMediaTypes(Class<?> clazz) {
+	    return (canRead(clazz, null) || canWrite(clazz, null) ?
+	    		getSupportedMediaTypes() : Collections.emptyList());
+    }
 
     // HTTP 메시지를 읽고 첫번째 인자로 넘어온 타입의 인스턴스를 생성한 후 데이터를 바인딩해 반환한다
     // 두번째 인자는 클라이언트가 보낸 요청이다.
-	T read(Class<? extends T> clazz, HttpInputMessage inputMessage)
-			throws IOException, HttpMessageNotReadableException;
+    T read(Class<? extends T> clazz, HttpInputMessage inputMessage)
+		    throws IOException, HttpMessageNotReadableException;
 
     // 첫번째 인자로 넘어온 타입을 읽어 두번째 인자로 넘어온 Content-Type으로 파싱한다.
     // 이후 세번째 인자로 넘어온, 클라이언트에게 보낼 응답에 작성한다. 
-	void write(T t, @Nullable MediaType contentType, HttpOutputMessage outputMessage)
-			throws IOException, HttpMessageNotWritableException;
+    void write(T t, @Nullable MediaType contentType, HttpOutputMessage outputMessage)
+		    throws IOException, HttpMessageNotWritableException;
 
 }
 ```
@@ -290,7 +290,7 @@ public class PostApiController {
 
 <br />
 
-# 주의사항
+# 정리
 
 ---
 

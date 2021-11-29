@@ -126,7 +126,7 @@ public interface HttpMessageConverter<T> {
 
 <br />
 
-> 💡 https://github.com/spring-projects/spring-framework/commit/c38542739734c15e84a28ecc5f575127f25d310a
+> 💡 [https://github.com/spring-projects/spring-framework/commit/c38542739734c15e84a28ecc5f575127f25d310a](https://github.com/spring-projects/spring-framework/commit/c38542739734c15e84a28ecc5f575127f25d310a)
 
 <br />
 

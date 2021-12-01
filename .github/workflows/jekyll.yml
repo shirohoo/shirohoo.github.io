@@ -9,16 +9,21 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: 3.0
           bundler-cache: true
+        env:
+          BUNDLE_GITHUB__COM: x-access-token:${{ secrets.GH_REPO_PAT }}
+          
       - uses: actions/cache@v2
         with:
           path: vendor/bundle
           key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile') }}
           restore-keys: |
             ${{ runner.os }}-gems-
+          
       - uses: helaili/jekyll-action@v2
         with:
           token: ${{ secrets.GH_REPO_PAT }}

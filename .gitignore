@@ -4,6 +4,9 @@ _site
 .jekyll-cache
 .jekyll-metadata
 vendor
+node_modules
+.bundle
+*.gem
 
 ### IntelliJ IDEA ###
 .idea

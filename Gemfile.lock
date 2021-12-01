@@ -3,7 +3,7 @@ GIT
   revision: 550552bfaf770d21ae4964c18a8ddcc1f2b38ed9
   branch: pro/v9
   specs:
-    jekyll-theme-hydejack (9.1.4)
+    jekyll-theme-hydejack (9.1.5)
       jekyll (>= 3.8, < 5.0)
       jekyll-include-cache (~> 0.2)
 

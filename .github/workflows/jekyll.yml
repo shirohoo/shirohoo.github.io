@@ -10,9 +10,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: ruby/setup-ruby@v1
-          with:
-            ruby-version: 3.0
-            bundler-cache: true
+        with:
+          ruby-version: 3.0
+          bundler-cache: true
       - uses: actions/cache@v2
         with:
           path: vendor/bundle

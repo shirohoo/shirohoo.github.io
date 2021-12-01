@@ -310,27 +310,3 @@
 .icon-history:before {
   content: "\1f552";
 }
-
-@font-face {
-  font-family: 'Ligamonacop';
-  src:  url('fonts/Ligamonacop.ttf');
-  font-weight: normal;
-  font-style: normal;
-  font-display: block;
-}
-
-code {
-  font-family: Ligamonacop !important;
-}
-
-blockquote {
-  font-family: Ligamonacop !important;
-}
-
-.layout-about {
-  font-family: Ligamonacop !important;
-}
-
-.layout-post {
-  font-family: Ligamonacop !important;
-}

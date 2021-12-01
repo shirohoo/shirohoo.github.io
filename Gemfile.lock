@@ -1,12 +1,3 @@
-GIT
-  remote: https://github.com/hydecorp/hydejack-dev
-  revision: 25d52da566ddcc9557c883e3a05361221885333a
-  branch: pro/v9
-  specs:
-    jekyll-theme-hydejack (9.1.5)
-      jekyll (>= 3.8, < 5.0)
-      jekyll-include-cache (~> 0.2)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -19,10 +10,8 @@ GEM
       eventmachine (>= 0.12.9)
       http_parser.rb (~> 0)
     eventmachine (1.2.7)
-    eventmachine (1.2.7-x64-mingw32)
     execjs (2.8.1)
     ffi (1.15.4)
-    ffi (1.15.4-x64-mingw32)
     forwardable-extended (2.6.0)
     http_parser.rb (0.8.0)
     i18n (1.8.11)
@@ -68,6 +57,9 @@ GEM
       jekyll (>= 3.8, < 5.0)
     jekyll-sitemap (1.4.0)
       jekyll (>= 3.7, < 5.0)
+    jekyll-theme-hydejack (9.1.5)
+      jekyll (>= 3.8, < 5.0)
+      jekyll-include-cache (~> 0.2)
     jekyll-titles-from-headings (0.5.3)
       jekyll (>= 3.3, < 5.0)
     jekyll-watch (2.2.1)
@@ -98,8 +90,6 @@ GEM
     safe_yaml (1.0.5)
     sassc (2.4.0)
       ffi (~> 1.9)
-    sassc (2.4.0-x64-mingw32)
-      ffi (~> 1.9)
     terminal-table (2.0.0)
       unicode-display_width (~> 1.1, >= 1.1.1)
     unicode-display_width (1.8.0)
@@ -124,7 +114,7 @@ DEPENDENCIES
   jekyll-relative-links
   jekyll-seo-tag
   jekyll-sitemap
-  jekyll-theme-hydejack!
+  jekyll-theme-hydejack
   jekyll-titles-from-headings
   kramdown-math-katex
 

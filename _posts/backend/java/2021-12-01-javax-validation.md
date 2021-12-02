@@ -160,7 +160,7 @@ public abstract class ValidateUtils {
             Set<ConstraintViolation<Object>> violations = VALIDATOR.validate(object);
             
             // 유효성 검사에 통과하지 못했다면 에러메시지가 들어있을 것이다.
-            // 즉, isEmpty==true일 경우 유효성 검사에 통과하지 못했음을 의미한다.
+            // 즉, isEmpty()==false일 경우 유효성 검사에 통과하지 못했음을 의미한다.
             if (!violations.isEmpty()) {
                 throw new ConstraintViolationException(violations);
             }

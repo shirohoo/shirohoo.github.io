@@ -45,7 +45,8 @@ published: true
 // file: 'build.gradle'
 
 dependencies {
-implementation 'javax.validation:validation-api:2.0.1.Final'
+    implementation 'javax.validation:validation-api:2.0.1.Final'
+    implementation 'org.hibernate.validator:hibernate-validator:7.0.1.Final'
 }
 ```
 
@@ -57,7 +58,7 @@ implementation 'javax.validation:validation-api:2.0.1.Final'
 // file: 'build.gradle'
 
 dependencies {
-implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
 }
 ```
 

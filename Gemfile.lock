@@ -1,5 +1,7 @@
-PATH
-  remote: #jekyll-theme-hydejack
+GIT
+  remote: https://github.com/hydecorp/hydejack-dev
+  revision: 25d52da566ddcc9557c883e3a05361221885333a
+  branch: pro/v9
   specs:
     jekyll-theme-hydejack (9.1.5)
       jekyll (>= 3.8, < 5.0)
@@ -100,7 +102,12 @@ GEM
       ffi (~> 1.9)
     terminal-table (2.0.0)
       unicode-display_width (~> 1.1, >= 1.1.1)
+    tzinfo (2.0.4)
+      concurrent-ruby (~> 1.0)
+    tzinfo-data (1.2021.5)
+      tzinfo (>= 1.0.0)
     unicode-display_width (1.8.0)
+    wdm (0.1.1)
 
 PLATFORMS
   arm64-darwin-20
@@ -125,6 +132,8 @@ DEPENDENCIES
   jekyll-theme-hydejack!
   jekyll-titles-from-headings
   kramdown-math-katex
+  tzinfo-data
+  wdm
 
 BUNDLED WITH
    2.2.32

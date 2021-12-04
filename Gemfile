@@ -9,7 +9,8 @@ source "https://rubygems.org"
 # This will help ensure the proper Jekyll version is running.
 # Happy Jekylling!
 gem "jekyll", "~> 4.1"
-gem "jekyll-theme-hydejack", git: "https://github.com/hydecorp/hydejack-dev", branch: "pro/v9"
+
+gem "jekyll-theme-hydejack", path: "./#jekyll-theme-hydejack"
 
 # IMPORTANT: The followign gem is used to compile math formulas to
 # KaTeX during site building.
@@ -27,6 +28,9 @@ gem "kramdown-math-katex"
 
 # A JavaScript runtime for ruby that helps with running the katex gem above.
 gem "duktape"
+
+# Fixes `jekyll serve` in ruby 3
+gem "webrick"
 
 group :jekyll_plugins do
   gem "jekyll-default-layout"
@@ -48,3 +52,4 @@ end
 
 gem 'wdm' if Gem.win_platform?
 gem "tzinfo-data" if Gem.win_platform?
+

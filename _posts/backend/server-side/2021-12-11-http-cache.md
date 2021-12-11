@@ -393,7 +393,7 @@ HTTP 헤더를 까보니 역시 브라우저는 요청 헤더에 `If-None-Match`
 <br />
 
 ![image](https://user-images.githubusercontent.com/71188307/145670738-6284e0a8-1702-46e6-b5ad-4509c2899fd0.png)
-- 이미지 출처: [구글 개발자 페이지](https://web.dev/http-cache/#invalidating-and-updating-cached-responses)
+이미지 출처: [구글 개발자 페이지](https://web.dev/http-cache/#invalidating-and-updating-cached-responses)
 {:.figcaption}
 
 <br />

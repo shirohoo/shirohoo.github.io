@@ -124,28 +124,6 @@ published: true
 
 <br />
 
-## [🖥 SPROUT](https://github.com/TEAM-ARK/sprout-backend){:target="_blank"}
-
----
-
-- [📜 이슈](https://github.com/TEAM-ARK/sprout-backend/issues){:target="_blank"}
-- [📜 위키](https://github.com/TEAM-ARK/sprout-backend/wiki){:target="_blank"}
-- [📜 풀 리퀘스트](https://github.com/TEAM-ARK/sprout-backend/pulls){:target="_blank"}
-- [📜 SonarQube](https://sonarcloud.io/project/overview?id=TEAM-ARK_sprout-backend){:target="_blank"}
-- [📜 Codeclimate](https://codeclimate.com/github/TEAM-ARK/sprout-backend){:target="_blank"}
-
-<br />
-
-현업에 재직중이신 주니어분들과 진행중인 `사이드 프로젝트`로 `프론트 팀`, `백엔드 팀`으로 나뉘어 협업 중입니다. 
-
-`코드 품질` 확보를 위해 `CI/CD`를 모두 적용하였고, `Jira`를 도입하여 이슈를 관리하고 있으며, 팀원간 `코드 리뷰`를 진행하고 있습니다.
-
-![CI](https://user-images.githubusercontent.com/71188307/131324482-803a4b44-8d9b-4257-9a2a-dac9102ec464.png)
-
-![Jira](https://user-images.githubusercontent.com/71188307/131324607-827b188f-7400-44dd-8a14-de866644dd40.png)
-
-<br />
-
 ## [🖥 SFTP Client Module](https://github.com/shirohoo/sftp-client){:target="_blank"}
 
 ---

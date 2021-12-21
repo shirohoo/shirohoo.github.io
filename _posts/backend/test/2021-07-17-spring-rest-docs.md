@@ -586,7 +586,7 @@ class ApiControllerTest extends AbstractControllerTests {
 
 <br />
 
-> [📜 api-docs.html](/assets/docs/rest/api-docs.html){:target="_blank"}
+> [📜 index.html](/assets/docs/rest/api-docs.html){:target="_blank"}
 
 <br />
 

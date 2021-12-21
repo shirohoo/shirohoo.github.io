@@ -3,7 +3,7 @@ layout: post
 category:
     - backend
     - test
-title: Spring Rest Docs로 API 문서작성 자동화하기
+title: Spring REST Docs로 API 문서작성 자동화하기
 description: >
   개발자간 협업에 아주 큰 도움이 되는 `API 문서`작성을 자동화 합니다
 image: /assets/img/backend/test-logo.png
@@ -17,7 +17,11 @@ related_posts:
   
 <br />
 
-# 🤔 Spring Rest Docs ? 
+포스팅에 사용된 예제 코드는 [🚀GitHub](https://github.com/shirohoo/spring-rest-docs-examples/tree/main/spring-rest-docs){:target="_blank"} 를 참고해주세요.
+{:.note}
+
+
+# 🤔 Spring REST Docs ? 
 
 ---
 
@@ -33,17 +37,17 @@ related_posts:
 
 <br />
 
-이러한 문제를 해결하기 위해 API 문서를 자동으로 작성해주는 방법이 존재하는데, API 문서 프레임워크의 양대 산맥으로 `Swagger`와 `Spring Rest Docs`가 있다.
+이러한 문제를 해결하기 위해 API 문서를 자동으로 작성해주는 방법이 존재하는데, API 문서 프레임워크의 양대 산맥으로 `Swagger`와 `Spring REST Docs`가 있다.
 
-두 프레임워크는 서로 장단점이 명확하기 때문에 개발자마다 호불호가 갈리며, 개발자의 취향에 맞게 선택하여 사용하는게 일반적이다.
-
-<br />
-
-이 포스팅에서는 `Spring Rest Docs`로 문서를 생성하는 방법에 대해 다룰것이다.
+두 프레임워크는 서로 장단점이 명확하기 때문에 개발자마다 호불호가 갈리는 것 같다.
 
 <br />
 
-# 🤔 Spring Rest Docs의 장단점
+이 포스팅에서는 `Spring REST Docs`로 문서를 생성하는 방법에 대해 다룰것이다.
+
+<br />
+
+# 🤔 Spring REST Docs의 장단점
 
 ---
 
@@ -53,7 +57,7 @@ related_posts:
 
 <br />
 
-> [📜 Spring Rest Docs 문서 예시](/assets/docs/rest/api-docs.html){:target="_blank"}
+> [📜 Spring REST Docs 문서 예시](/assets/docs/rest/api-docs.html){:target="_blank"}
 
 <br />
 
@@ -72,16 +76,16 @@ related_posts:
 ---
 
 - 문서를 작성하려면 테스트 코드가 강제되기 때문에 테스트 코드에 익숙하지 않다면 도입 난이도가 굉장히 높다
-- 문서를 커스터마이징 하려면 `AsciiDoc` 문법을 알아야 한다
-- `Swagger` 문서와 다르게 문서에서 API를 즉석으로 테스트 할 수 없다
+- 문서를 커스터마이징 하려면 `Asciidoc` 문법을 알아야 한다
+- `Swagger` 문서와 다르게 문서에서 API를 즉석으로 테스트 할 수 없다 (Curl 커맨드를 제공해주긴 한다)
 
 <br />
 
-# 📕 Spring Rest Docs 적용
+# 📕 Spring REST Docs 적용
 
 ---
 
-`Spring Rest Docs`를 적용하기 위한 방법에 대해 설명한다.
+`Spring REST Docs`를 적용하기 위한 방법에 대해 설명한다.
 
 <br />
 
@@ -90,10 +94,10 @@ related_posts:
 --- 
 
 |항목|버전|
-|:---:|:---:|
+|:---:|:--:|
 |java|11|
-|gradle|6.8|
-|spring-boot|2.5.2|
+|gradle|6.9|
+|spring-boot|2.6.1|
 |asciidoctor convert plugin|1.5.8|
 
 <br />
@@ -102,20 +106,36 @@ related_posts:
 
 --- 
 
-`Spring5`부터 `RestTemplate`이 `Deprecated`되고 `WebClient` 사용을 권장하고 있으므로 `WebClient` 테스트로 진행 할 것이다.
+테스트하는데 사용할 수 있는 구현체가 `MockMvc`, `Restassured`, `WebClient`로 총 세개 존재한다.
 
-`Spring Rest Docs`는 테스트 결과를 여러개의 `adoc 스니펫(조각)`으로 생성해준다.
-
-이후 개발자가 생성된 스니펫들을 `AsciiDoc` 문법을 사용해 하나의 문서로 조합하는 방식으로 동작한다.
+취향껏 골라 사용하면 되겠다. 각 의존성은 하기와 같다.
 
 <br />
 
-{: style="text-align: center" }
-![image](https://user-images.githubusercontent.com/71188307/126029898-15cc6b90-a6b3-461d-8bb8-f70926d646af.png)
+```groovy
+// file: 'build.gradle'
+dependencies {
+    testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
+    testImplementation 'org.springframework.restdocs:spring-restdocs-restassured'
+    testImplementation 'org.springframework.restdocs:spring-restdocs-webtestclient'
+}
+```
 
 <br />
 
-아래는 Spring Rest Docs를 적용하기 위한 필수적인 설정들이다.
+`Spring REST Docs`는 테스트 결과를 여러개의 `adoc 스니펫(조각)`으로 생성해준다.
+
+이후 개발자가 생성된 스니펫들을 `Asciidoc` 문법을 사용해 하나의 문서로 조합하는 방식으로 동작한다.
+
+<u>즉, 책을 하나 만든다고 생각하면 편하다.</u>
+
+책에는 챕터가 있으며, 각 챕터에는 세부 내용들이 있을것이다.
+
+그러니까 기본적으로 3개의 `depth`가 생길 수 있다.
+
+<br />
+
+아래는 `Spring REST Docs`를 적용하기 위한 필수적인 설정들이다.
 
 <br />
 
@@ -123,7 +143,7 @@ related_posts:
 // file: 'build.gradle'
 plugins {
     id 'java'
-    id 'org.springframework.boot' version '2.5.2'
+    id 'org.springframework.boot' version '2.6.1'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'org.asciidoctor.convert' version '1.5.8' // API 문서를 생성하기 위한 플러그인
 }
@@ -133,68 +153,210 @@ ext {
 }
 
 dependencies {
-    testImplementation(
-            'org.springframework.boot:spring-boot-starter-test', // 테스트 코드 작성을 위한 의존성. 여기선 JUnit5로 설정된다.
-            'org.springframework.restdocs:spring-restdocs-webtestclient', // Spring Rest Doc WebClient 의존성 설정
-    )
-    
-    testImplementation("org.springframework.boot:spring-boot-starter-test") {
-        exclude group: "junit", module: "junit" // JUnit4를 프로젝트에서 제거
-    }
-    
-    asciidoctor 'org.springframework.restdocs:spring-restdocs-asciidoctor' // API 문서를 생성하기 위한 의존성 설정
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
 }
 
 test {
-    outputs.dir snippetsDir
+    outputs.dir snippetsDir // Spring REST Docs가 생성하는 스니펫을 작성할 위치  
     useJUnitPlatform()
 }
 
 asciidoctor {
-    inputs.dir snippetsDir
+    inputs.dir snippetsDir // Asciidoctor가 문서를 생성해낼 때 필요한 스니펫을 읽어들일 위치
     dependsOn test
+}
+
+bootJar {
+    dependsOn asciidoctor
+    from("${asciidoctor.outputDir}/html5") { // 빌드할 때 Asciidoctor가 만들어낸 HTML 문서를 jar파일에 포함시킨다
+        into 'BOOT-INF/classes/static/docs'
+    }
+}
+
+task copyDocument(type: Copy) { // Asciidoctor가 build 디렉토리에 생성해낸 HTML 문서를 Spring의 정적 리소스 위치로 복사한다
+    dependsOn asciidoctor
+
+    from file('build/asciidoc/html5/')
+    into file('src/main/resources/static/docs')
+}
+
+build {
+    dependsOn copyDocument // build 태스크 실행되면 copyDocument 태스크를 먼저 유발시킨다
 }
 ```
 
 <br />
 
-필수적인 빌드 스크립트 설정을 하였다면 `src/main/docs/asciidoc/api-docs.adoc` 파일을 작성해준다.
+필수적인 빌드 스크립트 설정을 하였다면 `src/docs/asciidoc/{document-name}.adoc` 파일을 작성해준다.
 
-`src/main/docs/asciidoc` 까지의 경로는 고정이며, 하위 adoc 파일의 이름은 개발자 마음대로 작명해도 된다.
+`src/docs/asciidoc` 까지의 경로는 고정이며, 하위 adoc 파일의 이름은 개발자 마음대로 작명해도 된다.
+
+나는 `유저 조회`, `유저 생성`이라는 두개의 API를 만들것이다.
+
+따라서 API 문서는 총 두개가 나올것이며, 이들을 묶어줄 `색인(index.html)`도 필요하다.
+
+<br />
+
+`src/docs/asciidoc` 경로는 버전마다 다를 수 있으니 잘 안된다면 공식문서를 참고하자!
+{:.note}
 
 <br />
 
 ```java
-// file: 'main/src/docs/asciidoc/api-docs.adoc')
+// file: 'src/docs/asciidoc/user-find.adoc'
+=== 조회
 :basedir: {docdir}/../../../
 :snippets: {basedir}/build/generated-snippets
-
-= RESTful API Guide
-:doctype: user
 :icons: font
 :source-highlighter: highlightjs
 :toc: left
 :toclevels: 4
+
+==== 설명
+
+유저 조회에 성공한 경우
+
+==== 요청
+
+===== 요청 필드
+
+include::{snippets}/user-find/request-parameters.adoc[]
+
+===== Curl 요청 코드
+
+include::{snippets}/user-find/curl-request.adoc[]
+
+===== 요청 예제
+
+include::{snippets}/user-find/http-request.adoc[]
+
+==== 응답
+
+===== 응답 필드
+
+include::{snippets}/user-find/response-fields.adoc[]
+
+===== 응답 예제
+
+include::{snippets}/user-find/http-response.adoc[]
+```
+
+<br />
+
+```java
+// file: 'src/docs/asciidoc/user-create.adoc'
+=== 생성
+:basedir: {docdir}/../../../
+:snippets: {basedir}/build/generated-snippets
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 4
+
+==== 설명
+
+유저 추가에 성공한 경우
+
+==== 요청
+
+===== 요청 필드
+
+include::{snippets}/user-create/request-fields.adoc[]
+
+===== Curl 요청 코드
+
+include::{snippets}/user-create/curl-request.adoc[]
+
+===== 요청 예제
+
+include::{snippets}/user-create/http-request.adoc[]
+
+==== 응답
+
+===== 응답 필드
+
+include::{snippets}/user-create/response-fields.adoc[]
+
+===== 응답 예제
+
+include::{snippets}/user-create/http-response.adoc[]
+```
+
+<br />
+
+그리고 이 문서들을 묶어줄 챕터격의 문서를 하나 더 만든다.
+
+<br />
+
+```java
+// file: 'src/docs/asciidoc/user.adoc'
+== 유저 API
+:basedir: {docdir}/../../../
+:snippets: {basedir}/build/generated-snippets
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 4
+
+include::./user-find.adoc[]
+
+include::./user-create.adoc[]
+```
+
+<br />
+
+마지막으로 챕터들이 묶여있는 책의 역할을 하는 `색인(index.html)`을 만들어야 한다.
+
+<br />
+
+```java
+// file: 'src/docs/asciidoc/index.adoc'
+= API DOCUMENTATION
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 4
+:sectlinks: /build/asciidoc/html5/
 :sectnums:
-:sectlinks:
-:sectanchors:
 
-[[api]]
+== 소개
 
-== User Api
+유저 API 입니다.
 
-// Spring Rest Docs로 생성된 스니펫을 조합한다
-// 이부분은 개발환경에 따라 직접적으로 건들일이 많다
-include::{snippets}/user/curl-request.adoc[]
-include::{snippets}/user/http-request.adoc[]
-include::{snippets}/user/request-fields.adoc[]
-include::{snippets}/user/http-response.adoc[]
-include::{snippets}/user/response-fields.adoc[]
+== 환경
+
+서비스의 각종 환경에 대한 정보를 표시합니다.
+
+=== 도메인
+
+서비스의 도메인 호스트는 다음과 같습니다.
+
+NOTE: 인프라 팀에서 설정합니다.
+
+|===
+| 환경 | URI
+
+| 개발서버
+| `io.github.shirohoo-dev`
+
+| 운영서버
+| `io.github.shirohoo`
+|===
+
+include::./user.adoc[]
 ```
 
 <br />
 
 여기까지 완료하면 모든 설정이 끝났다.
+
+<br />
+
+`Asciidoc` 문법에 대한 자세한 내용은 [📜여기](https://narusas.github.io/2018/03/21/Asciidoc-basic.html){:target="_blank"} 와 [📜여기](https://docs.asciidoctor.org/asciidoc/latest/document-structure/){:target="_blank"} 를 참고하세요.
+{:.note}
+
+<br />
 
 문서를 작성하기 위해서는 `컨트롤러`에 대한 테스트코드가 반드시 필요하다.
 
@@ -203,124 +365,200 @@ include::{snippets}/user/response-fields.adoc[]
 <br />
 
 ```java
-// file: 'UserApiController.java'
-import io.shirohoo.docs.domain.UserRequest;
-import io.shirohoo.docs.domain.UserResponse;
-import io.shirohoo.docs.service.UserService;
-import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
 @RestController
-@RequiredArgsConstructor
-@RequestMapping("/api/v1/user")
-public class UserApiController {
-    private final UserService service;
-    private final ModelMapper mapper;
+public class ApiController {
 
-    @PostMapping("")
-    public ResponseEntity<UserResponse> create(@RequestBody UserRequest request) {
-        return ResponseEntity.ok(mapper.map(service.create(request), UserResponse.class));
+    @GetMapping
+    public ResponseEntity<User> get(@RequestParam String phoneNumber) {
+        Map<String, User> users = getRepository();
+
+        if (users.containsKey(phoneNumber)) {
+            return ResponseEntity.ok(users.get(phoneNumber));
+        }
+        return ResponseEntity.notFound().build();
     }
+
+    @PostMapping
+    public ResponseEntity<User> post(@RequestBody User user) {
+        Map<String, User> users = getRepository();
+
+        if (users.containsKey(user)) {
+            return ResponseEntity.badRequest().build();
+        }
+        users.put(user.getPhoneNumber(), user);
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(user);
+    }
+
+    private Map<String, User> getRepository() {
+        Map<String, User> users = new HashMap<>();
+        users.put("010-1234-5678", new User("user1", 11, "010-1234-5678", LocalDate.of(2000, 1, 1)));
+        users.put("010-1111-1111", new User("user2", 22, "010-1111-1111", LocalDate.of(2000, 1, 1)));
+        users.put("010-1234-1111", new User("user3", 33, "010-1234-1111", LocalDate.of(2000, 1, 1)));
+        return users;
+    }
+
+    @Data
+    @Builder
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class User {
+
+        private String name;
+
+        private int age;
+
+        private String phoneNumber;
+
+        private LocalDate birthDay;
+
+    }
+
 }
 ```
 
 <br />
 
+이제 테스트 코드를 작성해야 하는데, `JUnit`을 사용해보신 독자라면 <u>스프링 컨텍스트를 매 테스트마다 리로딩하는것이 얼마나 테스트를 느리게 만드는지</u> 잘 알것이다.
+
+이 문제를 해결하기 위해 `Spring REST Docs` 테스트를 실행할 때 사용할 추상 클래스를 하나 정의하도록 한다.
+
+이 추상 클래스를 사용해 테스트를 실행시키면 스프링 컨텍스트를 단 한번만 로딩한 후 이를 재사용함으로써 테스트 시간을 대폭 단축시킬 수 있게된다.
+
+<br />
+
 ```java
-// file: 'UserApiControllerTest.java'
-import com.fasterxml.jackson.databind.ObjectMapper;
-import io.shirohoo.docs.domain.UserRequest;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.MediaType;
-import org.springframework.restdocs.RestDocumentationContextProvider;
-import org.springframework.restdocs.RestDocumentationExtension;
-import org.springframework.test.web.reactive.server.WebTestClient;
-import org.springframework.test.web.servlet.client.MockMvcWebTestClient;
-import org.springframework.web.context.WebApplicationContext;
-import org.springframework.web.reactive.function.BodyInserters;
-import reactor.core.publisher.Mono;
+@WebMvcTest(controllers = {
+    ApiController.class // 여기에 테스트 대상 컨트롤러들을 추가
+})
+@ExtendWith(RestDocumentationExtension.class)
+@AutoConfigureRestDocs(uriScheme = SCHEME, uriHost = HOST)
+public class AbstractControllerTests {
 
-import java.time.LocalDateTime;
+    // 여기서 문서에 표시될 정보들을 정의
+    public static final String SCHEME = "https";  
+    public static final String HOST = "io.github.shirohoo";
 
-import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
-import static org.springframework.restdocs.payload.PayloadDocumentation.*;
-import static org.springframework.restdocs.webtestclient.WebTestClientRestDocumentation.document;
-import static org.springframework.restdocs.webtestclient.WebTestClientRestDocumentation.documentationConfiguration;
-
-@ExtendWith(RestDocumentationExtension.class) // Spring Rest Docs를 사용하기 위한 확장
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT) // 통합 테스트를 위해 선언
-class UserApiControllerTest {
     @Autowired
-    ObjectMapper mapper; // 테스트코드 작성을 편하게 하기 위함
+    protected MockMvc mockMvc;
 
-    WebTestClient webTestClient; // 테스트 전용 WebClient인 WebTestClient 선언
+    @Autowired
+    protected ObjectMapper objectMapper;
 
-    @BeforeEach
-    void setUp(WebApplicationContext context, RestDocumentationContextProvider restDocumentation) {
-        webTestClient = MockMvcWebTestClient.bindToApplicationContext(context) // WebTestClient에 Spring Web Container를 바인딩
-                                            .configureClient()
-                                            .filter(documentationConfiguration(restDocumentation)) // Spring Rest Docs를 바인딩
-                                            .build();
+    // 나중에 테스트 코드 중 문서작성부에 사용될 편의성 메서드들을 정의
+    protected static OperationRequestPreprocessor documentRequest() {
+        return Preprocessors.preprocessRequest(
+            Preprocessors.modifyUris()
+                .scheme(SCHEME)
+                .host(HOST)
+                .removePort(),
+            prettyPrint());
+    }
+
+    protected static OperationResponsePreprocessor documentResponse() {
+        return Preprocessors.preprocessResponse(prettyPrint());
+    }
+
+    protected static StatusResultMatchers status() {
+        return MockMvcResultMatchers.status();
+    }
+
+    protected static ContentResultMatchers content() {
+        return MockMvcResultMatchers.content();
+    }
+
+}
+```
+
+<br />
+
+이후로 위 추상 클래스에 테스트 할 컨트롤러를 추가하고, 다른 객체를 모킹해야 한다면 `@MockBean`도 여기에 선언하도록 하자.
+
+그리고 다음과 같은 테스트 코드를 작성한다.
+
+<br />
+
+```java
+import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
+import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
+import static org.springframework.restdocs.payload.PayloadDocumentation.requestFields;
+import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
+import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
+import static org.springframework.restdocs.request.RequestDocumentation.requestParameters;
+import io.github.shirohoo.springrestdocs.api.ApiController.User;
+import java.time.LocalDate;
+import org.junit.jupiter.api.Test;
+import org.springframework.http.MediaType;
+import org.springframework.restdocs.payload.JsonFieldType;
+import org.springframework.test.web.servlet.ResultActions;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+
+class ApiControllerTest extends AbstractControllerTests {
+
+    @Test
+    void get() throws Exception {
+        // ...given
+        String request = "010-1234-5678";
+        String response = objectMapper.writeValueAsString(
+                new User("user1", 11, "010-1234-5678", LocalDate.of(2000, 1, 1))
+        );
+
+        // ...when
+        ResultActions actions = mockMvc.perform(MockMvcRequestBuilders.get("/?phoneNumber=" + request));
+
+        // ...then
+        actions.andExpect(status().isOk())
+                .andExpect(content().json(response))
+                .andDo(document("user-find", // 여기부터 Spring REST Docs의 문서화 코드
+                        documentRequest(), // 요청부를 전처리하고 문서에 기록한다
+                        documentResponse(), // 응답부를 전처리하고 문서에 기록한다
+                        requestParameters( // 여기부터 검증 및 문서화 코드. 검증에 실패하면 테스트도 실패한다
+                                parameterWithName("phoneNumber").description("휴대폰 번호")
+                        ),
+                        responseFields(
+                                fieldWithPath("name").type(JsonFieldType.STRING).description("이름"),
+                                fieldWithPath("age").type(JsonFieldType.NUMBER).description("나이"),
+                                fieldWithPath("phoneNumber").type(JsonFieldType.STRING).description("휴대폰 번호"),
+                                fieldWithPath("birthDay").type(JsonFieldType.STRING).description("생일")
+                        )
+                ));
     }
 
     @Test
-    void create() throws Exception {
-        // given
-        // http 요청할 json string
-        Mono<String> request = Mono.just(mapper.writeValueAsString(UserRequest.builder()
-                                                                              .name("홍길동")
-                                                                              .email("hong@email.com")
-                                                                              .phoneNumber("01012341234")
-                                                                              .build())
-                                        );
+    void post() throws Exception {
+        // ...given
+        String request = objectMapper.writeValueAsString(
+                new User("user4", 44, "010-5678-5678", LocalDate.of(2000, 1, 1))
+        );
 
-        // http 응답으로 예상되는 json string
-        String expected = mapper.writeValueAsString(UserRequest.builder()
-                                                               .id(1L)
-                                                               .name("홍길동")
-                                                               .email("hong@email.com")
-                                                               .phoneNumber("01012341234")
-                                                               .build());
+        // ...when
+        ResultActions actions = mockMvc.perform(MockMvcRequestBuilders.post("/")
+                .content(request)
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON)
+        );
 
-        // when
-        WebTestClient.ResponseSpec exchange = webTestClient.post() // http method
-                                                           .uri("/api/v1/user") // request uri
-                                                           .contentType(MediaType.APPLICATION_JSON) // request content type
-                                                           .accept(MediaType.APPLICATION_JSON) // response content type
-                                                           .body(BodyInserters.fromProducer(request, String.class)) // request body (json string)
-                                                           .exchange(); // execute
-
-        // then
-        exchange.expectStatus().isOk() // http status가 200이면 통과
-                .expectBody().json(expected) // http response body가 예상값과 같으면 통과
-                .consumeWith(document("user", // API 문서 작성 및 추가적인 검증을 위한 코드
-                                      preprocessRequest(prettyPrint()), // 문서에 json string을 이쁘게 출력한다
-                                      preprocessResponse(prettyPrint()), // 문서에 json string을 이쁘게 출력한다
-                                      requestFields( // 문서에 표시 될 http request field. 실제 요청과 일치하지 않으면 테스트가 실패한다.
-                                              fieldWithPath("id").description("식별자").type(Long.class),
-                                              fieldWithPath("name").description("이름").type(String.class),
-                                              fieldWithPath("email").description("이메일").type(String.class),
-                                              fieldWithPath("phoneNumber").description("전화번호").type(String.class)
-                                                   ),
-                                      responseFields( // 문서에 표시 될 http response field. 실제 응답과 일치하지 않으면 테스트가 실패한다.
-                                              fieldWithPath("id").description("식별자").type(Long.class),
-                                              fieldWithPath("name").description("이름").type(String.class),
-                                              fieldWithPath("email").description("이메일").type(String.class),
-                                              fieldWithPath("phoneNumber").description("전화번호").type(String.class),
-                                              fieldWithPath("createAt").description("등록일").type(LocalDateTime.class),
-                                              fieldWithPath("updateAt").description("수정일").type(LocalDateTime.class)
-                                                    )
-                                     ));
+        // ...then
+        actions.andExpect(status().isCreated())
+                .andExpect(content().json(request))
+                .andDo(document("user-create", // 여기부터 Spring REST Docs의 문서화 코드
+                        documentRequest(), // 요청부를 전처리하고 문서에 기록한다
+                        documentResponse(), // 응답부를 전처리하고 문서에 기록한다
+                        requestFields( // 여기부터 검증 및 문서화 코드. 검증에 실패하면 테스트도 실패한다
+                                fieldWithPath("name").type(JsonFieldType.STRING).description("이름"),
+                                fieldWithPath("age").type(JsonFieldType.NUMBER).description("나이"),
+                                fieldWithPath("phoneNumber").type(JsonFieldType.STRING).description("휴대폰 번호"),
+                                fieldWithPath("birthDay").type(JsonFieldType.STRING).description("생일")
+                        ),
+                        responseFields(
+                                fieldWithPath("name").type(JsonFieldType.STRING).description("이름"),
+                                fieldWithPath("age").type(JsonFieldType.NUMBER).description("나이"),
+                                fieldWithPath("phoneNumber").type(JsonFieldType.STRING).description("휴대폰 번호"),
+                                fieldWithPath("birthDay").type(JsonFieldType.STRING).description("생일")
+                        )
+                ));
     }
+
 }
 ```
 
@@ -328,46 +566,23 @@ class UserApiControllerTest {
 
 테스트가 통과하면 `빌드`를 한다.
 
-빌드에 성공하면 `Spring Rest Docs` 코드에 명시한 대로 `adoc 스니펫`이 생성된다.
+빌드에 성공하면 `Spring REST Docs` 코드에 명시한 대로 `build/generated-snippets` 경로에 `Asciidoc 스니펫`이 생성돼있을 것이다.
 
 <br />
 
-```shell
-$ gradle clean build
-
-Starting a Gradle Daemon, 1 incompatible and 1 stopped Daemons could not be reused, use --status for details
-> Task :test
-
-...
-
-BUILD SUCCESSFUL in 28s
-8 actionable tasks: 8 executed
-```
-<br />
-
-빌드가 성공하면 문서 작성을 위한 `asciidoctor` 태스크를 실행한다.
+![image](https://user-images.githubusercontent.com/71188307/146929753-cbcb2ed7-851f-4ea5-8cbb-d4a3f0adf510.png)
 
 <br />
 
-```shell
-$ gradle asciidoctor
-
-BUILD SUCCESSFUL in 1s
-5 actionable tasks: 5 up-to-date
-```
+또한, `src/main/resources/static/docs` 에 몇가지 HTML 문서도 생성되어 있을 것이다.
 
 <br />
 
-`build/asciidoc/html5/api-docs.html`이 생성된다.
+![image](https://user-images.githubusercontent.com/71188307/146929784-f602d331-060b-4171-b03c-b27b1a2c9227.png)
 
 <br />
 
-{: style="text-align: center" }
-![image](https://user-images.githubusercontent.com/71188307/126030349-708875a5-5f96-4910-97d0-e534f70f9f82.png)
-
-<br />
-
-여기까지 완료하면 생성되는 `api-docs.html`은 다음과 같다
+여기까지 완료하면 생성되는 `index.html`은 다음과 같다
 
 <br />
 
@@ -375,25 +590,10 @@ BUILD SUCCESSFUL in 1s
 
 <br />
 
-여기서 문제가 하나 있는데, 문서 작성을 위한 태스크는 수동으로 실행해줘야 한다는 것이다.
+# 참고
 
-이를 자동화하기 위한 빌드 스크립트를 추가한다.
+---
 
-<br />
-
-```groovy
-// file: 'build.gradle'
-bootJar {
-    dependsOn(':asciidoctor')
-}
-```
-
-<br />
-
-문서를 생성하는 `asciidoctor` 태스크는 `test` 태스크가 완료된 후에 실행되어야 한다.
-
-따라서 최종 패키징 단계인 `bootJar` 태스크가 실행되기 전에 `asciidoctor` 태스크가 먼저 유발될 수 있도록 해준다.
-
-이후부터는 `build` 태스크만 실행시키면 문서 생성작업이 자동화된다.
+- [Spring REST Docs Document](https://docs.spring.io/spring-restdocs/docs/1.0.0.M1/reference/html5/){:target="_blank"}
 
 <br />

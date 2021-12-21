@@ -158,9 +158,9 @@ asciidoctor {
 
 <br />
 
-필수적인 빌드 스크립트 설정을 하였다면 `main/src/docs/asciidoc/api-docs.adoc` 파일을 작성해준다.
+필수적인 빌드 스크립트 설정을 하였다면 `src/main/docs/asciidoc/api-docs.adoc` 파일을 작성해준다.
 
-`main/src/docs/asciidoc` 까지의 경로는 고정이며, 하위 adoc 파일의 이름은 개발자 마음대로 작명해도 된다.
+`src/main/docs/asciidoc` 까지의 경로는 고정이며, 하위 adoc 파일의 이름은 개발자 마음대로 작명해도 된다.
 
 <br />
 
@@ -199,10 +199,6 @@ include::{snippets}/user/response-fields.adoc[]
 문서를 작성하기 위해서는 `컨트롤러`에 대한 테스트코드가 반드시 필요하다.
 
 예시를 위해 아주 간단한 컨트롤러를 하나 작성하고 이를 테스트하는 테스트 코드를 작성할 것이다.
-
-<br />
-
-전체 소스 코드는 [깃허브](https://github.com/shirohoo/spring-rest-docs/tree/spring-rest-docs)에 공개돼있습니다.
 
 <br />
 

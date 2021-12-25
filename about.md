@@ -12,11 +12,11 @@ published: true
 
 ---
 
-- Name :  <u>shirohoo (ChangHun Han)</u>
+- Name :  <u>shirohoo (Changhun Han)</u>
 
 - Birth : 1993.12
 
-- Major : <u>Java Server Developer</u>
+- Major : <u>Java Backend Developer</u>
 
 - MBTI : INTJ-T
 
@@ -30,7 +30,7 @@ published: true
 
 - <u>2020.08</u> ~ : <u>개발 독학 시작</u>
 
-- 2021.02 ~ : 자바 서버 개발자로 근무 중
+- 2021.02 ~ : 자바 백엔드 개발자로 근무 중
 
 <br />
 
@@ -61,13 +61,13 @@ published: true
 - OOP
 - Test code
 - <u>APM</u> 을 활용한 <u>서버 모니터링</u>, <u>성능 분석</u> 및 <u>개선</u>
-- <u>JPA / Querydsl</u>을 사용한 <u>성능 최적화 경험</u>
-- <u>Spring Batch</u> 개발 및 운영
-- <u>Spring Security</u>를 사용한 시큐어 코딩
+- <u>Hibernate / Querydsl</u>을 사용한 <u>성능 최적화 경험</u>
+- <u>Spring Batch</u>
+- <u>Spring Security</u>
 - 인프라 운영
-    - Jenkins / Nginx를 이용한 <u>로드 밸런싱, 무중단 배포</u> 구축
+    - Jenkins / Nginx를 이용한 <u>로드 밸런싱, 무중단 배포</u> 구축 및 운영
     - Jenkins, Github Actions를 이용한 <u>CI/CD</u>
-    - Jenkins를 이용한 <u>배치 서버 운영</u>
+    - Jenkins를 이용한 <u>배치 운영</u>
 
 <br />
 
@@ -81,10 +81,10 @@ published: true
 
 - <u>Java</u>, <u>Groovy</u>
 - <u>Spring Boot</u>, <u>Spring MVC</u>, <u>Spring Batch</u>, <u>Spring Security</u>, <u>Spring Data JPA</u>
-- <u>JPA</u>, <u>Querydsl</u>, <u>Hibernate</u>
+- <u>JPA(Hibernate)</u>, <u>Querydsl</u>
 - <u>Junit5</u>, <u>Mockito</u>
-- <u>Gradle</u>, Maven
-- <u>IntelliJ</u>, Visual Studio Code
+- <u>Gradle</u>
+- <u>IntelliJ</u>
 
 ## 🎨 FrontEnd
 
@@ -98,7 +98,7 @@ published: true
 ---
 
 - <u>Jenkins</u>
-- Nginx, <u>Tomcat</u>
+- <u>Nginx</u>
 - AWS
     - <u>EC2</u>
     - RDS
@@ -110,11 +110,11 @@ published: true
 
 ---
 
-## [🖥 Full Text Mapper](https://github.com/shirohoo/full-text-mapper){:target="_blank"}
+## [🖥 전문 매퍼](https://github.com/shirohoo/full-text-mapper){:target="_blank"}
 
 ---
 
-`전문(Full-Text)`을 자바 클래스와 매핑할 수 있게 해주는 모듈입니다.
+`전문`을 자바 클래스와 매핑할 수 있게 해주는 모듈입니다.
 
 `ObjectMapper`에서 영감을 얻었으며, 반복되는 노가다성의 전문통신 개발을 조금이라도 더 편하게 해보고자 개발했습니다.
 
@@ -124,7 +124,7 @@ published: true
 
 <br />
 
-## [🖥 SFTP Client Module](https://github.com/shirohoo/sftp-client){:target="_blank"}
+## [🖥 SFTP Client](https://github.com/shirohoo/sftp-client){:target="_blank"}
 
 ---
 

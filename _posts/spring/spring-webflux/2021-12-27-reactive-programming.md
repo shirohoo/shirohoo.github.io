@@ -6,7 +6,7 @@ category:
 title: Reactive Programming
 description: |
   반응형 프로그래밍에 대한 정리
-image: /assets/img/spring/spring-security/security-logo.png
+image: /assets/img/spring/spring-webflux/spring-webflux.jpg
 related_posts:
   - _posts/spring/spring-security/2021-05-02-authentication.md
   - _posts/spring/spring-security/2021-08-30-rest-login.md

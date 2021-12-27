@@ -223,18 +223,81 @@ published: true
 
 그리고 이 `스트림`의 동의어가 바로 `Flux`이다. _**(Spring WebFlux의 Flux가 맞다)**_
 
-또한 기존 HTTP와 같은 방식을 `Mono`라는 용어로 부른다.
-
-조금 더 쉽게 이야기 하자면, `Flux`는 응답이 두번 이상 발생하는 것을 의미하며, `Mono`는 기존 HTTP와 동일하게 단 한번의 응답에 통신이 끝나는것을 의미한다.
+또한 `Flux`와 `Mono`는 `Reactor` 에서 정의한 `Publisher` 인터페이스의 구현체이기도 한데, 두 구현체의 차이는 다음과 같다.
 
 <br />
 
-그리고 위의 개념을 주로 `Pub/Sub` 이라고 많이 부르는 것 같다.
+- Flux: 0...N 을 표현
+- Mono: 0...1 을 표현
 
-즉, `발행(Publisher)`과 `구독(Subscribe)`이다.
+<br />
 
-클라이언트는 서버를 구독하고, 서버는 구독자들(Flux가 연결된 클라이언트들)에게 응답을 발행하는것이다.
+이렇게 보니 무슨말인지 잘 모르겟다. 코드를 보자.
 
-여기서 `이벤트 드리븐(Event Driven)`과 `Pub/Sub`의 차이가 모호해졌는데, 이 부분은 추후에 따로 더 공부를 해봐야 할 것 같다.
+코드로 보 다음과 같다고 할 수 있다.
+
+일단 단일 객체를 반환하는것을 `Mono`로 표현할수 있는데 `Java 8`의 `Optional`로 비교해보자.
+
+<br />
+
+```java
+public Optional<Person> findById(Long id) {
+    if(map.contains(id)) {
+        return Optional.of(map.get(id));
+    }
+    return Optional.empty();
+}
+```
+
+<br />
+
+이를 `Mono`로 표현하면 다음과 같다.
+
+<br />
+
+```java
+public Mono<Person> findById(Long id) {
+    if(map.contains(id)) {
+        return Mono.just(map.get(id));
+    }
+    return Mono.empty();
+}
+```
+
+<br />
+
+`Flux`는 `Collection` 혹은 `Stream` 이라고 볼수 있을 것 같다. (하지만 무한일지도 모르는...?)
+
+역시 코드로 보자.
+
+<br />
+
+```java
+public Stream<Person> findAll() {
+    return Stream.of(
+        new Person("james"),
+        new Person("charles)
+    );
+}
+```
+
+<br />
+
+이를 `Flux`로 표현하면,
+
+<br />
+
+```java
+public Flux<Person> findAll() {
+    return Flux.just(
+        new Person("james"),
+        new Person("charles)
+    );
+}
+```
+
+<br />
+
+일단 기초적인 컨셉은 이렇게 이해를 하였으니, 차차 API도 구성해보면서 더 깊게 알아봐야겠다.
 
 <br />

@@ -96,6 +96,8 @@ menu:
         url:           /spring/spring-data-jpa/
       - title:         Spring Batch
         url:           /spring/spring-batch/
+      - title:         Spring WebFlux
+        url:           /spring/spring-webflux/
   - title:             FrontEnd
     url:               /frontend/
     submenu:

@@ -12,9 +12,11 @@ description: >
 * [Spring Security]{:.heading.flip-title}
 * [Spring Data Jpa]{:.heading.flip-title}
 * [Spring Batch]{:.heading.flip-title}
+* [Spring WebFlux]{:.heading.flip-title}
 
 [Spring Boot]: /spring/spring-boot/
 [Spring MVC]: /spring/spring-mvc/
 [Spring Security]: /spring/spring-security/
 [Spring Data Jpa]: /spring/spring-data-jpa/
 [Spring Batch]: /spring/spring-batch/
+[Spring WebFlux]: /spring/spring-webflux/

@@ -6,7 +6,7 @@ category:
 title: HTTP 통신내역을 기록하기
 description: >
     `Spring MVC`의 `Filter`와 `Interceptor`를 활용한 로깅
-image: /assets/img/spring/spring-mvc/spring-boot-logo.png
+image: /assets/img/spring/spring-mvc/spring-mvc-logo.png
 related_posts:
     - 
 ---

@@ -1,12 +1,12 @@
 ---
 layout: post
 category:
-  - spring
-  - spring-boot
+    - spring
+    - spring-boot
 title: 스프링 부트의 이벤트 처리
 description: |
   스트링 부트에서 `Event Driven` 방식의 처리를 어떻게 하는지 정리합니다.
-image: /assets/img/spring/spring-mvc/spring-boot-logo.png
+image: //assets/img/spring/spring-boot/spring-boot-logo.png
 related_posts:
   - null
 published: true

@@ -7,7 +7,7 @@ date: 2021-01-24 21:52
 title: Spring Boot 살펴보기
 description: >
     `Spring Boot` 입문
-image: /assets/img/spring/spring-mvc/spring-boot-logo.png
+image: /assets/img/spring/spring-boot/spring-boot-logo.png
 related_posts:
     - _posts/backend/server-side/2021-01-25-hikari-dbcp.md
 ---

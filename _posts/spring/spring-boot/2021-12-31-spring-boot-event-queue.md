@@ -34,11 +34,11 @@ published: true
 <br />
 
 ```yaml
-#application.yaml
+# file: 'application.yaml'
 spring:
   datasource:
     url: jdbc:h2:mem:testdb
-#   url: jdbc:h2:tcp://localhost/~/test
+    # url: jdbc:h2:tcp://localhost/~/test
     username: sa
     password:
 ```

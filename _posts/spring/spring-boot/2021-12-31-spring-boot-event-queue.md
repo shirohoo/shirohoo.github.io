@@ -5,7 +5,7 @@ category:
     - spring-boot
 title: 실무용 이벤트 큐 구현
 description: |
-  Spring Boot에서 Event Queue를 구현하는 방법
+  `Spring Boot`에서 간단한 `Event Queue`를 구현하는 방법
 image: /assets/img/spring/spring-boot/spring-boot-logo.png
 related_posts:
   - null
@@ -23,7 +23,7 @@ published: true
 
 ---
 
-[📦 GitHub - shirohoo/spring-event-queue](https://github.com/shirohoo/spring-boot-examples/tree/main/spring-event-queue)
+[📦 GitHub - shirohoo/spring-event-queue](https://github.com/shirohoo/spring-boot-examples/tree/main/spring-event-queue){:target="_blank"}
 
 프로젝트를 클론하고 데이터베이스를 설정한다.
 
@@ -168,7 +168,7 @@ spring:
 
 이에 대한 이유가 궁금하다면 아래의 아티클을 확인하라.
 
-[📜 LinkedBlockingQueue vs ConcurrentLinkedQueue](https://www.baeldung.com/java-queue-linkedblocking-concurrentlinked)
+[📜 LinkedBlockingQueue vs ConcurrentLinkedQueue](https://www.baeldung.com/java-queue-linkedblocking-concurrentlinked){:target="_blank"}
 
 API는 심플하다.
 

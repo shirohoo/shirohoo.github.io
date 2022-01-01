@@ -56,8 +56,6 @@ menu:
   - title:             Computer Science
     url:               /cs/
     submenu:
-      - title:         밑바닥부터 만드는 컴퓨팅 시스템
-        url:           /cs/making-computer-system/
       - title:         소프트웨어 설계
         url:           /cs/software-design/
       - title:         데이터베이스 구축

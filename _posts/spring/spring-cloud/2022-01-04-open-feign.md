@@ -319,7 +319,7 @@ void getUsers(@PathVariable("id") Long id); // OpenFeign에서는 이렇게 사�
 
 <br />
 
-OpenFeign의 경우 많은 애노테이션 속성을 생략할수가 없다. 😂
+`OpenFeign`의 경우 많은 애노테이션 속성을 생략할수가 없다. 😂
 {:.note}
 
 <br />
@@ -330,20 +330,23 @@ OpenFeign의 경우 많은 애노테이션 속성을 생략할수가 없다. �
 
 일반적으로 `Get 방식`의 요청을 보낼 때 `queryString`을 자주 사용한다.
 
-이때 일반적으로 @RequestParam을 여러개 추가해서 사용하게 된다.
+이때 일반적으로 `@RequestParam`을 여러개 추가해서 사용하게 된다.
 
 <br />
 
 ```java
 @GetMapping("/users")
-List<User> getUsersWithQueryParamsBasic(@RequestParam("param1") String param1, @RequestParam("param2") String param2);
+List<User> getUsersWithQueryParamsBasic(
+        @RequestParam("param1") String param1,
+        @RequestParam("param2") String param2
+);
 ```
 
 <br />
 
 `@ReuqestParam`이 많아지면 코드의 가독성이 매우 안좋아지고, 코드를 작성하기도 지루해진다.
 
-이 때 `@SpringQueryMap`를 사용할 수 있다.
+이 때 `@SpringQueryMap`을 사용할 수 있다.
 
 <br />
 

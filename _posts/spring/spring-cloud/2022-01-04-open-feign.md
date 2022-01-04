@@ -148,13 +148,13 @@ public class OpenFeignConfig {
 - HEADERS : 요청 및 응답 헤더와 함께 BASIC의 항목을 기록한다
 - FULL : 요청과 응답 모두에 대한 헤더, 본문 및 메타데이터를 기록한다. (즉, HTTP 메시지를 통째로 다찍는다)
 
-`application.yaml`이나 `application.properties`에서 `logging.level.root=debug`로 해도 되고, 하기 코드 스니펫처럼 설정하면 더 디테일하게 설정할 수 있다.
-
 <br />
 
 위 설정을 온전히 적용하려면 프로젝트의 로깅 레벨을 `DEBUG`까지 허용해줘야 한다.
 
-하지만 프로젝트 전체의 로깅 레벨을 DEBUG로 설정하는 것은 무리가 있으므로, <u>페인 클라이언트가 몰려있는 특정 패키지의 로깅 레벨만 DEBUG로 적용하는 방식이 주로 사용된다.</u>
+`application.yaml`이나 `application.properties`에서 `logging.level.root=debug`로 설정하면 된다.
+
+하지만 프로젝트 전체의 로깅 레벨을 DEBUG로 설정하는 것은 무리가 있으므로, <u>아래와 같이 페인 클라이언트가 몰려있는 특정 패키지의 로깅 레벨만 DEBUG로 적용하는 방식이 주로 사용된다.</u>
 
 <br />
 

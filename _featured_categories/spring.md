@@ -13,6 +13,7 @@ description: >
 * [Spring Data Jpa]{:.heading.flip-title}
 * [Spring Batch]{:.heading.flip-title}
 * [Spring WebFlux]{:.heading.flip-title}
+* [Spring Cloud]{:.heading.flip-title}
 
 [Spring Boot]: /spring/spring-boot/
 [Spring MVC]: /spring/spring-mvc/
@@ -20,3 +21,4 @@ description: >
 [Spring Data Jpa]: /spring/spring-data-jpa/
 [Spring Batch]: /spring/spring-batch/
 [Spring WebFlux]: /spring/spring-webflux/
+[Spring Cloud]: /spring/spring-cloud/

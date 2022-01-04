@@ -96,6 +96,8 @@ menu:
         url:           /spring/spring-batch/
       - title:         Spring WebFlux
         url:           /spring/spring-webflux/
+      - title:         Spring Cloud
+        url:           /spring/spring-cloud/
   - title:             FrontEnd
     url:               /frontend/
     submenu:

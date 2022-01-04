@@ -3,7 +3,7 @@ layout: post
 category:
     - spring
     - spring-boot
-title: 실무용 이벤트 큐 구현
+title: 스프링 부트 이벤트 큐 구현
 description: |
   `Spring Boot`에서 간단한 `Event Queue`를 구현하는 방법
 image: /assets/img/spring/spring-boot/spring-boot-logo.png

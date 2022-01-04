@@ -372,7 +372,7 @@ List<User> getUsersWithQueryParams(@SpringQueryMap QueryParams queryParams);
 <br />
 
 ```shell
-[JsonPlaceHolderClient#getUsersWithQueryParams] ---> GET https://jsonplaceholder.typicode.com/users?param1=param1&param2=param2&customHeader=shirohoo HTTP/1.1
+[JsonPlaceHolderClient#getUsersWithQueryParams] ---> GET https://jsonplaceholder.typicode.com/users?param1=param1&param2=param2 HTTP/1.1
 ```
 
 <br />

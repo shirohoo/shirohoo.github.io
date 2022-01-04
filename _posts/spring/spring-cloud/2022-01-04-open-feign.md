@@ -6,7 +6,7 @@ category:
 title: 오픈페인(OpenFeign)
 description: |
   혹은 `페인 클라이언트(Feign Client)`로 불리는 프로젝트
-image: /assets/img/spring/spring-cloud/spring-cloud.jpg
+image: /assets/img/spring/spring-cloud/spring-cloud.png
 related_posts:
   - 
 ---

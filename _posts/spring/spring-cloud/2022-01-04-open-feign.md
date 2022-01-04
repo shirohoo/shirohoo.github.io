@@ -141,16 +141,20 @@ public class OpenFeignConfig {
 
 <br />
 
-`Level.FULL` 설정 시 `OpenFeign`이 제공하는 기본 로거 구현체를 사용하기 위해서는 로깅 레벨을 `DEBUG`까지 허용해줘야 한다.
-
-로깅 레벨은 다음과 같다.
+`OpenFeign`이 제공하는 `Logger.Level` 설정은 다음과 같다
 
 - NONE : 로깅을 하지 않는다
 - BASIC : 요청 방법 및 URL, 상태 코드 및 실행 시간만 기록한다
 - HEADERS : 요청 및 응답 헤더와 함께 BASIC의 항목을 기록한다
-- FULL : 요청과 응답 모두에 대한 헤더, 본문 및 메타데이터를 기록한다. (즉, HTTP를 통째로 다찍는다)
+- FULL : 요청과 응답 모두에 대한 헤더, 본문 및 메타데이터를 기록한다. (즉, HTTP 메시지를 통째로 다찍는다)
 
 `application.yaml`이나 `application.properties`에서 `logging.level.root=debug`로 해도 되고, 하기 코드 스니펫처럼 설정하면 더 디테일하게 설정할 수 있다.
+
+<br />
+
+위 설정을 온전히 적용하려면 프로젝트의 로깅 레벨을 `DEBUG`까지 허용해줘야 한다.
+
+하지만 프로젝트 전체의 로깅 레벨을 DEBUG로 설정하는 것은 무리가 있으므로, <u>페인 클라이언트가 몰려있는 특정 패키지의 로깅 레벨만 DEBUG로 적용하는 방식이 주로 사용된다.</u>
 
 <br />
 
@@ -320,6 +324,52 @@ OpenFeign의 경우 많은 애노테이션 속성을 생략할수가 없다. �
 
 <br />
 
+### @SpringQueryMap
+
+---
+
+일반적으로 `Get 방식`의 요청을 보낼 때 `queryString`을 자주 사용한다.
+
+이때 일반적으로 @RequestParam을 여러개 추가해서 사용하게 된다.
+
+<br />
+
+```java
+@GetMapping("/users")
+List<User> getUsersWithQueryParamsBasic(@RequestParam("param1") String param1, @RequestParam("param2") String param2);
+```
+
+<br />
+
+`@ReuqestParam`이 많아지면 코드의 가독성이 매우 안좋아지고, 코드를 작성하기도 지루해진다.
+
+이 때 `@SpringQueryMap`를 사용할 수 있다.
+
+<br />
+
+```java
+@Data
+public class QueryParams {
+    private String param1;
+    private String param2;
+}
+
+@GetMapping("/users")
+List<User> getUsersWithQueryParams(@SpringQueryMap QueryParams queryParams);
+```
+
+<br />
+
+`getUsersWithQueryParams(QueryParams)`를 호출하면 다음과 같은 요청이 발생한다.
+
+<br />
+
+```shell
+[JsonPlaceHolderClient#getUsersWithQueryParams] ---> GET https://jsonplaceholder.typicode.com/users?param1=param1&param2=param2&customHeader=shirohoo HTTP/1.1
+```
+
+<br />
+
 ## 예외 핸들링(디코더)
 
 ---
@@ -398,49 +448,65 @@ public class CustomErrorDecoder implements ErrorDecoder {
 
 클라이언트를 DI하고 메소드를 호출하면 된다.
 
+본 예제에서는 그냥 인터페이스상태로 사용했지만, 별도의 래퍼 클래스를 만들어 사용하면 효과가 더 좋다.
+
 <br />
 
 ```java
 @SpringBootTest
 class JsonPlaceHolderClientTest {
-    @Autowired
-    private JsonPlaceHolderClient client;
+  @Autowired
+  JsonPlaceHolderClient client;
 
-    @Test
-    void getPosts() throws Exception {
-        List<Post> posts = client.getPosts();
-        assertThat(posts.size()).isEqualTo(100);
-    }
+  @Test
+  void getPosts() throws Exception {
+    List<Post> posts = client.getPosts();
+    assertThat(posts.size()).isEqualTo(100);
+  }
 
-    @Test
-    void getComments() throws Exception {
-        List<Comment> posts = client.getComment();
-        assertThat(posts.size()).isEqualTo(500);
-    }
+  @Test
+  void getComments() throws Exception {
+    List<Comment> posts = client.getComment();
+    assertThat(posts.size()).isEqualTo(500);
+  }
 
-    @Test
-    void getAlbums() throws Exception {
-        List<Album> posts = client.getAlbums();
-        assertThat(posts.size()).isEqualTo(100);
-    }
+  @Test
+  void getAlbums() throws Exception {
+    List<Album> posts = client.getAlbums();
+    assertThat(posts.size()).isEqualTo(100);
+  }
 
-    @Test
-    void getPhotos() throws Exception {
-        List<Photo> posts = client.getPhotos();
-        assertThat(posts.size()).isEqualTo(5000);
-    }
+  @Test
+  void getPhotos() throws Exception {
+    List<Photo> posts = client.getPhotos();
+    assertThat(posts.size()).isEqualTo(5000);
+  }
 
-    @Test
-    void getTodos() throws Exception {
-        List<Todo> posts = client.getTodos();
-        assertThat(posts.size()).isEqualTo(200);
-    }
+  @Test
+  void getTodos() throws Exception {
+    List<Todo> posts = client.getTodos();
+    assertThat(posts.size()).isEqualTo(200);
+  }
 
-    @Test
-    void getUsers() throws Exception {
-        List<User> posts = client.getUsers();
-        assertThat(posts.size()).isEqualTo(10);
-    }
+  @Test
+  void getUsers() throws Exception {
+    List<User> posts = client.getUsers();
+    assertThat(posts.size()).isEqualTo(10);
+  }
+
+  @Test
+  void getUsersWithQueryParams() throws Exception {
+    // ...given
+    QueryParams queryParams = new QueryParams();
+    queryParams.setParam1("param1");
+    queryParams.setParam2("param2");
+
+    // ...when
+    List<User> posts = client.getUsersWithQueryParams(queryParams);
+
+    // ...then
+    assertThat(posts.size()).isEqualTo(10);
+  }
 }
 ```
 

@@ -17,9 +17,9 @@ related_posts:
 <br />
 
 - [📦 GitHub - shirohoo/spring-cloud-openfeign](https://github.com/shirohoo/spring-cloud-examples/tree/main/spring-cloud-openfeign){:target="_blank"}
-- [📦 Spring Cloud OpenFeign Docs](https://docs.spring.io/spring-cloud-openfeign/docs/current/reference/html/)
-- [📦 우아한 feign 적용기](https://techblog.woowahan.com/2630/)
-- [📦 feign 좀더 나아가기](https://techblog.woowahan.com/2657/)
+- [📦 Spring Cloud OpenFeign Docs](https://docs.spring.io/spring-cloud-openfeign/docs/current/reference/html/){:target="_blank"}
+- [📦 우아한 feign 적용기](https://techblog.woowahan.com/2630/){:target="_blank"}
+- [📦 feign 좀더 나아가기](https://techblog.woowahan.com/2657/){:target="_blank"}
 
 <br />
 
@@ -133,7 +133,8 @@ public class OpenFeignConfig {
     @Bean
     public RequestInterceptor requestInterceptor() {
         return requestTemplate -> {
-             requestTemplate.query("customHeader", "shirohoo");
+             requestTemplate.header("commonHeader", "shirohoo"); // 모든 페인 클라이언트에 적용될 헤더
+             requestTemplate.query("commonQueryParam", "shirohoo"); // 모든 페인 클라이언트에 적용될 쿼리스트링
         };
     }
 }
@@ -211,13 +212,16 @@ HTTP 메시지에 별도의 헤더를 추가하겠다면 Spring MVC Controller�
 
 그럴때 하기 설정을 추가하면 된다.
 
+헤더 뿐만아니고 쿼리스트링, 바디등도 설정할 수 있으니 참고하자 !
+
 <br />
 
 ```java
 @Bean
 public RequestInterceptor requestInterceptor() {
     return requestTemplate -> {
-         requestTemplate.query("customHeader", "shirohoo");
+        requestTemplate.header("commonHeader", "shirohoo"); // 모든 페인 클라이언트에 적용될 헤더
+        requestTemplate.query("commonQueryParam", "shirohoo"); // 모든 페인 클라이언트에 적용될 쿼리스트링
     };
 }
 ```

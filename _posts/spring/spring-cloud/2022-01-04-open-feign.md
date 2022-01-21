@@ -2,7 +2,7 @@
 layout: post
 category:
   - spring
-  - spring-webflux
+  - spring-cloud
 title: 오픈페인(OpenFeign)
 description: |
   혹은 `페인 클라이언트(Feign Client)`로 불리는 프로젝트

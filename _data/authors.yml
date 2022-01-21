@@ -8,11 +8,7 @@ author1:
   # Used at the bottom of each page and at the top of the `about` layout
   # Markdown enabled, can use multiple paragraphs (enabled by `|`)
   about:             |
-    I'm working as a server developer. 
-
-    started programming a bit late in my life 😂.
-
-    but, I'll put in the effort learn what I need. 🚀
+    ![chat_svg](https://github.com/shirohoo/shirohoo/raw/main/chat.svg)
 
   # This photo will be used in the about section
   picture:
@@ -26,10 +22,11 @@ author1:
   # Comment/uncommet to show/hide
   # Rearrange to change the order in which they appear
   social:
-#    twitter:         <username>
-    github:            shirohoo
-    email:             mailto:shirohoo4102@gmail.com
-    rss:               https://shirohoo.github.io/feed.xml
+#    twitter:          <username>
+    github:              shirohoo
+    email:               mailto:shirohoo4102@gmail.com
+    rss:                 https://shirohoo.github.io/feed.xml
+    devtools:            https://devtools.life
     # facebook:        <username>
     # google:          <number>
     # vk:              <username>
@@ -40,7 +37,7 @@ author1:
     # soundcloud:      <username>
     # lastfm:          <username>
     # instagram:       <username>
-    # flickr:          <string@string>
+    # flickr:           <string@string>
     # 500px:           <username>
     # dribbble:        <username>
     # behance:         <username>
@@ -53,7 +50,7 @@ author1:
     # pinterest:       <username>
     # foursquare:      <number>
     # yelp:            <string>
-    # stackoverflow:   <number/username>
+    # stackoverflow:    <number/username>
     # npm:             <username>
     # hackernews:      <username>
     # trello:          <firstnamelastname>

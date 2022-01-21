@@ -110,6 +110,22 @@ published: true
 
 ---
 
+## [🖥 Devtools](https://devtools.life/){:target="_blank"}
+
+---
+
+신입 개발자로 취업한지 1개월차에 개인적으로 유용하게 사용하기 위해서 개발한 웹 사이트입니다.
+
+출퇴근길에 사용하기 위해 개발하여 모바일 환경에 특화돼있습니다.
+
+서비스 오픈일은 2021-03-05 이며, 기능은 총 세가지가 구현돼있습니다.
+
+1. IT 기업들의 기술 블로그 RSS 구독
+2. Spring 공식문서 같은 것들을 파싱하여 만든 영단어 사전 (opennlp 사용)
+3. 퀄리티 좋은 기술 포스팅 북마크 (관리자만 권한 부여)
+
+<br />
+
 ## [🖥 전문 매퍼](https://github.com/shirohoo/full-text-mapper){:target="_blank"}
 
 ---
@@ -133,15 +149,5 @@ published: true
 [JSch](https://github.com/is/jsch){:target="_blank"}를 래핑하여 <u>SFTP 프로토콜로 아주 쉽고 간단하게 파일 CRUD를 할 수 있는 모듈</u>을 개발하였습니다.
 
 자세한 사항은 [README](https://github.com/shirohoo/sftp-client/blob/master/README.md){:target="_blank"}를 참고 바랍니다.
-
-<br />
-
-## [🖥 개발사전](http://15.165.178.142/#/){:target="_blank"}
-
----
-
-자기계발에 유용하게 사용하기 위해서 개발한 웹 사이트입니다.
-
-주로 출퇴근길에 최대한 간단하게 사용하기 위해 개발하였으며, 모바일 환경에 특화돼있습니다.
 
 <br />

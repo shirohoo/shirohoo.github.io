@@ -87,7 +87,7 @@ published: true
 
 이러한 방식을 `동기+블로킹 방식`이라고 볼 수 있다.
 
-이러한 방식을 사용할때 위 문제를 해결하기 위해 스레드를 이빠이 만들어놓고(_**톰캣의 기본 스레드는 200개다**_) `시분할(Time Slicing)` 처리를 한다.
+이러한 방식을 사용할때 위 문제를 해결하기 위해 스레드를 이빠이 만들어놓고(_**톰캣의 기본 스레드는 200개다**_) `시분할(Time Sharing)` 처리를 한다.
 
 이에 대한 설명은 아래 그림을 보자.
 
@@ -135,11 +135,11 @@ published: true
 
 <br />
 
-![image](https://user-images.githubusercontent.com/71188307/147463597-b4271b87-8ea7-4c63-95d1-669de7ac1d50.png)
+![image](https://user-images.githubusercontent.com/71188307/152805576-1cefe8c4-779f-41c1-98b2-2ba210e8ad96.png)
 
 <br />
 
-![image](https://user-images.githubusercontent.com/71188307/147463758-0af6d74a-eef2-4b46-9ed0-6aec4815dd6d.png)
+![image](https://user-images.githubusercontent.com/71188307/152805450-6d9df712-7740-4a9f-b45f-8b2916116ab0.png)
 
 <br />
 
@@ -147,7 +147,7 @@ published: true
 
 <br />
 
-![image](https://user-images.githubusercontent.com/71188307/147463965-7847d7e5-1e64-4fe7-9e07-8102287437b4.png)
+![image](https://user-images.githubusercontent.com/71188307/152805925-61c9f5fd-a8c1-4acd-b720-7b245b58535d.png)
 
 <br />
 

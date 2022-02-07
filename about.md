@@ -18,8 +18,6 @@ published: true
 
 - Major : <u>Java Backend Developer</u>
 
-- MBTI : INTJ-T
-
 <br />
 
 # 📖 History

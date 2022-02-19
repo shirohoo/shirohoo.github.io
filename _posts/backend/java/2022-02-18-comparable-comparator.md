@@ -322,7 +322,66 @@ public record Student(Integer id) implements Comparable<Student>{
 
 <br />
 
-마지막으로 본문과는 상관없는 여담이지만, 자바의 정렬은 정렬 메서드에 넘어간 배열의 사이즈에 따라 다른 정렬 알고리즘이 선택되어 사용됩니다.
+자바의 자료형들은 전부 내부적으로 `Comparator` 혹은 `Comparable`를 구현해두었습니다.
+
+자주 사용하는 `String(문자열)`의 비교 코드를 한번 보죠.
+
+내부적으로 메서드 추출 리팩토링이 많이 되어있지만, 중요한 부분은 다음 코드입니다.
+
+<br />
+
+```java
+public static int compareToCI(byte[] value, byte[] other) {
+    int len1 = value.length;
+    int len2 = other.length;
+    int lim = Math.min(len1, len2);
+    for (int k = 0; k < lim; k++) {
+        if (value[k] != other[k]) {
+            char c1 = (char) CharacterDataLatin1.instance.toUpperCase(getChar(value, k));
+            char c2 = (char) CharacterDataLatin1.instance.toUpperCase(getChar(other, k));
+            if (c1 != c2) {
+                c1 = Character.toLowerCase(c1);
+                c2 = Character.toLowerCase(c2);
+                if (c1 != c2) {
+                    return c1 - c2;
+                }
+            }
+        }
+    }
+    return len1 - len2;
+}
+```
+
+<br />
+
+문자열 두개를 입력받아, 두 문자열의 길이를 먼저 비교합니다.
+
+문자열 `abcd`와 `abc`가 입력됐다고 가정합시다.
+
+`Math.min` 메서드를 통해 두 문자열의 길이 중 작은 값을 얻어낸 후 얻어낸 길이만큼만 for문을 돌며 대문자로 변경 후 비교 -> 소문자로 변경 후 비교를 하고 있습니다.
+
+그리고 사전순으로 앞서는 값을 반환하도록 하고 있네요.
+
+그러면 `abcd`와 `abc`가 입력됐을 경우 `abc`가 `abcd`보다 사전순으로 더 앞서므로 `abc`, `abcd`순으로 정렬이 될 것임을 짐작해볼 수 있습니다. 
+
+<br />
+
+```java
+public class StringSortTest {
+    @Test
+    void sort() {
+        String[] strings = {"abcd", "abc"};
+        Arrays.sort(strings);
+        assertThat(Arrays.asList(strings).toString()).isEqualTo("[abc, abcd]"); // 테스트 통과
+    }
+}
+```
+
+<br />
+
+마지막으로 이 내용은 본문과는 크게 상관없는 내용이지만, 자바의 정렬은 정렬 메서드에 넘어간 배열의 사이즈에 따라 다른 정렬 알고리즘이 선택되어 사용됩니다.
+
+참고해두시면 도움이 될 것 같습니다.
 
 <br />
 

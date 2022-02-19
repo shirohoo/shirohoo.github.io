@@ -10,7 +10,7 @@ image: /assets/img/cs/cs-logo.jpg
 accent_image:
     background: url('/assets/img/cs/cs-logo.jpg') center/cover
 related_posts:
-  - _posts/cs/operating-system/2022-02-13-process-thread.md
+  - _posts/cs/operating-system/2022-02-16-process-management.md
 published: true
 ---
 

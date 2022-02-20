@@ -16,7 +16,7 @@ published: true
 
 - Birth : 1993.12
 
-- Major : <u>Java Backend Developer</u>
+- Major : <u>Software engineer(Java Backend Developer)</u>
 
 <br />
 
@@ -56,16 +56,14 @@ published: true
 
 ---
 
-- OOP
-- Test code
-- <u>APM</u> 을 활용한 <u>서버 모니터링</u>, <u>성능 분석</u> 및 <u>개선</u>
-- <u>Hibernate / Querydsl</u>을 사용한 <u>성능 최적화 경험</u>
-- <u>Spring Batch</u>
-- <u>Spring Security</u>
+- <u>OOP</u>
+- <u>Test code</u>
+- <u>APM</u> 을 활용한 <u>성능지표 모니터링</u>, <u>성능 분석</u> 및 <u>개선</u>
+- <u>Hibernate / Querydsl</u>을 사용한 <u>성능 최적화 경험(쿼리 튜닝)</u>
 - 인프라 운영
-    - Jenkins / Nginx를 이용한 <u>로드 밸런싱, 무중단 배포</u> 구축 및 운영
-    - Jenkins, Github Actions를 이용한 <u>CI/CD</u>
-    - Jenkins를 이용한 <u>배치 운영</u>
+    - Jenkins / Nginx를 이용한 로드 밸런싱, 무중단 배포 구축 및 운영
+    - Jenkins, Github Actions를 이용한 CI/CD
+    - Jenkins를 이용한 배치 운영
 
 <br />
 
@@ -77,26 +75,18 @@ published: true
 
 ---
 
-- <u>Java</u>, <u>Groovy</u>
-- <u>Spring Boot</u>, <u>Spring MVC</u>, <u>Spring Batch</u>, <u>Spring Security</u>, <u>Spring Data JPA</u>
-- <u>JPA(Hibernate)</u>, <u>Querydsl</u>
-- <u>Junit5</u>, <u>Mockito</u>
-- <u>Gradle</u>
-- <u>IntelliJ</u>
+- Java
+- Spring Boot, Spring MVC, Spring Batch, Spring Security, Spring Data JPA
+- JPA(Hibernate), Querydsl
+- Junit5, Mockito
+- Gradle
 
-## 🎨 FrontEnd
-
----
-
-- ES6, Jquery
-- <u>Vue.js</u>
-
-## 🕋 DevOps
+## 🕋 Infra
 
 ---
 
-- <u>Jenkins</u>
-- <u>Nginx</u>
+- Jenkins
+- Nginx
 - AWS
     - <u>EC2</u>
     - RDS

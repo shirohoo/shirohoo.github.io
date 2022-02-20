@@ -45,7 +45,7 @@ related_posts:
 
 기능이 여러가지 있지만, 이 중 가장 자주 사용하게 되는 기능은 `Translate`, `Translate and Replace` 입니다.
 
-저는 각각 `Alt + Shift + 2`와 `Alt + Shift + X`로 설정해주었습니다.
+저는 각각 `Alt + Shift + 2`와 `Ctrl + Shift + X`로 설정해주었습니다.
 
 젯브레인 툴은 워낙 단축키가 많아, 기존의 단축키와 중복되지 않으면서도 편한 단축키를 찾는게 생각보다 어려울 수 있습니다.
 
@@ -77,7 +77,7 @@ related_posts:
 
 <br />
 
-하기 이미지는 `Translate and Replace`에 등록한 단축키인 `Alt + Shift + X`를 입력했을 때의 모습입니다.
+하기 이미지는 `Translate and Replace`에 등록한 단축키인 `Ctrl + Shift + X`를 입력했을 때의 모습입니다.
 
 단어를 번역하고 치환해줍니다.
 

@@ -16,7 +16,7 @@ published: true
 
 - Birth : 1993.12
 
-- Major : <u>Software engineer(Java Backend Developer)</u>
+- Major : <u>Java Software Engineer</u>
 
 <br />
 

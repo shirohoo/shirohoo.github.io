@@ -3,9 +3,9 @@ layout: post
 category:
   - backend
   - test
-title: 컨트롤러 테스트를 최적화하기 위한 고민
+title: 컨트롤러 테스트를 최적화해보기
 description: |
-  컨트롤러 테스트를 더욱 깔끔하게, 더욱 빠르게 작성해보기
+  `Spring` 환경에서 컨트롤러 테스트를 더욱 깔끔한 구조로, 더욱 빠르게 실행되게 작성해보기
 image: /assets/img/backend/test-logo.png
 published: true
 ---

@@ -253,10 +253,10 @@ class EmployeeControllerTests extends RestDocsSpecification {
 @ExtendWith({RestDocumentationExtension.class, ObjectMapperResolver.class})
 public abstract class RestDocsSpecification {
     protected ObjectMapper objectMapper;
-    protected RestDocumentationContextProvider contextProvider;
+    private RestDocumentationContextProvider contextProvider;
 
     @BeforeEach
-    void setUp(ObjectMapper objectMapper, RestDocumentationContextProvider contextProvider) {
+    private void setUp(ObjectMapper objectMapper, RestDocumentationContextProvider contextProvider) {
         this.objectMapper = objectMapper;
         this.contextProvider = contextProvider;
     }

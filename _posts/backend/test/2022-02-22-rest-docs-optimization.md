@@ -244,7 +244,7 @@ class EmployeeControllerTests extends RestDocsSpecification {
 
 <br />
 
-`MockBean`을 사용했기 때문에 필연적으로 `Mockito`를 사용하게 되며, 따라서 테스트 코드 상단부에 `Mocking`을 하기 위한 코드들이 상당수 추가됩니다.
+`@MockBean`을 사용했기 때문에 필연적으로 `Mockito`를 사용하게 되며, 따라서 테스트 코드 상단부에 `Mocking`을 하기 위한 코드들이 상당수 추가됩니다.
 
 그리고 이러한 코드들은 테스트 코드가 무엇을 검증하고 있는지 눈에 잘 안들어오게 방해합니다.
 
@@ -371,13 +371,13 @@ class EmployeeControllerTests extends RestDocsSpecification {
 
 <br />
 
-![image](https://user-images.githubusercontent.com/71188307/155138530-dd957f9f-396f-4909-a5d9-2ea2041b97b1.png)
+![image](https://user-images.githubusercontent.com/71188307/155261602-f8bbb7fa-82d4-4f1f-9d8f-f203ef703ac8.png)
 
 <br />
 
 `v1`이 기존의 방식이며, `v2`는 `standaloneSetup`을 사용한 개선된 방식입니다.
 
-`v2`의 경우 실제로 스프링 컨텍스트를 로딩하는 과정 자체가 스킵되기 때문에 실 체감상으로도 테스트 속도가 매우 빨라짐을 느낄 수 있으며(과장 조금 보태 버튼 누르자마자 완료되는 수준으로 POJO 테스트보다 약간 느립니다), 테스트 리포트 상으로도 `약 10배`에 가까운 속도차이가 발생하고 있음을 확인 할 수 있습니다.
+`v2`의 경우 실제로 스프링 컨텍스트를 로딩하는 과정 자체가 스킵되기 때문에 실 체감상으로도 테스트 속도가 매우 빨라짐을 느낄 수 있으며(과장 조금 보태 버튼 누르자마자 완료되는 수준으로 POJO로 작성된 유닛 테스트보다 약간 느린 정도 입니다), 테스트 리포트 상으로도 `약 10배`에 가까운 속도차이가 발생하고 있음을 확인 할 수 있습니다.
 
 <br />
 

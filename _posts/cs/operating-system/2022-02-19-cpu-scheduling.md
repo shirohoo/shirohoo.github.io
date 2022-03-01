@@ -11,6 +11,7 @@ accent_image:
     background: url('/assets/img/cs/cs-logo.jpg') center/cover
 related_posts:
   - _posts/cs/operating-system/2022-02-16-process-management.md
+  - _posts/cs/operating-system/2022-03-01-process-synchronization.md
 published: true
 ---
 

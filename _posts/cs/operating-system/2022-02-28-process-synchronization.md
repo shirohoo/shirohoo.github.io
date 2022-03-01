@@ -5,12 +5,13 @@ category:
   - operating-system
 title: 운영체제(Operating System) 5강
 description: |
-    Process Synchronization
+    반효경 교수님 - Process Synchronization
 image: /assets/img/cs/cs-logo.jpg
 accent_image:
     background: url('/assets/img/cs/cs-logo.jpg') center/cover
 related_posts:
   - _posts/cs/operating-system/2022-02-19-cpu-scheduling.md
+  - _posts/cs/operating-system/2022-03-01-deadlock.md
 published: true
 ---
 

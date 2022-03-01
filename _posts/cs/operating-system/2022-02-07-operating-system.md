@@ -5,7 +5,7 @@ category:
   - operating-system
 title: 운영체제(Operating System) 1강
 description: |
-    System Structure & Program Execution
+    반효경 교수님 - System Structure & Program Execution
 image: /assets/img/cs/cs-logo.jpg
 accent_image:
     background: url('/assets/img/cs/cs-logo.jpg') center/cover

@@ -5,7 +5,7 @@ category:
   - operating-system
 title: 운영체제(Operating System) 4강
 description: |
-    CPU Scheduling
+    반효경 교수님 - CPU Scheduling
 image: /assets/img/cs/cs-logo.jpg
 accent_image:
     background: url('/assets/img/cs/cs-logo.jpg') center/cover

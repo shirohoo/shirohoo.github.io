@@ -5,7 +5,7 @@ category:
   - operating-system
 title: 운영체제(Operating System) 2강
 description: |
-    Process & Thread
+    반효경 교수님 - Process & Thread
 image: /assets/img/cs/cs-logo.jpg
 accent_image:
     background: url('/assets/img/cs/cs-logo.jpg') center/cover

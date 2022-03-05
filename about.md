@@ -92,6 +92,18 @@ published: true
     - RDS
     - Route 53
 
+<br />
+
+# 🖼 OSS(Open Source Software)
+
+> 오픈소스 활동 이력
+
+---
+
+- [📜 spring-projects/spring-security - Consider adding factory method to UsernamePasswordAuthenticationToken](https://github.com/spring-projects/spring-security/issues/10790){:target="_blank"}
+
+<br />
+
 # 📦 Projects
 
 > 여가 시간에 직접 개발하거나, 참여했던 프로젝트들
@@ -102,15 +114,15 @@ published: true
 
 ---
 
-신입 개발자로 취업한지 1개월차에 개인적으로 유용하게 사용하기 위해서 개발한 웹 사이트입니다.
+경력 1개월차 개발.
 
-출퇴근길에 사용하기 위해 개발하여 모바일 환경에 특화돼있습니다.
+개인적으로 출퇴근길에 사용하기 위해 개발하였고, 모바일 환경에 특화돼있습니다.
 
-서비스 오픈일은 2021-03-05 이며, 기능은 총 세가지가 구현돼있습니다.
+최초 배포일은 2021-03-05 이며, 기능은 총 세가지가 구현돼있습니다.
 
-1. IT 기업들의 기술 블로그 RSS 구독
-2. Spring 공식문서 같은 것들을 파싱하여 만든 영단어 사전 (opennlp 사용)
-3. 퀄리티 좋은 기술 포스팅 북마크 (관리자만 권한 부여)
+1. 테크 기업들의 기술 블로그 구독
+2. 개발 공식문서들을 파싱하여 만든 영단어 사전 (feat.opennlp)
+3. 퀄리티 좋은 기술 포스팅 북마크
 
 <br />
 

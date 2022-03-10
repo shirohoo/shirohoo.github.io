@@ -27,6 +27,8 @@ published: true
 - [운영체제 - 반효경 교수님](http://www.kocw.or.kr/home/cview.do?mty=p&kemId=1046323)
   - Memory Management 1
   - Memory Management 2
+  - Memory Management 3
+  - Memory Management 4
 
 <br />
 

@@ -16,7 +16,7 @@ published: true
 
 - Birth : 1993.12
 
-- Major : <u>Java Software Engineer</u>
+- Major : <u>Software Engineer</u>
 
 <br />
 
@@ -24,11 +24,11 @@ published: true
 
 ---
 
-- 2012 ~ 2020.08 : 타 업종 근무
+- 2012 ~ 2020.08 : 타 업종 근무 (프로그래밍 무관)
 
-- <u>2020.08</u> ~ : <u>개발 독학 시작</u>
+- <u>2020.08</u> ~ : <u>프로그래밍 독학 시작</u>
 
-- 2021.02 ~ : 자바 백엔드 개발자로 근무 중
+- 2021.02 ~ : Java Backend Developer 
 
 <br />
 

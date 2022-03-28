@@ -3,6 +3,7 @@ layout: about
 title: <u>About Me</u>
 description: |
   A brief introduction to my development experience and projects.
+  <img src="https://ghchart.rshah.org/219138/shirohoo"/>
 published: true
 ---
 
@@ -20,7 +21,7 @@ published: true
 
 <br />
 
-# 📖 History
+# 📖 History동
 
 ---
 

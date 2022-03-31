@@ -21,7 +21,7 @@ published: true
 
 <br />
 
-# 📖 History동
+# 📖 History
 
 ---
 
@@ -123,7 +123,7 @@ published: true
 
 1. 테크 기업들의 기술 블로그 구독
 2. 개발 공식문서들을 파싱하여 만든 영단어 사전 (feat.opennlp)
-3. 퀄리티 좋은 기술 포스팅 북마크
+3. 고퀄리티 기술 포스팅 북마크
 
 <br />
 

@@ -72,7 +72,7 @@ class DemoApplicationTests {
 
     @Test
     void contextLoads() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/v1/api/members/"))
+        mockMvc.perform(get("/v1/api/members/"))
             .andDo(print());
     }
 }

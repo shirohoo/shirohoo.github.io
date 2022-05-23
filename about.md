@@ -14,14 +14,13 @@ published: true
 > 업무에 사용 했던 기술들
 
 - Java
+- Junit5
 - Spring
   - Boot
   - MVC
   - Batch
   - Security
   - Data JPA
-- Junit5
-- Mockito
 
 <br />
 

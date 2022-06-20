@@ -9,28 +9,47 @@ published: true
 
 <br />
 
-# Skills
-
-> 업무에 사용 했던 기술들
-
-- Java
-- Junit5
-- Spring
-  - Boot
-  - MVC
-  - Batch
-  - Security
-  - Data JPA
-
-<br />
-
 # Experience
 
 - 2012.11 ~ 2020.07 : 타 업종 근무 (프로그래밍 무관)
 
 - 2020.08 ~ 2021.01 : 프로그래밍 독학
 
-- 2021.02 ~ : 자바 소프트웨어 엔지니어로 근무 중 
+- 2021.02 ~ : 자바 소프트웨어 엔지니어로 근무
+
+<br />
+
+# Open Source
+
+> 오픈소스 활동 이력
+
+- [📜 spring-projects/spring-security - Consider adding factory method to UsernamePasswordAuthenticationToken](https://github.com/spring-projects/spring-security/issues/10790){:target="_blank"}
+
+<br />
+
+# Skills
+
+> 업무에 사용 했던 기술들
+
+- Java
+- Gradle
+- Junit5
+- Spring
+  - Boot
+  - MVC
+  - Batch
+  - Security
+  - Data-blahblah
+
+<br />
+
+# Special Skills
+
+> 실무 레벨의 경험, 역량
+
+- Java
+- OOP
+- TDD
 
 <br />
 
@@ -45,23 +64,5 @@ published: true
 # License
 
 - 2021.06 : 정보처리기사 취득
-
-<br />
-
-# Special Skills
-
-> 실무 레벨의 경험, 역량
-
-- Java
-- OOP
-- TDD
-
-<br />
-
-# Open Source
-
-> 오픈소스 활동 이력
-
-- [📜 spring-projects/spring-security - Consider adding factory method to UsernamePasswordAuthenticationToken](https://github.com/spring-projects/spring-security/issues/10790){:target="_blank"}
 
 <br />

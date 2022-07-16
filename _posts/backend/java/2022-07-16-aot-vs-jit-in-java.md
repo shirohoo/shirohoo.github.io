@@ -53,14 +53,14 @@ JIT(Just in Time Compilation) 또는 AOT(Ahead of Time Compilation)를 사용하
 
 **C1 컴파일러**는 일부 값 번호 매기기, 인라이닝 및 클래스 분석을 수행하는 가볍고 빠르게 최적화된 바이트 코드 컴파일러입니다.
 
-C1 컴파일러는 간단한 CFG 지향적인 [📜 SSA](https://en.wikipedia.org/wiki/Static_single-assignment_form){:target="_blank"}의 고수준의 [📜 중간 표현(IR)](https://en.wikipedia.org/wiki/Intermediate_representation){:target="_blank"}, 기계 지향적인 저수준의 중간 표현, 선형 스캔 레지스터 할당 및 
+C1 컴파일러는 간단한 CFG 지향적인 [📜 SSA](https://en.wikipedia.org/wiki/Static_single-assignment_form){:target="_blank"}와 고수준의 [📜 중간 표현(IR)](https://en.wikipedia.org/wiki/Intermediate_representation){:target="_blank"}, 기계 지향적인 저수준의 IR, 선형 스캔 레지스터 할당 및 
 템플릿 스타일 코드 생성기를 사용합니다.
 
 ### C2 컴파일러
 
 ---
 
-**C2 컴파일러**는 [📜 노드의 바다](https://darksi.de/d.sea-of-nodes/){:target="_blank"} SSA와 이상적인 중간 표현을 사용하는 고도로 최적화된 바이트 코드 컴파일러이며, 중간 표현은 동일한 종류의 기계별 중간표현으로 낮아집니다. C2 컴파일러에는 그래프 색칠 레지스터 할당자도 있습니다. 색상은 로컬, 글로벌, 인수 레지스터와 스택을 포함한 기계의 상태입니다. 또한, C2 컴파일러의 최적화에는 전역 값 번호 매기기, 
+**C2 컴파일러**는 [📜 노드의 바다](https://darksi.de/d.sea-of-nodes/){:target="_blank"} SSA와 이상적인 IR을 사용하는 고도로 최적화된 바이트 코드 컴파일러이며, IR은 동일한 종류의 기계별 IR로 낮아집니다. C2 컴파일러에는 그래프 색칠 레지스터 할당자도 있습니다. 색상은 로컬, 글로벌, 인수 레지스터와 스택을 포함한 기계의 상태입니다. 또한, C2 컴파일러의 최적화에는 전역 값 번호 매기기, 
 조건부 상수 유형 전파, 상수 접기, 전역 코드 동작, 대수적 ID, 메서드 인라이닝(적극적인, 낙관적인, and/or multi-morphic), 본질적인 대체, 루프 변환(전환 해제, 루프 풀기), 배열 범위 검사 제거 및 기타 등등이 포함됩니다.
 
 <br />

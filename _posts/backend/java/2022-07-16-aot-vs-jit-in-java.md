@@ -181,11 +181,11 @@ JIT 컴파일러는 프로그램을 크로스 플랫폼으로 만들어줍니다
 - 더 빠르고 효율적인 배포를 위해 경량 컨테이너 이미지로 패키징할 수 있습니다.
 - 공격 표면이 감소됩니다.
 
-### AOT 제약 사항: Close-World
+### AOT 제약 사항: Closed-World Assumption (CWA)
 
 ---
 
-AOT 컴파일의 포인트 분석이 올바르게 작동하려면 모든 바이트 코드를 보아야 할 필요가 있습니다. 이러한 제약은 Close-World 한정으로 알려져 있습니다. 즉, GraalVM의 네이티브 이미지 도구가 독립 실행 파일을 빌드할 때 런타임에 호출할 수 있는 응용 프로그램의 모든 바이트 코드와 종속성을 알아야 함을 의미합니다.
+AOT 컴파일의 포인트 분석이 올바르게 작동하려면 모든 바이트 코드를 보아야 할 필요가 있습니다. 이러한 제약은 CWA 한정으로 알려져 있습니다. 즉, GraalVM의 네이티브 이미지 도구가 독립 실행 파일을 빌드할 때 런타임에 호출할 수 있는 응용 프로그램의 모든 바이트 코드와 종속성을 알아야 함을 의미합니다.
 
 따라서 JNI(Java Native Interface), Java Reflection, 동적 프록시 개체(java.lang.reflect.Proxy) 또는 클래스 경로 리소스(Class.getResource)와 같은 동적 언어 기능이 지원되지 않습니다.
 
@@ -197,7 +197,7 @@ AOT 컴파일의 포인트 분석이 올바르게 작동하려면 모든 바이�
 
 이러한 한계를 극복하기 위해 GraalVM은 일반 JVM에서 실행되는 모든 동적 언어 기능을 추적하는 [📜 에이전트](https://www.graalvm.org/22.0/reference-manual/native-image/Agent/){:target="_blank"}를 제공합니다. 실행하는 동안 에이전트는 JVM과 상호작용하며 클래스, 메서드, 필드, 리소스를 조회하거나 프록시 액세스를 요청하는 모든 호출을 가로챕니다. 그런 다음 에이전트 는 지정된 출력 디렉토리에 `jni-config.json`, `reflect-config.json`, `proxy-config.json` 및 `resource-config` 파일을 생성합니다. 이렇게 생성된 파일들은 가로채는 모든 동적 액세스를 포함하는 JSON 형식의 독립 실행형 구성 파일입니다. 이와 같은 명세 파일들은 네이티브 이미지 도구로 전달되며 네이티브 이미지 빌드 과정에서 사용된 클래스가 제거되지 않습니다.
 
-close work assumption이 다양한 코드 주입 가능성을 제거하므로 보안에 좋다는 점은 언급할만한 가치가 있습니다(예로 2021년 웹 생태계에 큰 충격을 준 Log4j 취약점은 Java의 동적 클래스 로딩 메커니즘의 악용으로 인해 가능했습니다). 반면에 포인트 분석은 도달 가능한 모든 바이트 코드를 분석해야 하기 때문에 AOT 컴파일을 JIT보다 느리게 만듭니다. 즉, 이는 값비싼 계산 방식입니다.
+CWA가 다양한 코드 주입 가능성을 제거하므로 보안에 좋다는 점은 언급할만한 가치가 있습니다(예로 2021년 웹 생태계에 큰 충격을 준 Log4j 취약점은 Java의 동적 클래스 로딩 메커니즘의 악용으로 인해 가능했습니다). 반면에 포인트 분석은 도달 가능한 모든 바이트 코드를 분석해야 하기 때문에 AOT 컴파일을 JIT보다 느리게 만듭니다. 즉, 이는 값비싼 계산 방식입니다.
 
 ## GraalVM과 AOT 컴파일은 Java의 미래인가요?
 
@@ -222,7 +222,7 @@ JVM 기반 네이티브 애플리케이션을 구축하는 일반적인 프로�
 
 <br />
 
-GraalVM을 사용한 AOT는 Java, Scala, Kotlin과 같은 JVM 기반 언어의 미래인 것 같습니다. 그러나 네이티브 이미지 생성은 애플리케이션의 바이트 코드와 모든 종속성을 분석해야 하기 때문에 종속성 중 하나 이상이 일부 동적인 기능에 의존하고 있는 경우 Close-World 제약조건을 위반할 위험이 있습니다. 커뮤니티는 이러한 위험성을 고려한 새 버전의 라이브러리를 만들고 있지만, 가장 널리 사용되는 Java 라이브러리에 대한 지원은 아직도 충분하지 않습니다. 
+GraalVM을 사용한 AOT는 Java, Scala, Kotlin과 같은 JVM 기반 언어의 미래인 것 같습니다. 그러나 네이티브 이미지 생성은 애플리케이션의 바이트 코드와 모든 종속성을 분석해야 하기 때문에 종속성 중 하나 이상이 일부 동적인 기능에 의존하고 있는 경우 CWA를 위반할 위험이 있습니다. 커뮤니티는 이러한 위험성을 고려한 새 버전의 라이브러리를 만들고 있지만, 가장 널리 사용되는 Java 라이브러리에 대한 지원은 아직도 충분하지 않습니다. 
 
 따라서 이 기술이 대규모로 채택되기까지는 아직 시간이 더 필요합니다.
 
@@ -239,7 +239,7 @@ AOT 또는 JIT 접근 방식을 사용하여 JVM 바이트 코드를 기계어�
 
 각 방식이 서로 다른 상황에 적합하기 때문에 둘 중 하나가 다른 방식보다 좋다고 말하는 것은 잘못된 것입니다. 
 
-GraalVM을 사용하면 AOT 컴파일로 고성능 애플리케이션을 구축할 수 있으므로 시작 시간이 단축되고 성능이 크게 향상됩니다. 이러한 이점은 Close-World 제약조건(Java 동적 언어 기능은 허용되지 않음)을 준수하는 대신 얻어집니다. 
+GraalVM을 사용하면 AOT 컴파일로 고성능 애플리케이션을 구축할 수 있으므로 시작 시간이 단축되고 성능이 크게 향상됩니다. 이러한 이점은 CWA를 준수하는 대신 얻어집니다. 
 
 반대로 개발자는 여전히 Hotspot VM에서 표준 JIT 컴파일러를 사용하여 런타임에 기계어 생성을 지원하는 동적 언어 기능을 사용할 수 있습니다.
 
@@ -263,5 +263,7 @@ GraalVM을 사용하면 AOT 컴파일로 고성능 애플리케이션을 구축�
 - [📜 Static Single Assignment Form](https://en.wikipedia.org/wiki/Static_single-assignment_form){:target="_blank"}
 - [📜 HotSpot Glossary of Terms](https://openjdk.org/groups/hotspot/docs/HotSpotGlossary.html){:target="_blank"}
 - [📜 Sea of Nodes](https://darksi.de/d.sea-of-nodes/){:target="_blank"}
+- [📜 https://en.wikipedia.org/wiki/Closed-world_assumption](https://en.wikipedia.org/wiki/Closed-world_assumption){:target="_blank"}
+- [📜 Closed World Assumption (CWA; 닫힌 세계 가정)](https://redcarrot.tistory.com/52){:target="_blank"}
 
 <br />

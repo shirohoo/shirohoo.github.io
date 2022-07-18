@@ -83,12 +83,12 @@ Java 프로그램을 컴파일할 때(예: javac 명령줄 도구를 사용하�
 
 <br />
 
-JVM 바이트 코드를 특정 플랫폼에서 실행할 수 있는 기계어로 변환하기 위해 JVM은 런타임에 바이트 코드를 해석하고 어떤 플랫폼에서 프로그램이 실행되고 있는지를 파악합니다. 이 전략은 [📜 동적 컴파일](https://en.wikipedia.org/wiki/Dynamic_compilation){:target="_blank"}의 한 형태인 [📜 JIT 컴파일](https://en.wikipedia.org/wiki/Just-in-time_compilation){:target="_blank"}로 알려져 있으며, JVM의 기본 JIT 컴파일러는 일명 Hotspot으로 알려져 있습니다. 그리고, [📦OpenJDK](https://github.com/openjdk/jdk){:target="_blank"}는 Java로 작성된 이 JVM 바이트 코드 컴파일러의 무료 버전입니다. <u>(즉, OpenJDK는 무료 버전의 HotspotVM이며, HotspotVM은 JIT 컴파일 방식을 사용한다는 의미)</u>
+JVM 바이트 코드를 특정 플랫폼에서 실행할 수 있는 기계어로 변환하기 위해 JVM은 런타임에 바이트 코드를 해석하고 어떤 플랫폼에서 프로그램이 실행되고 있는지를 파악합니다. 이 전략은 [📜 동적 컴파일](https://en.wikipedia.org/wiki/Dynamic_compilation){:target="_blank"}의 한 형태인 [📜 JIT 컴파일](https://en.wikipedia.org/wiki/Just-in-time_compilation){:target="_blank"}로 알려져 있으며, JVM의 기본 JIT 컴파일러는 일명 Hotspot으로 알려져 있습니다. 그리고, [📦 OpenJDK](https://github.com/openjdk/jdk){:target="_blank"}는 Java로 작성된 이 JVM 바이트 코드 컴파일러의 무료 버전입니다. <u>(즉, OpenJDK는 무료 버전의 HotspotVM이며, HotspotVM은 JIT 컴파일 방식을 사용한다는 의미)</u>
 
 <br />
 
 
-> [📦Understanding How Graal Works - a Java JIT Compiler Written in Java](https://chrisseaton.com/truffleruby/jokerconf17/){:target="_blank"}
+> [📜 Understanding How Graal Works - a Java JIT Compiler Written in Java](https://chrisseaton.com/truffleruby/jokerconf17/){:target="_blank"}
 > 
 > HotspotVM의 JIT 컴파일러는 C++로 작성되어 있는데, 현 시점 이 코드는 유지보수성과 확장성이 매우 좋지 않으며, 따라서 안정성이 매우 떨어집니다. 우리는 이러한 문제를 해결하기 위해 JIT 컴파일러를 Java로 작성하기로 했습니다. C나 C++같은 시스템 언어를 사용하지 않고 JIT 컴파일러를 어떻게 작성할 수 있는지 궁금할 수 있습니다. 따지고 보면 JIT 컴파일러는 오직 JVM 바이트 코드를 입력받아 기계어로 변환 할 수만 있으면 됩니다. 당신은 JIT 컴파일러에 바이트 배열(byte[])을 입력하면 다시 바이트 배열이 출력되길 원할 것입니다. 이러한 작업들을 Java로 처리하기 위해 많은 복잡한 작업을 해야 하겠지만, 어쨋든 순수하게 Java로 JIT 컴파일러를 작성할 수 있습니다. 순수하게 Java로 JIT 컴파일러를 작성한다면 이 컴파일러는 실제로 시스템과 큰 관련이 없어지므로 C나 C++과 같은 시스템 언어에 의존하지 않을 수 있게 됩니다.
 
@@ -108,7 +108,7 @@ JIT 컴파일러는 Java 메서드를 미리 수천 번 실행하여 JVM 바이�
 컴파일의 한 형태입니다. 이것은 C와 같은 오래된 프로그래밍 언어의 코드가 정적으로 링크되고 컴파일되는 "구형" 방식입니다. 컴파일의 결과로 얻어진 기계어는 특정 플랫폼에 맞게 
 조정되며(단, 플랫폼에 종속됨) 매우 빠른 실행이 가능해집니다.
 
-[📦GraalVM](https://github.com/oracle/graal){:target="_blank"}은 JVM 바이트 코드에 고도로 최적화된 AOT 컴파일을 수행할 수 있습니다. GraalVM은 Java로 작성되었으며 `JVMCI`을 사용하여 HotspotVM과 통합됩니다. GraalVM 프로젝트의 초점은 최신 Java 애플리케이션에 더 좋은 성능과 더 나은 확장성을 제공하는 것입니다. 즉, 더 적은 오버헤드로 더 빠르게 실행되며 이는 더 적은 CPU와 메모리 리소스의 소비로 이어집니다. 따라서 GraalVM은 JVM과 함께 제공되는 기존 JIT 컴파일러보다 더 나은 대안이 됩니다.
+[📦 GraalVM](https://github.com/oracle/graal){:target="_blank"}은 JVM 바이트 코드에 고도로 최적화된 AOT 컴파일을 수행할 수 있습니다. GraalVM은 Java로 작성되었으며 `JVMCI`을 사용하여 HotspotVM과 통합됩니다. GraalVM 프로젝트의 초점은 최신 Java 애플리케이션에 더 좋은 성능과 더 나은 확장성을 제공하는 것입니다. 즉, 더 적은 오버헤드로 더 빠르게 실행되며 이는 더 적은 CPU와 메모리 리소스의 소비로 이어집니다. 따라서 GraalVM은 JVM과 함께 제공되는 기존 JIT 컴파일러보다 더 나은 대안이 됩니다.
 
 <br />
 
@@ -252,7 +252,7 @@ GraalVM을 사용하면 AOT 컴파일로 고성능 애플리케이션을 구축�
 
 ---
 
-- [📦Understanding How Graal Works - a Java JIT Compiler Written in Java](https://chrisseaton.com/truffleruby/jokerconf17/){:target="_blank"}
+- [📜 Understanding How Graal Works - a Java JIT Compiler Written in Java](https://chrisseaton.com/truffleruby/jokerconf17/){:target="_blank"}
 - [📜 .NET 환경의 컴파일 과정 - CLR, CIL, JIT, AOT](https://rito15.github.io/posts/cs-dotnet-compile/){:target="_blank"}
 - [📜 Scalable pointer analysis of data structures using semantic models](https://dl.acm.org/doi/abs/10.1145/3377555.3377885){:target="_blank"}
 - [📜 Intermediate Representation](https://ko.wikipedia.org/wiki/%EC%A4%91%EA%B0%84_%ED%91%9C%ED%98%84){:target="_blank"}

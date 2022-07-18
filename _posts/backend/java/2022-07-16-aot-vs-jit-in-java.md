@@ -3,7 +3,7 @@ layout: post
 category:
   - backend
   - java
-title: 자바에서의 AOT vs JIT 컴파일
+title: Java에서의 AOT vs JIT 컴파일
 description: |
     어느것이 더 나은가?
 image: /assets/img/backend/java.png
@@ -43,7 +43,7 @@ JIT(Just in Time Compilation) 또는 AOT(Ahead of Time Compilation)를 사용하
  
 프로그램을 컴파일한다는 것은, Java나 Python과 같은 고수준 프로그래밍 언어의 소스 코드를 [📜 기계어](https://en.wikipedia.org/wiki/Machine_code){:target="_blank"}로 변환하는 것을 의미합니다. 기계어란 특정 프로세서(즉, CPU. 이 글에서는 하드웨어 혹은 하드웨어 아키텍처라는 용어로도 많이 쓰였음)에서 실행할 수 있도록 만들어진 저수준의 명령어입니다. 그리고 컴파일러는 컴파일을 효율적으로 수행하도록 설계된 프로그램입니다. 컴파일러의 목표는 컴파일된 프로그램의 일관된 실행 파일을 만드는 것이며, 일관된 실행 파일은 소스 코드로 작성된 사양에 맞게 빠르고 안전하게 실행됩니다.
 
-컴파일러는 기계어 생성 과정에서 여러 최적화를 수행합니다. 예를 들어, 대부분의 컴파일러는 컴파일 타임에 상수 인라이닝, 루프 풀기, 코드 부분 평가등을 수행합니다. 이러한 컴파일러의 최적화 작업과 복잡성은 지난 수십 년 동안 크게 증가했습니다.
+컴파일러는 기계어 생성 과정에서 여러 최적화를 수행합니다. 예를 들어, 대부분의 컴파일러는 컴파일 타임에 constant inlining, loop unrolling, partial evaluation 등을 수행합니다. 이러한 컴파일러의 최적화 작업과 복잡성은 지난 수십 년 동안 크게 증가했습니다.
 
 표준 Java HotspotVM의 컴파일러 최적화 측면에서 두 가지 주요 컴파일러가 있는데, 이들이 바로 C1 컴파일러와 C2 컴파일러입니다.
 
@@ -53,14 +53,13 @@ JIT(Just in Time Compilation) 또는 AOT(Ahead of Time Compilation)를 사용하
 
 **C1 컴파일러**는 일부 값 번호 매기기, 인라이닝 및 클래스 분석을 수행하는 가볍고 빠르게 최적화된 바이트 코드 컴파일러입니다.
 
-C1 컴파일러는 간단한 CFG 지향적인 [📜 SSA](https://en.wikipedia.org/wiki/Static_single-assignment_form){:target="_blank"}와 고수준의 [📜 중간 표현(IR)](https://en.wikipedia.org/wiki/Intermediate_representation){:target="_blank"}, 기계 지향적인 저수준의 IR, 선형 스캔 레지스터 할당 및 
-템플릿 스타일 코드 생성기를 사용합니다.
+C1 컴파일러는 간단한 CFG 지향적인 [📜 SSA](https://en.wikipedia.org/wiki/Static_single-assignment_form){:target="_blank"}와 고수준의 [📜 중간 표현(IR)](https://en.wikipedia.org/wiki/Intermediate_representation){:target="_blank"}, 기계 지향적인 저수준의 IR, 선형 스캔 레지스터 할당 및 템플릿 스타일 코드 생성기를 사용합니다.
 
 ### C2 컴파일러
 
 ---
 
-**C2 컴파일러**는 [📜 노드의 바다](https://darksi.de/d.sea-of-nodes/){:target="_blank"} SSA와 이상적인 IR을 사용하는 고도로 최적화된 바이트 코드 컴파일러이며, IR은 동일한 종류의 기계별 IR로 낮아집니다. C2 컴파일러에는 그래프 색칠 레지스터 할당자도 있습니다. 색상은 로컬, 글로벌, 인수 레지스터와 스택을 포함한 기계의 상태입니다. 또한, C2 컴파일러의 최적화에는 전역 값 번호 매기기, 조건부 상수 유형 전파, 상수 접기, 전역 코드 동작, 대수적 ID, 메서드 인라이닝(적극적인, 낙관적인, and/or multi-morphic), 본질적인 대체, 루프 변환(전환 해제, 루프 풀기), 배열 범위 검사 제거 및 기타 등등이 포함됩니다.
+**C2 컴파일러**는 [📜 노드의 바다](https://darksi.de/d.sea-of-nodes/){:target="_blank"} SSA와 이상적인 IR을 사용하는 고도로 최적화된 바이트 코드 컴파일러이며, IR은 동일한 종류의 기계별 IR로 낮아집니다. C2 컴파일러에는 그래프 색칠 레지스터 할당자도 있습니다. 색상은 로컬, 글로벌, 인수 레지스터와 스택을 포함한 기계의 상태입니다. 또한, C2 컴파일러의 최적화에는 global value numbering, conditional constant type propagation, constant folding, global code motion, algebraic identities, method inlining (aggressive, optimistic, and/or multi-morphic), intrinsic replacement, loop transformations (unswitching, unrolling), array range check elimination 및 기타 등등이 포함됩니다.
 
 <br />
 
@@ -84,12 +83,14 @@ Java 프로그램을 컴파일할 때(예: javac 명령줄 도구를 사용하�
 
 <br />
 
-JVM 바이트 코드를 특정 플랫폼에서 실행할 수 있는 기계어로 변환하기 위해 JVM은 런타임에 바이트 코드를 해석하고 어떤 플랫폼에서 프로그램이 실행되고 있는지를 파악합니다. 이 전략은 [📜 동적 컴파일](https://en.wikipedia.org/wiki/Dynamic_compilation){:target="_blank"}의 한 형태인 [📜 JIT 컴파일](https://en.wikipedia.org/wiki/Just-in-time_compilation){:target="_blank"}로 알려져 있으며, JVM의 기본 JIT 컴파일러는 일명 Hotspot으로 알려져 있습니다. 그리고, 
-[📦OpenJDK](https://github.com/openjdk/jdk){:target="_blank"}는 Java로 작성된 이 JVM 바이트 코드 컴파일러의 무료 버전입니다. <u>(즉, OpenJDK는 무료 버전의 HotspotVM이며, HotspotVM은 JIT 컴파일 방식을 사용한다는 의미)</u>
+JVM 바이트 코드를 특정 플랫폼에서 실행할 수 있는 기계어로 변환하기 위해 JVM은 런타임에 바이트 코드를 해석하고 어떤 플랫폼에서 프로그램이 실행되고 있는지를 파악합니다. 이 전략은 [📜 동적 컴파일](https://en.wikipedia.org/wiki/Dynamic_compilation){:target="_blank"}의 한 형태인 [📜 JIT 컴파일](https://en.wikipedia.org/wiki/Just-in-time_compilation){:target="_blank"}로 알려져 있으며, JVM의 기본 JIT 컴파일러는 일명 Hotspot으로 알려져 있습니다. 그리고, [📦OpenJDK](https://github.com/openjdk/jdk){:target="_blank"}는 Java로 작성된 이 JVM 바이트 코드 컴파일러의 무료 버전입니다. <u>(즉, OpenJDK는 무료 버전의 HotspotVM이며, HotspotVM은 JIT 컴파일 방식을 사용한다는 의미)</u>
 
 <br />
 
-> 사실, JIT 컴파일러는 JVM 바이트 코드를 입력받아 기계어를 생성할 수만 있으면 되며, 당신은 JIT 컴파일러에 바이트 배열을 제공하면 다시 바이트 배열을 받기를 원할 것입니다. 컴파일러는 이러한 작업을 어떻게 해야 하는지 알아내기 위해 많은 복잡한 일들을 할 수 있지만, 컴파일러는 실제로 시스템을 전혀 포함하지 않으므로 C 또는 C++와 같은 Java와 관계 없는 시스템 언어의 일부 정의에 대해 "시스템" 언어가 필요하지 않습니다.
+
+> [📦Understanding How Graal Works - a Java JIT Compiler Written in Java](https://chrisseaton.com/truffleruby/jokerconf17/){:target="_blank"}
+> 
+> HotspotVM의 JIT 컴파일러는 C++로 작성되어 있는데, 현 시점 이 코드는 유지보수성과 확장성이 매우 좋지 않으며, 따라서 안정성이 매우 떨어집니다. 우리는 이러한 문제를 해결하기 위해 JIT 컴파일러를 Java로 작성하기로 했습니다. C나 C++같은 시스템 언어를 사용하지 않고 JIT 컴파일러를 어떻게 작성할 수 있는지 궁금할 수 있습니다. 따지고 보면 JIT 컴파일러는 오직 JVM 바이트 코드를 입력받아 기계어로 변환 할 수만 있으면 됩니다. 당신은 JIT 컴파일러에 바이트 배열(byte[])을 입력하면 다시 바이트 배열이 출력되길 원할 것입니다. 이러한 작업들을 Java로 처리하기 위해 많은 복잡한 작업을 해야 하겠지만, 어쨋든 순수하게 Java로 JIT 컴파일러를 작성할 수 있습니다. 순수하게 Java로 JIT 컴파일러를 작성한다면 이 컴파일러는 실제로 시스템과 큰 관련이 없어지므로 C나 C++과 같은 시스템 언어에 의존하지 않을 수 있게 됩니다.
 
 <br />
 
@@ -174,7 +175,7 @@ JIT 컴파일러는 프로그램을 크로스 플랫폼으로 만들어줍니다
 - 더 빠르고 효율적인 배포를 위해 경량 컨테이너 이미지로 패키징할 수 있습니다.
 - 공격 표면이 감소됩니다.
 
-### AOT 제약 사항: Closed-World Assumption (CWA)
+### AOT 제 사항: Closed-World Assumption (CWA)
 
 ---
 
@@ -251,6 +252,7 @@ GraalVM을 사용하면 AOT 컴파일로 고성능 애플리케이션을 구축�
 
 ---
 
+- [📦Understanding How Graal Works - a Java JIT Compiler Written in Java](https://chrisseaton.com/truffleruby/jokerconf17/){:target="_blank"}
 - [📜 .NET 환경의 컴파일 과정 - CLR, CIL, JIT, AOT](https://rito15.github.io/posts/cs-dotnet-compile/){:target="_blank"}
 - [📜 Scalable pointer analysis of data structures using semantic models](https://dl.acm.org/doi/abs/10.1145/3377555.3377885){:target="_blank"}
 - [📜 Intermediate Representation](https://ko.wikipedia.org/wiki/%EC%A4%91%EA%B0%84_%ED%91%9C%ED%98%84){:target="_blank"}

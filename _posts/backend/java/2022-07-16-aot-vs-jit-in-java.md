@@ -3,7 +3,7 @@ layout: post
 category:
   - backend
   - java
-title: 자바에서의 AOT vs JIT 컴파일
+title: Java에서의 AOT vs JIT 컴파일
 description: |
     어느것이 더 나은가?
 image: /assets/img/backend/java.png
@@ -84,12 +84,14 @@ Java 프로그램을 컴파일할 때(예: javac 명령줄 도구를 사용하�
 
 <br />
 
-JVM 바이트 코드를 특정 플랫폼에서 실행할 수 있는 기계어로 변환하기 위해 JVM은 런타임에 바이트 코드를 해석하고 어떤 플랫폼에서 프로그램이 실행되고 있는지를 파악합니다. 이 전략은 [📜 동적 컴파일](https://en.wikipedia.org/wiki/Dynamic_compilation){:target="_blank"}의 한 형태인 [📜 JIT 컴파일](https://en.wikipedia.org/wiki/Just-in-time_compilation){:target="_blank"}로 알려져 있으며, JVM의 기본 JIT 컴파일러는 일명 Hotspot으로 알려져 있습니다. 그리고, 
-[📦OpenJDK](https://github.com/openjdk/jdk){:target="_blank"}는 Java로 작성된 이 JVM 바이트 코드 컴파일러의 무료 버전입니다. <u>(즉, OpenJDK는 무료 버전의 HotspotVM이며, HotspotVM은 JIT 컴파일 방식을 사용한다는 의미)</u>
+JVM 바이트 코드를 특정 플랫폼에서 실행할 수 있는 기계어로 변환하기 위해 JVM은 런타임에 바이트 코드를 해석하고 어떤 플랫폼에서 프로그램이 실행되고 있는지를 파악합니다. 이 전략은 [📜 동적 컴파일](https://en.wikipedia.org/wiki/Dynamic_compilation){:target="_blank"}의 한 형태인 [📜 JIT 컴파일](https://en.wikipedia.org/wiki/Just-in-time_compilation){:target="_blank"}로 알려져 있으며, JVM의 기본 JIT 컴파일러는 일명 Hotspot으로 알려져 있습니다. 그리고, [📦OpenJDK](https://github.com/openjdk/jdk){:target="_blank"}는 Java로 작성된 이 JVM 바이트 코드 컴파일러의 무료 버전입니다. <u>(즉, OpenJDK는 무료 버전의 HotspotVM이며, HotspotVM은 JIT 컴파일 방식을 사용한다는 의미)</u>
 
 <br />
 
-> 사실, JIT 컴파일러는 JVM 바이트 코드를 입력받아 기계어를 생성할 수만 있으면 되며, 당신은 JIT 컴파일러에 바이트 배열을 제공하면 다시 바이트 배열을 받기를 원할 것입니다. 컴파일러는 이러한 작업을 어떻게 해야 하는지 알아내기 위해 많은 복잡한 일들을 할 수 있지만, 컴파일러는 실제로 시스템을 전혀 포함하지 않으므로 C 또는 C++와 같은 Java와 관계 없는 시스템 언어의 일부 정의에 대해 "시스템" 언어가 필요하지 않습니다.
+
+> [📦Understanding How Graal Works - a Java JIT Compiler Written in Java](https://chrisseaton.com/truffleruby/jokerconf17/){:target="_blank"}
+> 
+> HotspotVM의 JIT 컴파일러는 C++로 작성되어 있는데, 현 시점 이 코드는 유지보수성과 확장성이 매우 좋지 않으며, 따라서 안정성이 매우 떨어집니다. 우리는 이러한 문제를 해결하기 위해 JIT 컴파일러를 Java로 작성하기로 했습니다. C나 C++같은 시스템 언어를 사용하지 않고 JIT 컴파일러를 어떻게 작성할 수 있는지 궁금할 수 있습니다. 따지고 보면 JIT 컴파일러는 오직 JVM 바이트 코드를 입력받아 기계어로 변환 할 수만 있으면 됩니다. 당신은 JIT 컴파일러에 바이트 배열(byte[])을 입력하면 다시 바이트 배열이 출력되길 원할 것입니다. 이러한 작업들을 Java로 처리하기 위해 많은 복잡한 작업을 해야 하겠지만, 어쨋든 순수하게 Java로 JIT 컴파일러를 작성할 수 있습니다. 순수하게 Java로 JIT 컴파일러를 작성한다면 이 컴파일러는 실제로 시스템과 큰 관련이 없어지므로 C나 C++과 같은 시스템 언어에 의존하지 않을 수 있게 됩니다.
 
 <br />
 

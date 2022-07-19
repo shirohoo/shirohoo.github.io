@@ -51,7 +51,7 @@ JIT(Just in Time Compilation) 또는 AOT(Ahead of Time Compilation)를 사용하
 
 ---
 
-**C1 컴파일러**는 일부 값 번호 매기기, 인라이닝 및 클래스 분석을 수행하는 가볍고 빠르게 최적화된 바이트 코드 컴파일러입니다.
+**C1 컴파일러**는 some value numbering, inlining, class analysis를 수행하는 빠르고 가볍게 최적화된 바이트 코드 컴파일러입니다.
 
 C1 컴파일러는 간단한 CFG 지향적인 [📜 SSA](https://en.wikipedia.org/wiki/Static_single-assignment_form){:target="_blank"}와 고수준의 [📜 중간 표현(IR)](https://en.wikipedia.org/wiki/Intermediate_representation){:target="_blank"}, 기계 지향적인 저수준의 IR, 선형 스캔 레지스터 할당 및 템플릿 스타일 코드 생성기를 사용합니다.
 

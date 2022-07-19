@@ -1,0 +1,200 @@
+{
+  "openapi" : "3.0.1",
+  "info" : {
+    "title" : "Spring-Rest-Docs + Swagger-UI + Open-API-3.0.1",
+    "description" : "Spring-Rest-Docs의 장점과 Swagger의 장점을 모두 가져갈 수 있는 아키텍처를 구축한다",
+    "version" : "0.0.1"
+  },
+  "servers" : [ {
+    "url" : "http://localhost:8080"
+  } ],
+  "tags" : [ ],
+  "paths" : {
+    "/api/v1/user" : {
+      "put" : {
+        "tags" : [ "User" ],
+        "summary" : "사용자 정보 수정",
+        "description" : "사용자 정보를 수정한다",
+        "operationId" : "update",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/UserRequest"
+              },
+              "examples" : {
+                "update" : {
+                  "value" : "{\r\n  \"id\" : 1,\r\n  \"name\" : \"아무개\",\r\n  \"email\" : \"hong@email.com\",\r\n  \"phoneNumber\" : \"01012341234\"\r\n}"
+                }
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "200",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/UserResponse"
+                },
+                "examples" : {
+                  "update" : {
+                    "value" : "{\r\n  \"id\" : 1,\r\n  \"name\" : \"아무개\",\r\n  \"email\" : \"hong@email.com\",\r\n  \"phoneNumber\" : \"01012341234\",\r\n  \"createAt\" : null,\r\n  \"updateAt\" : \"2021-07-16T23:11:49.553064600\"\r\n}"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "User" ],
+        "summary" : "사용자 정보 생성",
+        "description" : "사용자 정보를 생성한다",
+        "operationId" : "create",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/UserRequest"
+              },
+              "examples" : {
+                "create" : {
+                  "value" : "{\r\n  \"id\" : null,\r\n  \"name\" : \"홍길동\",\r\n  \"email\" : \"hong@email.com\",\r\n  \"phoneNumber\" : \"01012341234\"\r\n}"
+                }
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "200",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/UserResponse"
+                },
+                "examples" : {
+                  "create" : {
+                    "value" : "{\r\n  \"id\" : 1,\r\n  \"name\" : \"홍길동\",\r\n  \"email\" : \"hong@email.com\",\r\n  \"phoneNumber\" : \"01012341234\",\r\n  \"createAt\" : \"2021-07-16T23:11:48.702340300\",\r\n  \"updateAt\" : \"2021-07-16T23:11:48.702340300\"\r\n}"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/user/{id}" : {
+      "get" : {
+        "tags" : [ "User" ],
+        "summary" : "사용자 정보 조회",
+        "description" : "사용자 정보를 조회한다",
+        "operationId" : "read",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "식별자",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/UserResponse"
+                },
+                "examples" : {
+                  "read" : {
+                    "value" : "{\r\n  \"id\" : 1,\r\n  \"name\" : \"홍길동\",\r\n  \"email\" : \"hong@email.com\",\r\n  \"phoneNumber\" : \"01012341234\",\r\n  \"createAt\" : \"2021-07-16T23:11:48.702340\",\r\n  \"updateAt\" : \"2021-07-16T23:11:48.702340\"\r\n}"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "User" ],
+        "summary" : "사용자 정보 삭제",
+        "description" : "사용자 정보를 삭제한다",
+        "operationId" : "delete",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "식별자",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200"
+          }
+        }
+      }
+    }
+  },
+  "components" : {
+    "schemas" : {
+      "UserRequest" : {
+        "title" : "UserRequest",
+        "type" : "object",
+        "properties" : {
+          "phoneNumber" : {
+            "type" : "string",
+            "description" : "전화번호"
+          },
+          "name" : {
+            "type" : "string",
+            "description" : "이름"
+          },
+          "id" : {
+            "type" : "number",
+            "description" : "식별자"
+          },
+          "email" : {
+            "type" : "string",
+            "description" : "이메일"
+          }
+        }
+      },
+      "UserResponse" : {
+        "title" : "UserResponse",
+        "type" : "object",
+        "properties" : {
+          "phoneNumber" : {
+            "type" : "string",
+            "description" : "전화번호"
+          },
+          "name" : {
+            "type" : "string",
+            "description" : "이름"
+          },
+          "updateAt" : {
+            "type" : "string",
+            "description" : "수정일"
+          },
+          "id" : {
+            "type" : "number",
+            "description" : "식별자"
+          },
+          "createAt" : {
+            "type" : "string",
+            "description" : "등록일"
+          },
+          "email" : {
+            "type" : "string",
+            "description" : "이메일"
+          }
+        }
+      }
+    }
+  }
+}

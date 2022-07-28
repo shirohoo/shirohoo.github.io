@@ -25,7 +25,7 @@ commit은 몇가지 재료를 합성해 만들어지고, 이 commit의 재료들
 
 위의 세 가지 오브젝트들은 사용자가 `.git` 디렉토리를 직접적으로 조작(예: rm -rf .git)하지만 않는다면 절대 수정되거나 삭제되지 않으며, 유일하다.
 
-또한, treecommit을 포함한 모든 오브젝트들은 0-9a-z로 이뤄진 40자리의 해시코드(SHA1)를 식별자로 갖는다.
+또한, commit을 포함한 모든 오브젝트들은 0-9a-z로 이뤄진 40자리의 해시코드(SHA1)를 식별자로 갖는다.
 
 그리고 40자리중 맨 앞의 2자리는 오브젝트가 저장된 디렉토리의 이름이 되고 뒤의 38자리는 오브젝트 파일의 이름이 된다.
 
@@ -63,15 +63,15 @@ commit은 위 계층 구조에서 . 디렉토리의 tree 오브젝트와 커미�
 
 commit은 tree와 blob, 커미터 정보의 집합으로 이루어져 있다.
 
-## 결론
+# 정리
 
 ![image](https://user-images.githubusercontent.com/71188307/181572179-4536ada5-8afd-49a9-b4bd-e28249408483.png)
 
-`git log`를 입력해 출력된 treecommit 히스토리는 다음과 같다.
+`git log`를 입력해 출력된 commit 히스토리는 다음과 같다.
 
 ![image](https://user-images.githubusercontent.com/71188307/181574214-e2040768-4126-4f65-a3a4-31a8e1b68887.png)
 
-조금 더 보기전에 먼저 방금 생성한 treecommit을 눈으로 직접 확인해보기 위해 `.git/objects`로 들어가 `tree` 명령어를 입력하면 다음과 같이 출력된다.
+조금 더 보기전에 먼저 방금 생성한 commit을 눈으로 직접 확인해보기 위해 `.git/objects`로 들어가 `tree` 명령어를 입력하면 다음과 같이 출력된다.
 
 ![image](https://user-images.githubusercontent.com/71188307/181575168-cc6ef9bd-8fa1-4b88-b58d-1cbca65f5dab.png)
 
@@ -79,9 +79,9 @@ commit은 tree와 blob, 커미터 정보의 집합으로 이루어져 있다.
 
 실제로 그러하다.
 
-방금 생성한 treecommit은 `baf09e6`으로 시작하는 해시코드를 가지며, `.git/objects/ba/f09e6...` 이 존재함을 확인 할 수 있다.
+방금 생성한 commit은 `baf09e6`으로 시작하는 해시코드를 가지며, `.git/objects/ba/f09e6...` 이 존재함을 확인 할 수 있다.
 
-`file` 명령어를 통해 treecommit의 파일 정보를 출력하면 다음과 같이 출력된다.
+`file` 명령어를 통해 commit의 파일 정보를 출력하면 다음과 같이 출력된다.
 
 ![image](https://user-images.githubusercontent.com/71188307/181576387-4bd4da2d-cb0f-4a13-9a4f-9fff6ed1e81e.png)
 
@@ -91,7 +91,7 @@ zlib 방식으로 압축된 파일임을 알 수 있는데, 이를 해석할 수
 
 ![image](https://user-images.githubusercontent.com/71188307/181576868-61e59dd4-e1f7-4503-99d0-a33572f7efcd.png)
 
-baf09e6 treecommit에 2092b97로 시작하는 tree 타입의 오브젝트가 포함되어 있음을 알 수 있다.
+baf09e6 commit에 2092b97로 시작하는 tree 타입의 오브젝트가 포함되어 있음을 알 수 있다.
 
 위의 설명을 대입시켜보면 위의 tree 오브젝트는 `src` 디렉토리일것이다.
 
@@ -102,10 +102,6 @@ baf09e6 treecommit에 2092b97로 시작하는 tree 타입의 오브젝트가 포
 `src` 디렉토리는 `a.txt` 파일을 포함하고 있으므로, 해당 파일에 매핑된 blob 타입의 오브젝트가 존재함을 알 수 있다.
 
 이어서 blob 타입의 오브젝트도 풀어보면 `a.txt` 파일의 데이터가 출력되게 된다.
-
-# 결론
-
----
 
 결과를 비교해보면...
 

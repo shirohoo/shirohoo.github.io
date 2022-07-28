@@ -37,7 +37,7 @@ commit은 몇가지 재료를 합성해 만들어지고, 이 commit의 재료들
     └── a.txt
 ```
 
-## Blob(Binary Large Object)
+## Blob (Binary Large Object)
 
 ---
 

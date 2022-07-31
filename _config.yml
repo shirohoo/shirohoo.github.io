@@ -19,7 +19,7 @@ hosturl: https://shirohoo.github.io
 lang:                  ko-KR, en-US
 
 # The title of your blog. Used in the sidebar and the browser tab.
-title:                 후회와 미래의 꿈 사이에서 기회를
+title:                 후회와 꿈 사이에 기회가 있다
 
 # A short description (~150 chars) of the page used for the meta description tag.
 # Can use markdown, but no more than one paragraph (enforced by `>`)

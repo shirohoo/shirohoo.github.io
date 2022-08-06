@@ -9,7 +9,7 @@ description: |
 image: /assets/img/spring/spring-security/security-logo.png
 related_posts:
   - _posts/spring/spring-security/2021-05-02-authentication.md
-  - _posts/spring/spring-security/2021-08-30-rest-login.md
+  - _posts/spring/spring-security/2021-08-30-http-login.md
 published: true
 ---
 

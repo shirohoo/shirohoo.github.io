@@ -8,7 +8,7 @@ description: |
     Git은 어떤 원리로 동작하는가?
 image: /assets/img/cs/git.png
 related_posts:
-  - null
+    - _posts/cs/software-design/2022-08-14-git-brach-tag.md
 published: true
 ---
 

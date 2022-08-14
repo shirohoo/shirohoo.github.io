@@ -19,12 +19,12 @@ hosturl: https://shirohoo.github.io
 lang:                  ko-KR, en-US
 
 # The title of your blog. Used in the sidebar and the browser tab.
-title:                 망설이면 두려움만 커진다
+title:                 감사의 정권 지르기 "일만번"
 
 # A short description (~150 chars) of the page used for the meta description tag.
 # Can use markdown, but no more than one paragraph (enforced by `>`)
 description:           >
-  Only I can change my life. No one can do it for me.
+  우리는 직장에서 "훈련"을 하기 때문에 "실수"한다
 
 # A shorter description for the sidebar.
 tagline:               Only I can change my life

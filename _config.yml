@@ -19,15 +19,15 @@ hosturl: https://shirohoo.github.io
 lang:                  ko-KR, en-US
 
 # The title of your blog. Used in the sidebar and the browser tab.
-title:                 감사의 정권 지르기 "일만번"
+title:                 매일 감사의 정권 지르기 일만번
 
 # A short description (~150 chars) of the page used for the meta description tag.
 # Can use markdown, but no more than one paragraph (enforced by `>`)
 description:           >
-  우리는 직장에서 훈련을 하기 때문에 실수를 반복한다
+  우리는 직장에서 훈련을 하기 때문에 매번 실수를 반복한다
 
 # A shorter description for the sidebar.
-tagline:               우리는 직장에서 훈련을 하기 때문에 실수를 반복한다
+tagline:               우리는 직장에서 훈련을 하기 때문에 매번 실수를 반복한다
 
 # A list of keywords for your blog
 keywords:              [java, spring, hibernate, backend]

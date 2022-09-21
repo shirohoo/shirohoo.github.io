@@ -75,6 +75,8 @@ menu:
         url:           /backend/test/
       - title:         Java
         url:           /backend/java/
+      - title:         Python
+        url:           /backend/python/
       - title:         Groovy
         url:           /backend/groovy/
       - title:         Gradle

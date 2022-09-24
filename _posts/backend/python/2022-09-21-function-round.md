@@ -51,7 +51,7 @@ published: true
 
 ![image](https://user-images.githubusercontent.com/71188307/191527618-e16aeb4e-e9dd-40bd-8b96-0246525d4de7.png)
 
-맞는지는 잘 모르겠고, 내 주변 사람들에게 물어본 바, 단 한명의 예외도 없이 1~4는 버리고 5~9는 올린다고 답하는 것 보면 그냥 이 방식이 사람한테 직관적이기 때문인 게 아닐까 싶기도 하다.
+맞는지는 잘 모르겠고, 내 주변 사람들에게 물어본 바, 단 한명의 예외도 없이 1~4는 버리고 5~9는 올린다고 답하는 것을 보면 그냥 이 방식이 사람한테 직관적이기 때문인 게 아닐까 싶기도 하다.
 
 # 참고
 - [📜 Built-in Functions - Python 3.10.7 documentation](https://docs.python.org/3/library/functions.html#round){:target="_blank"}

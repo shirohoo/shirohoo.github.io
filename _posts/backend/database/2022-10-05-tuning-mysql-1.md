@@ -73,8 +73,7 @@ FROM
      GROUP BY
          point_key
      HAVING
-        expired_point > 0) d,
-    point_info i
+         expired_point > 0) d, point_info i
 WHERE
     d.point_id = i.point_id;    
 ```

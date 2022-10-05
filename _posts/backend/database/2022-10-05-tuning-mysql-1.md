@@ -25,8 +25,7 @@ SELECT
     point_info.user_id,
     SUM(point_detail.point) expired_point
 FROM
-    point_detail
-    JOIN point_info ON point_detail.point_id = point_info.point_id
+    point_detail JOIN point_info ON point_detail.point_id = point_info.point_id
 WHERE
     point_detail.expiry_date <= CURRENT_TIMESTAMP
 GROUP BY

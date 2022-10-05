@@ -38,10 +38,10 @@ LIMIT 1000;
 
 # 튜닝 전 실행계획
 
-| id  | select_type | table        | type   | key      | ref           | rows   | filtered | Extra                                        |
-|-----|-------------|--------------|--------|----------|---------------|--------|----------|----------------------------------------------|
-| 1   | SIMPLE      | point_detail | index  | \<null\> | \<null\>      | 943527 | 33.33    | Using where; Using temporary; Using filesort |
-| 1   | SIMPLE      | point_info   | eq_ref | PRIMARY  | point_info_id | 1      | 100      | \<null\>                                     |
+| id  | select_type | table        | type   | key      | ref           | rows    | filtered | Extra                                        |
+|-----|-------------|--------------|--------|----------|---------------|---------|----------|----------------------------------------------|
+| 1   | SIMPLE      | point_detail | index  | \<null\> | \<null\>      | 943,527 | 33.33    | Using where; Using temporary; Using filesort |
+| 1   | SIMPLE      | point_info   | eq_ref | PRIMARY  | point_info_id | 1       | 100      | \<null\>                                     |
 
 표시되는 행은 2개고, id가 둘다 1임을 보아 `point_detail`과 `point_info`를 조인하고 있으며, `point_info`의 type이 `eq_ref`임을 보아 조인의 기준이 되는 드라이빙 테이블은 `point_detail`임을 알 수 있습니다.
 

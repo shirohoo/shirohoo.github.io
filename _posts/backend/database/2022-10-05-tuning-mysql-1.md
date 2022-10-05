@@ -42,7 +42,7 @@ LIMIT 1000;
 | 1   | SIMPLE      | point_detail | index  | \<null\> | \<null\>      | 943,527 | 33.33    | Using where; Using temporary; Using filesort |
 | 1   | SIMPLE      | point_info   | eq_ref | PRIMARY  | point_info_id | 1       | 100      | \<null\>                                     |
 
-표시되는 행은 2개고, id가 둘다 1임을 보아 `point_detail`과 `point_info`를 조인하고 있으며, `point_info`의 type이 `eq_ref`임을 보아 조인의 기준이 되는 드라이빙 테이블은 `point_detail`임을 알 수 있습니다.
+표시되는 행은 2개고, id가 둘다 1임을 보아 `point_detail`과 `point_info`를 조인하고 있으며, `point_info`의 `type`이 `eq_ref`임을 보아 조인의 기준이 되는 드라이빙 테이블은 `point_detail`임을 알 수 있습니다.
 
 `select_type`이 `SIMPLE`이므로 단순한 select 쿼리이며, 쿼리에 사용된 `key`가 없고 `type` 이 `ALL` 임을 보아 `point_detail`에서 `테이블 풀 스캔`이 일어났음을 알 수 있습니다.
 
@@ -77,19 +77,21 @@ WHERE
     d.point_id = i.point_id;    
 ```
 
-`인라인 뷰`로 `point_detail` 테이블 액세스 조건으로 만료일을 주었고, `point_key`로 그룹화를 한 후 having 절을 통해 이미 만료됐으면서도 잔액이 0원을 초과하는 포인트를 모두 출력하도록 하였습니다.
+`인라인 뷰`를 씁니다. 
 
-이렇게 드라이빙 테이블에서 행을 최대한 덜어낸 후 조인을 합니다.
+`point_detail` 테이블의 액세스 조건으로 `포인트 만료일`을 주었고, `point_key`로 그룹화를 한 후 having 절을 통해 이미 만료됐으면서도 잔액이 0원을 초과하는 포인트를 모두 출력하도록 하였습니다.
 
-마지막으로 쿼리의 모든 열을 포함하는 `커버링 인덱스`를 생성합니다.
+그리고 쿼리의 모든 열을 포함하는 `커버링 인덱스`를 생성합니다.
 
 이때, 인덱스의 순서가 매우 중요합니다. 
 
-그룹화에 사용 되는 `point_key`를 인덱스의 가장 첫 번째 열로 주고, 액세스 조건으로 사용되는 `expiry_date`를 두 번째 열로 줍니다.
+그룹화에 사용되는 `point_key`를 인덱스의 가장 첫 번째 열로 주고, 액세스 조건으로 사용되는 `expiry_date`를 두 번째 열로 줍니다.
 
 ```sql
 CREATE INDEX cidx_point_expiration ON point_detail (point_key, expiry_date);
 ```
+
+이렇게 드라이빙 테이블에서 디스크 I/O와 가져올 행을 최대한 덜어낸 후 마지막으로 조인을 합니다.
 
 # 튜닝 후 실행계획
 

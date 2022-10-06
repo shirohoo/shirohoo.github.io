@@ -87,6 +87,8 @@ WHERE
 
 그룹화에 사용되는 `point_key`를 인덱스의 가장 첫 번째 열로 설정하고, 액세스 조건으로 사용되는 `expiry_date`를 두 번째 열로 설정합니다.
 
+(원래는 액세스 조건을 인덱스의 첫번째 열로 설정하는 것이 대부분의 상황에서 가장 유효한 가이드이지만, 이번 케이스는 그러한 가이드를 따르면 `Using temporary`, `Using filesort`가 발생해 빠른 쿼리를 만들기가 어렵습니다.)
+
 ```sql
 CREATE INDEX cidx_point_expiration ON point_detail (point_key, expiry_date);
 ```

@@ -15,7 +15,7 @@ published: true
 
 - 2020.08 ~ 2021.01 : 프로그래밍 독학
 
-- 2021.02 ~ : 자바 소프트웨어 엔지니어로 근무
+- 2021.02 ~ : 소프트웨어 엔지니어로 근무
 
 <br />
 
@@ -29,13 +29,14 @@ published: true
 
 # Skills
 
-> 업무에 사용 했던 기술들
+> 업무에 사용 했던 언어 및 도구
 
 - Java
+- Kotlin
+- Python
 - Gradle
-- Junit5
-- Spring
-  - Boot
+- Junit
+- Spring Boot
   - MVC
   - Batch
   - Security
@@ -48,8 +49,12 @@ published: true
 > 실무 레벨의 경험, 역량
 
 - Java
+- Kotlin
+- Python
+- 테스트 코드 작성
 - OOP
-- TDD
+- FP
+- MySQL
 
 <br />
 

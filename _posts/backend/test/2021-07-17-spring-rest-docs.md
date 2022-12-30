@@ -17,7 +17,7 @@ related_posts:
   
 <br />
 
-포스팅에 사용된 예제 코드는 [🚀GitHub](https://github.com/shirohoo/spring-rest-docs-examples/tree/main/spring-rest-docs){:target="_blank"} 를 참고해주세요.
+포스팅에 사용된 예제 코드는 [🚀GitHub](https://github.com/olivahn/spring-rest-docs-examples/tree/main/spring-rest-docs){:target="_blank"} 를 참고해주세요.
 {:.note}
 
 
@@ -338,10 +338,10 @@ NOTE: 인프라 팀에서 설정합니다.
 | 환경 | URI
 
 | 개발서버
-| `io.github.shirohoo-dev`
+| `io.github.olivahn-dev`
 
 | 운영서버
-| `io.github.shirohoo`
+| `io.github.olivahn`
 |===
 
 include::./user.adoc[]
@@ -437,7 +437,7 @@ public class AbstractControllerTests {
 
     // 여기서 문서에 표시될 정보들을 정의
     public static final String SCHEME = "https";  
-    public static final String HOST = "io.github.shirohoo";
+    public static final String HOST = "io.github.olivahn";
 
     @Autowired
     protected MockMvc mockMvc;
@@ -485,7 +485,7 @@ import static org.springframework.restdocs.payload.PayloadDocumentation.requestF
 import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
 import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
 import static org.springframework.restdocs.request.RequestDocumentation.requestParameters;
-import io.github.shirohoo.springrestdocs.api.ApiController.User;
+import io.github.olivahn.springrestdocs.api.ApiController.User;
 import java.time.LocalDate;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;

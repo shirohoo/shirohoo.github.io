@@ -23,7 +23,7 @@ published: true
 
 설정은 원 저작자 문서에도 잘 나와 있습니다만, 샘플 코드를 게시합니다.
 
-이 글의 깃허브는 [📜 여기](https://github.com/shirohoo/jvm-benchmark) 를 참고해주세요.
+이 글의 깃허브는 [📜 여기](https://github.com/olivahn/jvm-benchmark) 를 참고해주세요.
 
 제가 구성한 빌드 스크립트는 다음과 같습니다.
 
@@ -46,7 +46,7 @@ java {
     }
 }
 
-group 'io.shirohoo'
+group 'io.olivahn'
 
 repositories {
     mavenCentral()

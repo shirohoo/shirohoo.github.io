@@ -2,13 +2,13 @@
 # Must be the same as `author` in `_config.yml`.
 # Change `author1` to your shortname.
 author1:
-  name:              shirohoo
-  email:             shirohoo4102@gmail.com
+  name:              olivahn
+  email:             olivahn4102@gmail.com
 
   # Used at the bottom of each page and at the top of the `about` layout
   # Markdown enabled, can use multiple paragraphs (enabled by `|`)
   about:             |
-    ![chat_svg](https://github.com/shirohoo/shirohoo/raw/main/chat.svg)
+    ![chat_svg](https://github.com/olivahn/olivahn/raw/main/chat.svg)
 
   # This photo will be used in the about section
   picture:
@@ -23,9 +23,9 @@ author1:
   # Rearrange to change the order in which they appear
   social:
 #    twitter:          <username>
-    github:              shirohoo
-    email:               mailto:shirohoo4102@gmail.com
-    rss:                 https://shirohoo.github.io/feed.xml
+    github:              olivahn
+    email:               mailto:olivahn4102@gmail.com
+    rss:                 https://olivahn.github.io/feed.xml
     devtools:            https://devtools.life
     # facebook:        <username>
     # google:          <number>

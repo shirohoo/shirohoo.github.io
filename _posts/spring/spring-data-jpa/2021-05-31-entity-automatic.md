@@ -92,7 +92,7 @@ import com.intellij.psi.codeStyle.NameUtil
 import javax.swing.*
 
 /**
- * @author shirohoo* @link https://github.com/shirohoo/create-automation-jpa-entity
+ * @author olivahn* @link https://github.com/olivahn/create-automation-jpa-entity
  * @param pakageName , primaryKey
  *
  * <pre>

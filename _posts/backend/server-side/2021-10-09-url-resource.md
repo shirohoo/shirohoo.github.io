@@ -77,12 +77,12 @@ URL은 리소스의 정확한 위치를 표현한 것입니다.
 
 <br />
 
-더 자세한 차이에 대해 설명드리자면 제 `블로그(https://shirohoo.github.io/)` 에서 `index.html` 이라는 리소스를 찾고자 할 때 웹 브라우저에 다음과 같은 문자열들을 입력할 수 있습니다.
+더 자세한 차이에 대해 설명드리자면 제 `블로그(https://olivahn.github.io/)` 에서 `index.html` 이라는 리소스를 찾고자 할 때 웹 브라우저에 다음과 같은 문자열들을 입력할 수 있습니다.
 
 <br />
 
-- URI: https://shirohoo.github.io/index
-- URL: https://shirohoo.github.io/index.html
+- URI: https://olivahn.github.io/index
+- URL: https://olivahn.github.io/index.html
 
 <br />
 

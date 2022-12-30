@@ -3,7 +3,7 @@
 
 # Uncomment and set the URL of your site (with protocol, e.g. `https://`)
 # NOTE: You don't need to provide this property when hosting on GitHub Pages or Netlify.
-hosturl: https://shirohoo.github.io
+hosturl: https://olivahn.github.io
 
 # Uncomment and set the "base URL" of your site.
 # When your site is in a subdirectory, set to `/<name of directory>`,
@@ -40,8 +40,8 @@ logo:                  /assets/img/me.gif
 # This should be the same author as first entry in `_data/authors.yml`.
 author:
   # Used by `jekyll-feed`:
-  name:                shirohoo
-  email:               shirohoo4102@gmail.com
+  name:                "Oliver Hahn"
+  email:               olivahn4102@gmail.com
   # # Used by `jekyll-seo-tag`:
   # twitter:             <username>
 
@@ -234,7 +234,7 @@ comments:
   provider:            utterances
 
 utterances:
-  repo:                "shirohoo/shirohoo.github.io.comments"
+  repo:                "olivahn/olivahn.github.io.comments"
   issue-term:          "pathname"
   theme:               "github-light"
 

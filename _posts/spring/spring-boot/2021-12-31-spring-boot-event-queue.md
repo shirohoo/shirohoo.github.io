@@ -23,7 +23,7 @@ published: true
 
 ---
 
-[📦 GitHub - shirohoo/spring-event-queue](https://github.com/shirohoo/spring-boot-examples/tree/main/spring-event-queue){:target="_blank"}
+[📦 GitHub - olivahn/spring-event-queue](https://github.com/olivahn/spring-boot-examples/tree/main/spring-event-queue){:target="_blank"}
 
 프로젝트를 클론하고 데이터베이스를 설정한다.
 

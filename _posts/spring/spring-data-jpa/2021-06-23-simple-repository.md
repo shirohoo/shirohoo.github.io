@@ -28,7 +28,7 @@ related_posts:
 
 `SimpleJpaRepository`의 대부분의 기능에 대한 학습 테스트코드를 작성하였다.
 
-전체 코드가 궁금하시다면 [깃허브](https://github.com/shirohoo/jpa-in-action)를 확인바랍니다.
+전체 코드가 궁금하시다면 [깃허브](https://github.com/olivahn/spring-data-jpa-examples)를 확인바랍니다.
 
 <br />
 
@@ -227,7 +227,7 @@ class SimpleRepositoryTest {
      * <br/>
      * 참고자료 경로 <br/>
      *
-     * @see "Han-Changhun/src/test/resources/images/query-method-0.png"
+     * @see "src/test/resources/images/query-method-0.png"
      */
     @Test
     @DisplayName("Page_API")
@@ -257,7 +257,7 @@ class SimpleRepositoryTest {
     /**
      * 참고자료 경로
      *
-     * @see "Han-Changhun/src/test/resources/images/query-method-0.png"
+     * @see "src/test/resources/images/query-method-0.png"
      */
     @Test
     @DisplayName("Query_Methods_Pageable_조회")
@@ -339,7 +339,7 @@ class SimpleRepositoryTest {
     /**
      * 참고자료 경로
      *
-     * @see "Han-Changhun/src/test/resources/images/query-method-1.png"
+     * @see "src/test/resources/images/query-method-1.png"
      */
     @Test
     @DisplayName("Query_Methods_조회_접두사")
@@ -358,7 +358,7 @@ class SimpleRepositoryTest {
     /**
      * 참고자료 경로
      *
-     * @see "Han-Changhun/src/test/resources/images/query-method-1.png"
+     * @see "src/test/resources/images/query-method-1.png"
      */
     @Test
     @DisplayName("Query_Methods_Top_조회")
@@ -384,7 +384,7 @@ class SimpleRepositoryTest {
     /**
      * 참고자료 경로
      *
-     * @see "Han-Changhun/src/test/resources/images/query-method-2.png"
+     * @see "src/test/resources/images/query-method-2.png"
      */
     @Test
     @DisplayName("Query_Methods_And_조회")
@@ -400,7 +400,7 @@ class SimpleRepositoryTest {
     /**
      * 참고자료 경로
      *
-     * @see "Han-Changhun/src/test/resources/images/query-method-2.png"
+     * @see "src/test/resources/images/query-method-2.png"
      */
     @Test
     @DisplayName("Query_Methods_Or_조회")
@@ -419,7 +419,7 @@ class SimpleRepositoryTest {
     /**
      * 참고자료 경로
      *
-     * @see "Han-Changhun/src/test/resources/images/query-method-2.png"
+     * @see "src/test/resources/images/query-method-2.png"
      */
     @Test
     @DisplayName("Query_Methods_After_조회(초과)")
@@ -436,7 +436,7 @@ class SimpleRepositoryTest {
     /**
      * 참고자료 경로
      *
-     * @see "Han-Changhun/src/test/resources/images/query-method-2.png"
+     * @see "src/test/resources/images/query-method-2.png"
      */
     @Test
     @DisplayName("Query_Methods_After_조회(이상)")
@@ -454,7 +454,7 @@ class SimpleRepositoryTest {
     /**
      * 참고자료 경로
      *
-     * @see "Han-Changhun/src/test/resources/images/query-method-2.png"
+     * @see "src/test/resources/images/query-method-2.png"
      */
     @Test
     @DisplayName("Query_Methods_Before_조회(미만)")
@@ -471,7 +471,7 @@ class SimpleRepositoryTest {
     /**
      * 참고자료 경로
      *
-     * @see "Han-Changhun/src/test/resources/images/query-method-2.png"
+     * @see "src/test/resources/images/query-method-2.png"
      */
     @Test
     @DisplayName("Query_Methods_Before_조회(이하)")
@@ -489,7 +489,7 @@ class SimpleRepositoryTest {
     /**
      * 참고자료 경로
      *
-     * @see "Han-Changhun/src/test/resources/images/query-method-2.png"
+     * @see "src/test/resources/images/query-method-2.png"
      */
     @Test
     @DisplayName("Query_Methods_Between_조회")
@@ -504,7 +504,7 @@ class SimpleRepositoryTest {
     /**
      * 참고자료 경로
      *
-     * @see "Han-Changhun/src/test/resources/images/query-method-2.png"
+     * @see "src/test/resources/images/query-method-2.png"
      */
     @Test
     @DisplayName("Query_Methods_NotNull_조회")
@@ -522,7 +522,7 @@ class SimpleRepositoryTest {
     /**
      * 참고자료 경로
      *
-     * @see "Han-Changhun/src/test/resources/images/query-method-2.png"
+     * @see "src/test/resources/images/query-method-2.png"
      */
     @Test
     @DisplayName("Query_Methods_In_조회(Batch)")
@@ -538,7 +538,7 @@ class SimpleRepositoryTest {
     /**
      * 참고자료 경로
      *
-     * @see "Han-Changhun/src/test/resources/images/query-method-2.png"
+     * @see "src/test/resources/images/query-method-2.png"
      */
     @Test
     @DisplayName("Query_Methods_Starting_조회")
@@ -551,7 +551,7 @@ class SimpleRepositoryTest {
     /**
      * 참고자료 경로
      *
-     * @see "Han-Changhun/src/test/resources/images/query-method-2.png"
+     * @see "src/test/resources/images/query-method-2.png"
      */
     @Test
     @DisplayName("Query_Methods_Ending_조회")
@@ -564,7 +564,7 @@ class SimpleRepositoryTest {
     /**
      * 참고자료 경로
      *
-     * @see "Han-Changhun/src/test/resources/images/query-method-2.png"
+     * @see "src/test/resources/images/query-method-2.png"
      */
     @Test
     @DisplayName("Query_Methods_Containing_조회")
@@ -577,7 +577,7 @@ class SimpleRepositoryTest {
     /**
      * 참고자료 경로
      *
-     * @see "Han-Changhun/src/test/resources/images/query-method-3.png"
+     * @see "src/test/resources/images/query-method-3.png"
      */
     @Test
     @DisplayName("Query_Methods_First_OrderBy_조회")
@@ -595,7 +595,7 @@ class SimpleRepositoryTest {
     /**
      * 참고자료 경로
      *
-     * @see "Han-Changhun/src/test/resources/images/query-method-3.png"
+     * @see "src/test/resources/images/query-method-3.png"
      */
     @Test
     @DisplayName("Query_Methods_Sort_조회")

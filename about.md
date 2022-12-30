@@ -3,7 +3,7 @@ layout: about
 title: <u>About Me</u>
 description: |
   A brief introduction to my development experience and projects.
-  <img src="https://ghchart.rshah.org/219138/shirohoo"/>
+  <img src="https://ghchart.rshah.org/219138/olivahn"/>
 published: true
 ---
 

@@ -178,7 +178,7 @@ related_posts:
 
 ---
 
-> 모든 소스코드는 [깃허브](https://github.com/shirohoo/spring-rest-docs)에 공개되어 있습니다.
+> 모든 소스코드는 [깃허브](https://github.com/olivahn/spring-rest-docs)에 공개되어 있습니다.
 
 <br />
 
@@ -282,7 +282,7 @@ ext {
     set('staticsDir', file('src/main/resources/static')) // OpenAPI가 생성될 위치
 }
 
-group = 'io.shirohoo.docs'
+group = 'io.olivahn.docs'
 archivesBaseName = 'spring-rest-docs'
 version = '0.0.1'
 sourceCompatibility = '11'
@@ -403,7 +403,7 @@ public class UserApiController {
 // file: 'UserApiControllerTest.java'
 import com.epages.restdocs.apispec.ResourceSnippetParameters;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.shirohoo.docs.domain.UserRequest;
+import io.olivahn.docs.domain.UserRequest;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;

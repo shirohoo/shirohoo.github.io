@@ -59,7 +59,7 @@ related_posts:
 
 ```shell
 $ uname -a
-Linux shirohoo 5.4.72-microsoft-standard-WSL2 #1 SMP Wed Oct 28 23:40:43 UTC 2020 x86_64 x86_64 x86_64 GNU/Linux
+Linux olivahn 5.4.72-microsoft-standard-WSL2 #1 SMP Wed Oct 28 23:40:43 UTC 2020 x86_64 x86_64 x86_64 GNU/Linux
 ````
 
 <br />

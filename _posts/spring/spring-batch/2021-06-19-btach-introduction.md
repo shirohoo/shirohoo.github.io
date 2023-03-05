@@ -23,7 +23,7 @@ related_posts:
 
 # 🚀 Spring-Batch ?
 
-![](https://github.com/olivahn/spring-batch/raw/master/src/images/img.png)
+![](https://github.com/shirohoo/spring-batch/raw/master/src/images/img.png)
 
 - Batch 처리를 쉽게 하기 위한 Spring 생태계의 Framework
 - Spring Triangle (DI, AOP, PSA) 활용 가능
@@ -72,7 +72,7 @@ spring:
 
 ### 🍔 Database 설정
 
-![](https://github.com/olivahn/spring-batch/blob/master/src/images/img_2.png)
+![](https://github.com/shirohoo/spring-batch/blob/master/src/images/img_2.png)
 
 `Spring-Batch`는 DB에 `Metadata table`을 생성하여, 이 데이터들을 기반으로 동작하므로 `BatchApplication`과 연결된 `DB`에 `Spring-Batch DDL`을 적용해줘야 한다
 
@@ -82,15 +82,15 @@ spring:
 path: spring-batch-core/org.springframework/batch/core/*
 ```
 
-![](https://github.com/olivahn/spring-batch/raw/master/src/images/img_4.png)
+![](https://github.com/shirohoo/spring-batch/raw/master/src/images/img_4.png)
 
-![](https://github.com/olivahn/spring-batch/raw/master/src/images/img_3.png)
+![](https://github.com/shirohoo/spring-batch/raw/master/src/images/img_3.png)
 
 ---
 
 # 🚀 Spring-Batch 구조
 
-![](https://github.com/olivahn/spring-batch/raw/master/src/images/img_1.png)
+![](https://github.com/shirohoo/spring-batch/raw/master/src/images/img_1.png)
 
 
 ### 🍀 Metadata
@@ -117,7 +117,7 @@ path: spring-batch-core/org.springframework/batch/core/*
 - `Job`은 `JobLauncher`에 의해 실행 됨
 - `Job`은 N개의 `Step`을 순차적으로 실행할 수 있고, 전체적인 흐름제어를 한다
 
-![](https://github.com/olivahn/spring-batch/raw/master/src/images/img_5.png)
+![](https://github.com/shirohoo/spring-batch/raw/master/src/images/img_5.png)
 
 - `JobInstance`: `BATCH_JOB_INSTANCE` 테이블과 매핑
     - 새로운 JobInstance의 생성 기준은 JobParameters의 중복 여부이다

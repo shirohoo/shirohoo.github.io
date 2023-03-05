@@ -15,7 +15,7 @@ published: true
 * toc
 {:toc}
 
-> 동작하는 전체 코드는 [🕋 깃허브 저장소](https://github.com/olivahn/sample-spring-security-login){:target="_blank"}를 참고해주세요.
+> 동작하는 전체 코드는 [🕋 깃허브 저장소](https://github.com/shirohoo/sample-spring-security-login){:target="_blank"}를 참고해주세요.
 
 `DelegatingFilterProxy` 는 표준 서블릿 필터를 구현하고 있고, 내부에 `FilterChainProxy`라는 이름의 위임 대상을 갖습니다.
 

@@ -16,7 +16,7 @@ related_posts:
   
 <br />
 
-- [📦 GitHub - olivahn/spring-cloud-openfeign](https://github.com/olivahn/spring-cloud-examples/tree/main/spring-cloud-openfeign){:target="_blank"}
+- [📦 GitHub - shirohoo/spring-cloud-openfeign](https://github.com/shirohoo/spring-cloud-examples/tree/main/spring-cloud-openfeign){:target="_blank"}
 - [📦 Spring Cloud OpenFeign Docs](https://docs.spring.io/spring-cloud-openfeign/docs/current/reference/html/){:target="_blank"}
 - [📦 우아한 feign 적용기](https://techblog.woowahan.com/2630/){:target="_blank"}
 - [📦 feign 좀더 나아가기](https://techblog.woowahan.com/2657/){:target="_blank"}
@@ -101,7 +101,7 @@ public class ObjectMapperConfig implements Jackson2ObjectMapperBuilderCustomizer
 // file: 'OpenFeignConfig'
 @Configuration
 // 페인 클라이언트를 활성화. @SpringBootApplication이 달린 메인 클래스가 아닌 별도의 설정클래스에 추가했으므로 콤포넌트 스캔을 위해 베이스패키지를 지정
-@EnableFeignClients(basePackages = "io.github.olivahn.openfeign.client") 
+@EnableFeignClients(basePackages = "io.github.shirohoo.openfeign.client") 
 public class OpenFeignConfig { 
     // 페인 클라이언트가 제공하는 모든 레벨의 로그를 사용 (자세한건 하기 내용 참고)
     @Bean
@@ -133,8 +133,8 @@ public class OpenFeignConfig {
     @Bean
     public RequestInterceptor requestInterceptor() {
         return requestTemplate -> {
-             requestTemplate.header("commonHeader", "olivahn"); // 모든 페인 클라이언트에 적용될 헤더
-             requestTemplate.query("commonQueryParam", "olivahn"); // 모든 페인 클라이언트에 적용될 쿼리스트링
+             requestTemplate.header("commonHeader", "shirohoo"); // 모든 페인 클라이언트에 적용될 헤더
+             requestTemplate.query("commonQueryParam", "shirohoo"); // 모든 페인 클라이언트에 적용될 쿼리스트링
         };
     }
 }
@@ -164,7 +164,7 @@ public class OpenFeignConfig {
 logging:
   level:
     # 이렇게 FeignClient가 위치한 패키지별로 로깅 레벨을 설정할수도 있다
-    io.github.olivahn.openfeign.client: DEBUG
+    io.github.shirohoo.openfeign.client: DEBUG
 ```
 
 <br />
@@ -220,8 +220,8 @@ HTTP 메시지에 별도의 헤더를 추가하겠다면 Spring MVC Controller�
 @Bean
 public RequestInterceptor requestInterceptor() {
     return requestTemplate -> {
-        requestTemplate.header("commonHeader", "olivahn"); // 모든 페인 클라이언트에 적용될 헤더
-        requestTemplate.query("commonQueryParam", "olivahn"); // 모든 페인 클라이언트에 적용될 쿼리스트링
+        requestTemplate.header("commonHeader", "shirohoo"); // 모든 페인 클라이언트에 적용될 헤더
+        requestTemplate.query("commonQueryParam", "shirohoo"); // 모든 페인 클라이언트에 적용될 쿼리스트링
     };
 }
 ```

@@ -35,12 +35,8 @@ published: true
 - Kotlin
 - Python
 - Gradle
-- Junit
+- JUnit
 - Spring Boot
-  - MVC
-  - Batch
-  - Security
-  - Data-blahblah
 
 <br />
 
@@ -51,7 +47,6 @@ published: true
 - Java
 - Kotlin
 - Python
-- 테스트 코드 작성
 - OOP
 - FP
 - MySQL

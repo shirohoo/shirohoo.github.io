@@ -228,7 +228,7 @@ favicon: /assets/icons/favicon.ico
 
 # Set your Google Analytics id to receive `pageview` events.
 # To remove Google Anaylics from your page, remove the line below.
-google_analytics:      G-R66YF2CLFW
+google_analytics:      G-NKVY3834TW
 
 comments:
   provider:            utterances
@@ -407,7 +407,7 @@ plugins:
 #google_site_verification:
 # -- or --
 webmaster_verifications:
-  google: google-site-verification=y7w0yO2cGX-tTJHNey__xD3H3n0hQujRSthcFiAZkS4
+  google: google-site-verification=QP6xbvFbQ-RK1rEeDlge0lpDYvcCG0FdC5crTSd-aDs
 #   bing:                <verification-id>
 #   alexa:               <verification-id>
 #   yandex:              <verification-id>

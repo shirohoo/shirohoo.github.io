@@ -51,6 +51,8 @@ menu:
     url:               /about/
   - title:             Diary
     url:               /diary/
+  - title:             Financial
+    url:               /financial/
   - title:             Debugging
     url:               /debugging/
   - title:             Computer Science

@@ -1,0 +1,62 @@
+{
+  "lang": "ko-KR, en-US",
+  "name": "돈 받고 일하면 프로",
+  "short_name": "돈 받고 일하면 프로",
+  "description": "우리는 직장에서 훈련을 하기 때문에 매번 실수를 반복한다",
+  "start_url": "/?utm_source=homescreen",
+  "theme_color": "rgb(8,46,57)",
+  "background_color": "#fff",
+  "orientation": "portrait",
+  "display": "minimal-ui",
+  "scope": "/",
+  "icons": [
+    {
+      "src": "/assets/icons/icon-72x72.png",
+      "sizes": "72x72",
+      "type": "image/png",
+      "purpose": "any maskable" 
+    },
+    {
+      "src": "/assets/icons/icon-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "any maskable" 
+    },
+    {
+      "src": "/assets/icons/icon-128x128.png",
+      "sizes": "128x128",
+      "type": "image/png",
+      "purpose": "any maskable" 
+    },
+    {
+      "src": "/assets/icons/icon-144x144.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "any maskable" 
+    },
+    {
+      "src": "/assets/icons/icon-152x152.png",
+      "sizes": "152x152",
+      "type": "image/png",
+      "purpose": "any maskable" 
+    },
+    {
+      "src": "/assets/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable" 
+    },
+    {
+      "src": "/assets/icons/icon-384x384.png",
+      "sizes": "384x384",
+      "type": "image/png",
+      "purpose": "any maskable" 
+    },
+    {
+      "src": "/assets/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable" 
+    }
+  ]
+}
